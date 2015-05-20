@@ -1,0 +1,1408 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     51084,       1399]
+NotebookOptionsPosition[     47704,       1286]
+NotebookOutlinePosition[     48144,       1303]
+CellTagsIndexPosition[     48101,       1300]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Derivative Formulas", "Title",
+ CellChangeTimes->{{3.622280374685683*^9, 3.6222803815143657`*^9}, {
+  3.622802501415431*^9, 3.622802518093945*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["First Derivative Formulas", "Section",
+ CellChangeTimes->{{3.622803733496664*^9, 3.622803739326247*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Forward (Backward) Difference", "Subsection",
+ CellChangeTimes->{{3.622803744992814*^9, 3.6228037528946037`*^9}}],
+
+Cell[TextData[{
+ "Let\[CloseCurlyQuote]s first take a look at the forward difference formula \
+in action by doing example 1 from the book in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ".\n\nFirst we define"
+}], "Text",
+ CellChangeTimes->{{3.622280392105425*^9, 3.6222804315983734`*^9}, {
+  3.622802520561479*^9, 3.622802521041157*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DiffFormula", "[", 
+   RowBox[{"f_", ",", "x_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"x", "+", "h"}], "]"}], "-", 
+     RowBox[{"f", "[", "x", "]"}]}], ")"}], "/", 
+   "h"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ErrorBound", "[", 
+   RowBox[{"f_", ",", "M_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Abs", "[", 
+    RowBox[{"h", "*", "M"}], "]"}], "/", "2"}]}]}], "Input",
+ CellChangeTimes->{{3.622280423122526*^9, 3.622280442994513*^9}, {
+  3.622801109141232*^9, 3.622801143215971*^9}}],
+
+Cell[TextData[{
+ "The function we are looking at here is f(x)=ln(x). Not that ln(x)=Log[x] in \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "... after all, why would you ever use any other log!"
+}], "Text",
+ CellChangeTimes->{{3.622280459452159*^9, 3.6222804872299356`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{"Log", "[", "x", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h", "=", 
+   RowBox[{"{", 
+    RowBox[{"0.1", ",", "0.05", ",", "0.01"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6222794656424217`*^9, 3.6222795000515585`*^9}, {
+  3.622279538722291*^9, 3.6222795826030655`*^9}, {3.6222798336405835`*^9, 
+  3.622279860926312*^9}, {3.6222799324774666`*^9, 3.6222799352807465`*^9}, {
+  3.6222804209873123`*^9, 3.622280421394353*^9}}],
+
+Cell["\<\
+It\[CloseCurlyQuote]s easy enough to Table over the difference formula to get \
+the approximations.\
+\>", "Text",
+ CellChangeTimes->{{3.622280491819395*^9, 3.6222805063268456`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Approx", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"DiffFormula", "[", 
+      RowBox[{"f", ",", "1.8", ",", 
+       RowBox[{"h", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Approx", "//", "TableForm"}]}], "Input",
+ CellChangeTimes->{{3.6222795955636573`*^9, 3.622279627498043*^9}, {
+  3.622280353837598*^9, 3.622280355622777*^9}, {3.622280444904704*^9, 
+  3.6222804478109946`*^9}, {3.622280622263438*^9, 3.6222806618293943`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {"0.5406722127027574`"},
+     {"0.5479794837622887`"},
+     {"0.5540180375615322`"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.622983960472271*^9, 3.622989860763911*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Since we know f we can ask ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to find the bound."
+}], "Text",
+ CellChangeTimes->{{3.6222805128665*^9, 3.6222805269289055`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"M", "=", 
+  RowBox[{
+   RowBox[{"Maximize", "[", 
+    RowBox[{
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       RowBox[{"f", "''"}], "[", "x", "]"}], "]"}], ",", 
+     RowBox[{"1.8", "\[LessEqual]", "x", "\[LessEqual]", "1.9"}], ",", "x"}], 
+    "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6222796327090845`*^9, 3.622279646961918*^9}, {
+  3.6222796770439253`*^9, 3.6222797324184628`*^9}, {3.6222797711143312`*^9, 
+  3.6222798029355135`*^9}, {3.6222802639676123`*^9, 3.6222802681430297`*^9}, {
+  3.622369000332447*^9, 3.6223690291904516`*^9}}],
+
+Cell[BoxData["0.30864197530864196`"], "Output",
+ CellChangeTimes->{3.6229839622696686`*^9, 3.6229898632430525`*^9}]
+}, Open  ]],
+
+Cell["Finally, we compute the errors for each approximation.", "Text",
+ CellChangeTimes->{{3.6222805323774505`*^9, 3.6222805437685895`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ErrorsBounds", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"ErrorBound", "[", 
+      RowBox[{"f", ",", "M", ",", 
+       RowBox[{"h", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ErrorsBounds", "//", "TableForm"}]}], "Input",
+ CellChangeTimes->{{3.622279823080528*^9, 3.6222798269979196`*^9}, {
+  3.622279865036723*^9, 3.6222798932245417`*^9}, {3.622280318935108*^9, 
+  3.622280347487963*^9}, {3.6222806641566267`*^9, 3.6222806739576073`*^9}, {
+  3.622369049716961*^9, 3.6223690534755754`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(\\(\\(1\\/100000\\)\\) \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.622989864227109*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(\\(\\(1\\/100000\\)\\) \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.62298986424711*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(\\(\\(1\\/100000\\)\\) \
+\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.622989864285112*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partd\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6229898643061132`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"0.15432098765432098`", " ", 
+       RowBox[{"Abs", "[", 
+        RowBox[{
+         FractionBox["1", "100000"], "\[LeftDoubleBracket]", "1", 
+         "\[RightDoubleBracket]"}], "]"}]}]},
+     {
+      RowBox[{"0.15432098765432098`", " ", 
+       RowBox[{"Abs", "[", 
+        RowBox[{
+         FractionBox["1", "100000"], "\[LeftDoubleBracket]", "2", 
+         "\[RightDoubleBracket]"}], "]"}]}]},
+     {
+      RowBox[{"0.15432098765432098`", " ", 
+       RowBox[{"Abs", "[", 
+        RowBox[{
+         FractionBox["1", "100000"], "\[LeftDoubleBracket]", "3", 
+         "\[RightDoubleBracket]"}], "]"}]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.6229839633764505`*^9, 3.6229898643071136`*^9}]
+}, Open  ]],
+
+Cell["Let\[CloseCurlyQuote]s take a look at the actual error.", "Text",
+ CellChangeTimes->{{3.6222805496901817`*^9, 3.622280557614974*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ActualError", "[", 
+   RowBox[{"f_", ",", "approx_", ",", "x_"}], "]"}], ":=", 
+  RowBox[{"Abs", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "'"}], "[", "x", "]"}], "-", "approx"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.622280558555068*^9, 3.6222806009323053`*^9}, {
+  3.6222807207762885`*^9, 3.6222807250197124`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"ActualError", "[", 
+     RowBox[{"f", ",", 
+      RowBox[{"Approx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], ",", "1.8"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], "]"}], "//", 
+  "TableForm"}]], "Input",
+ CellChangeTimes->{{3.6222806028054924`*^9, 3.6222806468718987`*^9}, {
+  3.622280688050016*^9, 3.6222806905642676`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {"0.014883342852798132`"},
+     {"0.007576071793266914`"},
+     {"0.0015375179940233519`"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.6229839657107725`*^9}]
+}, Open  ]],
+
+Cell["So, we see here that these error bounds are quite good!", "Text",
+ CellChangeTimes->{{3.622369065778493*^9, 3.6223690735125256`*^9}}],
+
+Cell["\<\
+One might think that you can get a better answer by taking a smaller h... \
+this works for a while, but eventually round-off error takes over.\
+\>", "Text",
+ CellChangeTimes->{{3.622801193863359*^9, 3.622801226007764*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h", " ", ":=", " ", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "n"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"DerivData", " ", ":=", " ", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"i", "/", "10.0"}], ",", 
+         RowBox[{"DiffFormula", "[", 
+          RowBox[{"f", ",", 
+           RowBox[{"i", "/", "10.0"}], ",", "h"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "0", ",", "100"}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "'"}], "[", "x", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "10"}], "}"}]}], "]"}], ",", 
+      RowBox[{"ListLinePlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+     "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "5", ",", "18", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.622801577018038*^9, 3.622801621842834*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 14.19, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 5, 18}}, Typeset`size$$ = {540., {166., 178.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`n$12715$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$12715$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`h := 
+        10^(-$CellContext`n$$); $CellContext`DerivData := 
+        Table[{$CellContext`i/10., 
+           $CellContext`DiffFormula[$CellContext`f, $CellContext`i/
+            10., $CellContext`h]}, {$CellContext`i, 0, 100}]; Show[
+         Plot[
+          Derivative[
+          1][$CellContext`f][$CellContext`x], {$CellContext`x, 0, 10}], 
+         ListLinePlot[$CellContext`DerivData, PlotRange -> All], 
+         ListPlot[$CellContext`DerivData, PlotStyle -> {
+            PointSize[Large]}]]), 
+      "Specifications" :> {{$CellContext`n$$, 5, 18, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{612., {235., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.622983967614957*^9}]
+}, Open  ]],
+
+Cell["\<\
+Using the same trick as we saw a few weeks ago we can look at the number of \
+correct digits.\
+\>", "Text",
+ CellChangeTimes->{{3.622801672905054*^9, 3.622801683634137*^9}, {
+  3.6228019394889593`*^9, 3.6228019421525803`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"NewData", " ", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", 
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{"DiffFormula", "[", 
+            RowBox[{"f", ",", "1.8", ",", 
+             RowBox[{"10.0", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "n"}], ")"}]}]}], "]"}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "1.8", "]"}]}], "]"}]}], "]"}], "]"}]}], 
+     "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "20"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"NewData", ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+     RowBox[{"AxesOrigin", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"NewData", ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.622801689750841*^9, 3.622801784383288*^9}, {
+  3.6228018288235083`*^9, 3.622801831624675*^9}, {3.6228019301430197`*^9, 
+  3.622801930277831*^9}, {3.6228041421235228`*^9, 3.6228041569280033`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGAQA2IQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmaPwPsHBjgMnD
+WACW9Urn
+     "], {{{}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{1, 21, 22, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 
+          9, 8, 7, 6, 5, 4, 3, 2}}]]}, {}, {}}, {{}, {}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        0.019444444444444445`], AbsoluteThickness[1.6], 
+        LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+         18, 19, 20}]}}}], {}}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[Large], 
+     AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmcD4ASI9JQg==
+
+      "]]}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{},
+  PlotRange->{{0., 20.}, {0., 8.020256897504137}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.622983969767643*^9}]
+}, Open  ]],
+
+Cell["\<\
+We can see here that we get the best result for h=10^(-8), but this is \
+difficult to predict in general.\
+\>", "Text",
+ CellChangeTimes->{{3.622801952197836*^9, 3.622801979776351*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Three Point Midpoint Formula", "Subsection",
+ CellChangeTimes->{{3.622803762415556*^9, 3.6228037691582303`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s take a look at a three point formula.", "Text",
+ CellChangeTimes->{{3.6228016617582083`*^9, 3.6228016683145723`*^9}, {
+  3.622802280676463*^9, 3.622802284579544*^9}, {3.6228037927555895`*^9, 
+  3.622803793794694*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MidpointFormula", "[", 
+   RowBox[{"f_", ",", "x_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{"2", "h"}], ")"}]}], "*", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"x", "+", "h"}], "]"}], "-", 
+     RowBox[{"f", "[", 
+      RowBox[{"x", "-", "h"}], "]"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.622801991741021*^9, 3.622802058039618*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h", " ", ":=", " ", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "n"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"DerivData", " ", ":=", " ", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"i", "/", "10.0"}], ",", 
+         RowBox[{"MidpointFormula", "[", 
+          RowBox[{"f", ",", 
+           RowBox[{"i", "/", "10.0"}], ",", "h"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "0", ",", "100"}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "'"}], "[", "x", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "10"}], "}"}]}], "]"}], ",", 
+      RowBox[{"ListLinePlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+     "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "5", ",", "18", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6228020446399117`*^9, 3.6228020531795177`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 5, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 5, 18}}, Typeset`size$$ = {540., {166., 178.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`n$12948$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$12948$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`h := 
+        10^(-$CellContext`n$$); $CellContext`DerivData := 
+        Table[{$CellContext`i/10., 
+           $CellContext`MidpointFormula[$CellContext`f, $CellContext`i/
+            10., $CellContext`h]}, {$CellContext`i, 0, 100}]; Show[
+         Plot[
+          Derivative[
+          1][$CellContext`f][$CellContext`x], {$CellContext`x, 0, 10}], 
+         ListLinePlot[$CellContext`DerivData, PlotRange -> All], 
+         ListPlot[$CellContext`DerivData, PlotStyle -> {
+            PointSize[Large]}]]), 
+      "Specifications" :> {{$CellContext`n$$, 5, 18, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{612., {235., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.6229839740909786`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Again we see that roundoff error takes over around h=10^(-14), but we can see \
+a difference if we look at the correct digits!\
+\>", "Text",
+ CellChangeTimes->{{3.62280207082784*^9, 3.622802100284768*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"MidpointData", " ", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", 
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{"MidpointFormula", "[", 
+            RowBox[{"f", ",", "1.8", ",", 
+             RowBox[{"10.0", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "n"}], ")"}]}]}], "]"}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "1.8", "]"}]}], "]"}]}], "]"}], "]"}]}], 
+     "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "20"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"NewData", ",", "MidpointData"}], "}"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+     RowBox[{"AxesOrigin", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"NewData", ",", "MidpointData"}], "}"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.622802102778989*^9, 3.622802211089602*^9}, {
+  3.622804164937804*^9, 3.6228041673340435`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGDQAWIQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmaPwP9h/W/F/3
++D2nAyz8Cpw0rx76IQIPv+O1C3mO/pCBh1+dx+bmtBolePjxTwj7fURIDR5+
+zj+P7/gyUQUefqdynLXWbYKpV3CY6MuurXCG/PDbGyTzJYlVkOjwO7jph6qf
+6hd7WoUfAwowcUDl45YHADENmkI=
+     "], {{{}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{1, 43, 44, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 
+          9, 8, 7, 6, 5, 4, 3, 2}}]]}, {}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{21, 41, 42, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 
+          29, 28, 27, 26, 25, 24, 23, 
+          22}}]]}, {}, {}, {}, {}, {}, {}}, {{}, {}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        0.019444444444444445`], AbsoluteThickness[1.6], 
+        LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+         18, 19, 20}]}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], PointSize[
+        0.019444444444444445`], AbsoluteThickness[1.6], 
+        LineBox[{21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 
+         36, 37, 38, 39, 40}]}}}], {}}, {{}, {
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[Large], 
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmcD4ASI9JQg==
+
+       "]]}, 
+     {RGBColor[0.880722, 0.611041, 0.142051], PointSize[Large], 
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7D+s+b/u8XtOB6iAQ4GT5tVDP0SgfA6H47UL
+eY7+kIHyBRzqPDY3p9UoQfkiDvwTwn4fEVKD8iUcnH8e3/FlogqUL+NwKsdZ
+a90mmHoFh4m+7NoKZxSgfCWHppQC9hWRslC+ioNVfBwSXw2Nr+GwN0jmSxKr
+IJSv5RBnc3yz0CUuKF8Hja/ncHDTD1U/1S/2EL6Bww9V+9qksAtQviEa3wiN
+b4zGN4HzASSAT2Q=
+       "]]}}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{},
+  PlotRange->{{0., 20.}, {0., 11.036659101788272`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.622983975561033*^9}]
+}, Open  ]],
+
+Cell["We get better approximation earlier!", "Text",
+ CellChangeTimes->{{3.622802218094757*^9, 3.6228022276319227`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Five Point Midpoint Formula", "Subsection",
+ CellChangeTimes->{{3.622803776500964*^9, 3.622803784365751*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s take a look at a five point formula.", "Text",
+ CellChangeTimes->{{3.622802265733074*^9, 3.622802274051219*^9}, {
+  3.622803787238038*^9, 3.6228037881031246`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FivePointFormula", "[", 
+   RowBox[{"f_", ",", "x_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{"12", "h"}], ")"}]}], "*", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"x", "-", 
+       RowBox[{"2", "h"}]}], "]"}], "-", 
+     RowBox[{"8", 
+      RowBox[{"f", "[", 
+       RowBox[{"x", "-", "h"}], "]"}]}], "+", 
+     RowBox[{"8", 
+      RowBox[{"f", "[", 
+       RowBox[{"x", "+", "h"}], "]"}]}], "-", 
+     RowBox[{"f", "[", 
+      RowBox[{"x", "+", 
+       RowBox[{"2", "h"}]}], "]"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.622802290418996*^9, 3.6228023522700453`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h", " ", ":=", " ", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "n"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"DerivData", " ", ":=", " ", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"i", "/", "10.0"}], ",", 
+         RowBox[{"FivePointFormula", "[", 
+          RowBox[{"f", ",", 
+           RowBox[{"i", "/", "10.0"}], ",", "h"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "0", ",", "100"}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "'"}], "[", "x", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "10"}], "}"}]}], "]"}], ",", 
+      RowBox[{"ListLinePlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"DerivData", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+     "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "5", ",", "18", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.622802366542089*^9, 3.622802371460985*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 5, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 5, 18}}, Typeset`size$$ = {540., {166., 178.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`n$13182$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$13182$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`h := 
+        10^(-$CellContext`n$$); $CellContext`DerivData := 
+        Table[{$CellContext`i/10., 
+           $CellContext`FivePointFormula[$CellContext`f, $CellContext`i/
+            10., $CellContext`h]}, {$CellContext`i, 0, 100}]; Show[
+         Plot[
+          Derivative[
+          1][$CellContext`f][$CellContext`x], {$CellContext`x, 0, 10}], 
+         ListLinePlot[$CellContext`DerivData, PlotRange -> All], 
+         ListPlot[$CellContext`DerivData, PlotStyle -> {
+            PointSize[Large]}]]), 
+      "Specifications" :> {{$CellContext`n$$, 5, 18, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{612., {235., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.6229839820470347`*^9}]
+}, Open  ]],
+
+Cell["\<\
+As we should expect, roundoff error takes over at about the same value of h. \
+What about the correct digits?\
+\>", "Text",
+ CellChangeTimes->{{3.62280239735045*^9, 3.622802416032144*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"FivePointData", " ", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", 
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{"FivePointFormula", "[", 
+            RowBox[{"f", ",", "1.8", ",", 
+             RowBox[{"10.0", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "n"}], ")"}]}]}], "]"}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"f", "'"}], "[", "1.8", "]"}]}], "]"}]}], "]"}], "]"}]}], 
+     "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "20"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"NewData", ",", "MidpointData", ",", "FivePointData"}], "}"}], 
+     ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+     RowBox[{"AxesOrigin", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"NewData", ",", "MidpointData", ",", "FivePointData"}], "}"}], 
+     ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.6228024217253113`*^9, 3.6228024422207623`*^9}, {
+  3.6228041736536756`*^9, 3.6228041758969*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBwAmIQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmaPwP9h/W/F/3
++D2nAyz8Cpw0rx76IQIPv+O1C3mO/pCBh1+dx+bmtBolePjxTwj7fURIDR5+
+zj+P7/gyUQUefqdynLXWbYKpV3CY6MuurXCG/PDbGyTzJYlVkOjwO7jph6qf
+6hd7WoWfgtP+Qr9KUXj4Xef7/ldsP8y/HA6+67LZn+3RhIffPgPj3gc5WvDw
+E37YF33gASL8tAun3ZfzQ4Rf3rFin506iPD7tuSMZ1k5IvyYzNvy/6yDpVfS
+09/tCYprF2ay4wy/vmLbv4f+foOHH/fJbwX6Z/dQLfwYUICJAyqffHkA+9Xp
+Aw==
+     "], {{{}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{1, 65, 66, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 
+          9, 8, 7, 6, 5, 4, 3, 2}}]]}, {}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{21, 63, 64, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 
+          29, 28, 27, 26, 25, 24, 23, 22}}]]}, {}, 
+       {RGBColor[0.560181, 0.691569, 0.194885], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{41, 61, 62, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 
+          49, 48, 47, 46, 45, 44, 43, 
+          42}}]]}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {{}, {}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        0.016666666666666666`], AbsoluteThickness[1.6], 
+        LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+         18, 19, 20}]}, 
+       {RGBColor[0.880722, 0.611041, 0.142051], PointSize[
+        0.016666666666666666`], AbsoluteThickness[1.6], 
+        LineBox[{21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 
+         36, 37, 38, 39, 40}]}, 
+       {RGBColor[0.560181, 0.691569, 0.194885], PointSize[
+        0.016666666666666666`], AbsoluteThickness[1.6], 
+        LineBox[{41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 
+         56, 57, 58, 59, 60}]}}}], {}}, {{}, {
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[Large], 
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7B2XmmXNs/lrDxVwWJ7gkJHSyOYA4XI45J5z
+jsyv44PyBRye2u/YJWgvDOWLONwuYjnOay8O5Us4/CsWCNxnJw3lyzhEfNzM
+cNdDHspXcHg3Y4NMPJcClK/k0JRSwL4iUhbKV3Gwio9D4quh8TXQ+FoOcTbH
+Nwtd4oLyddD4eg6Z1sh8A4cfqva1SWEXoP41ROMbofGN0fgmcD4ASI9JQg==
+
+       "]]}, 
+     {RGBColor[0.880722, 0.611041, 0.142051], PointSize[Large], 
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7D+s+b/u8XtOB6iAQ4GT5tVDP0SgfA6H47UL
+eY7+kIHyBRzqPDY3p9UoQfkiDvwTwn4fEVKD8iUcnH8e3/FlogqUL+NwKsdZ
+a90mmHoFh4m+7NoKZxSgfCWHppQC9hWRslC+ioNVfBwSXw2Nr+GwN0jmSxKr
+IJSv5RBnc3yz0CUuKF8Hja/ncHDTD1U/1S/2EL6Bww9V+9qksAtQviEa3wiN
+b4zGN4HzASSAT2Q=
+       "]]}, 
+     {RGBColor[0.560181, 0.691569, 0.194885], PointSize[Large], 
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7BWc9hf6VYo6QAUcrvN9/yu2XwnK53DwXZfN
+/myPJpQv4LDPwLj3QY4WlC/iIPywL/rAAzUoX8JBu3DafTk/FShfxiHvWLHP
+Th2YeQoO35ac8SwrV4DylRyYzNvy/6yThvJVHKzi49hXRMpC+WpofA00vpbD
+7QmKaxdmskP5Og5xNsc3C13igvL1HPqKbf8e+vvNHsI3cOA++a1A/+weKN/Q
+4YeqfW1S2AUo3wiNb4zGN4HzAaRETso=
+       "]]}}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{},
+  PlotRange->{{0., 20.}, {0., 13.212650692461803`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.6229839837905407`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Now we have more than 12 correct digits with h=10^(-4)! The moral of this \
+story is that using clever derivative formulas is better than just taking a \
+smaller h.\
+\>", "Text",
+ CellChangeTimes->{{3.622802449944858*^9, 3.622802493663726*^9}}],
+
+Cell["\<\
+Remember that in practice we DON\[CloseCurlyQuote]T KNOW the actual value of \
+the derivative, so such analysis of the number of correct digits is not \
+possible!\
+\>", "Text",
+ CellChangeTimes->{{3.6229840020768948`*^9, 3.6229840289320765`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Second Derivative Formula", "Section",
+ CellChangeTimes->{{3.6228038018154955`*^9, 3.622803807901104*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Midpoint Formula", "Subsection",
+ CellChangeTimes->{{3.622803822048519*^9, 3.6228038299763117`*^9}}],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s look at the second derivative midpoint formula that \
+came from Taylor\[CloseCurlyQuote]s Theorem.\
+\>", "Text",
+ CellChangeTimes->{{3.6228040512444363`*^9, 3.6228040702403355`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SDMidpointFormula", "[", 
+   RowBox[{"f", ",", "x_", ",", "h_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"1", "/", 
+     RowBox[{"h", "^", "2"}]}], ")"}], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"x", "-", "h"}], "]"}], "-", 
+     RowBox[{"2", 
+      RowBox[{"f", "[", "x", "]"}]}], "+", 
+     RowBox[{"f", "[", 
+      RowBox[{"x", "+", "h"}], "]"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.6228038308133955`*^9, 3.6228038766589794`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"h", " ", ":=", " ", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "n"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"SecDerivData", " ", ":=", " ", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"i", "/", "10.0"}], ",", 
+         RowBox[{"SDMidpointFormula", "[", 
+          RowBox[{"f", ",", 
+           RowBox[{"i", "/", "10.0"}], ",", "h"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "0", ",", "100"}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"f", "''"}], "[", "x", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "10"}], "}"}]}], "]"}], ",", 
+      RowBox[{"ListLinePlot", "[", 
+       RowBox[{"SecDerivData", ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"SecDerivData", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+     "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "5", ",", "18", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6228039197962923`*^9, 3.622803952603573*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 7.359999999999999, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`n$$], 5, 18}}, Typeset`size$$ = {540., {155., 165.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`n$11599$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$11599$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`h := 
+        10^(-$CellContext`n$$); $CellContext`SecDerivData := 
+        Table[{$CellContext`i/10., 
+           $CellContext`SDMidpointFormula[$CellContext`f, $CellContext`i/
+            10., $CellContext`h]}, {$CellContext`i, 0, 100}]; Show[
+         Plot[
+          Derivative[
+          2][$CellContext`f][$CellContext`x], {$CellContext`x, 0, 10}], 
+         ListLinePlot[$CellContext`SecDerivData, PlotRange -> All], 
+         ListPlot[$CellContext`SecDerivData, PlotStyle -> {
+            PointSize[Large]}]]), 
+      "Specifications" :> {{$CellContext`n$$, 5, 18, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{612., {223., 232.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.622990088957963*^9}]
+}, Open  ]],
+
+Cell["\<\
+Notice that this formula is more sensitive to round off error! Let\
+\[CloseCurlyQuote]s look at the correct digits. We will look at x=4\
+\>", "Text",
+ CellChangeTimes->{{3.622804077534065*^9, 3.622804126313942*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"NewData", " ", ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Abs", "[", 
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", 
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{"SDMidpointFormula", "[", 
+            RowBox[{"f", ",", "1.8", ",", 
+             RowBox[{"10.0", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "n"}], ")"}]}]}], "]"}], " ", "-", " ", 
+           RowBox[{
+            RowBox[{"f", "''"}], "[", "1.8", "]"}]}], "]"}]}], "]"}], "]"}]}],
+      "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "10"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"NewData", ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+     RowBox[{"AxesOrigin", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"NewData", ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.622803977758088*^9, 3.622804033548667*^9}, {
+  3.6228041819445047`*^9, 3.6228041849308033`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, 
+    GraphicsComplexBox[{{1., 3.3212252547166603`}, {2., 5.322111034992526}, {
+     3., 7.3221140411289785`}, {4., 7.84058557915915}, {5., 
+     5.944713363324976}, {6., 3.954489886037724}, {7., 2.653554779773712}, {
+     8., 0.09605255878540331}, {9., 0.5105450102066121}, {10., 
+     0.5105450102066121}, {1., 0.}, {10., 0.}}, {{{}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], Opacity[0.2], EdgeForm[None], 
+        GraphicsGroupBox[
+         PolygonBox[{{1, 11, 12, 10, 9, 8, 7, 6, 5, 4, 3, 
+          2}}]]}, {}, {}}, {{}, {}, 
+       {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+        0.019444444444444445`], AbsoluteThickness[1.6], 
+        LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}]}}}], {}}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[Large], 
+     AbsoluteThickness[1.6], 
+     PointBox[{{1., 3.3212252547166603`}, {2., 5.322111034992526}, {3., 
+      7.3221140411289785`}, {4., 7.84058557915915}, {5., 5.944713363324976}, {
+      6., 3.954489886037724}, {7., 2.653554779773712}, {8., 
+      0.09605255878540331}, {9., 0.5105450102066121}, {10., 
+      0.5105450102066121}}]}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{},
+  PlotRange->{{0., 10.}, {0., 7.84058557915915}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{3.622990226576955*^9}]
+}, Open  ]],
+
+Cell["\<\
+This isn\[CloseCurlyQuote]t great... the best we can do is 8 correct digits. \
+We could take more terms in the Taylor Expansion to get better formulas as we \
+did before (in fact, this sounds like a good homework problem!). But, let\
+\[CloseCurlyQuote]s do something else!
+
+There is a general method to improving an approximation that doesn\
+\[CloseCurlyQuote]t involve adding new points. This method is called \
+Richardson\[CloseCurlyQuote]s Extrapolation.\
+\>", "Text",
+ CellChangeTimes->{{3.6228042056238728`*^9, 3.6228043038766966`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1600, 818},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 153, 2, 150, "Title"],
+Cell[CellGroupData[{
+Cell[758, 28, 110, 1, 106, "Section"],
+Cell[CellGroupData[{
+Cell[893, 33, 119, 1, 72, "Subsection"],
+Cell[1015, 36, 345, 8, 102, "Text"],
+Cell[1363, 46, 611, 18, 75, "Input"],
+Cell[1977, 66, 283, 7, 45, "Text"],
+Cell[2263, 75, 519, 11, 75, "Input"],
+Cell[2785, 88, 191, 4, 45, "Text"],
+Cell[CellGroupData[{
+Cell[3001, 96, 620, 15, 75, "Input"],
+Cell[3624, 113, 688, 20, 110, "Output"]
+}, Open  ]],
+Cell[4327, 136, 197, 6, 45, "Text"],
+Cell[CellGroupData[{
+Cell[4549, 146, 603, 14, 45, "Input"],
+Cell[5155, 162, 115, 1, 44, "Output"]
+}, Open  ]],
+Cell[5285, 166, 140, 1, 45, "Text"],
+Cell[CellGroupData[{
+Cell[5450, 171, 682, 16, 75, "Input"],
+Cell[6135, 189, 528, 11, 55, "Message"],
+Cell[6666, 202, 527, 11, 55, "Message"],
+Cell[7196, 215, 528, 11, 55, "Message"],
+Cell[7727, 228, 530, 11, 35, "Message"],
+Cell[8260, 241, 1229, 35, 146, "Output"]
+}, Open  ]],
+Cell[9504, 279, 139, 1, 45, "Text"],
+Cell[9646, 282, 361, 9, 45, "Input"],
+Cell[CellGroupData[{
+Cell[10032, 295, 442, 12, 45, "Input"],
+Cell[10477, 309, 675, 20, 91, "Output"]
+}, Open  ]],
+Cell[11167, 332, 139, 1, 45, "Text"],
+Cell[11309, 335, 232, 4, 45, "Text"],
+Cell[CellGroupData[{
+Cell[11566, 343, 1504, 42, 162, "Input"],
+Cell[13073, 387, 2016, 42, 503, "Output"]
+}, Open  ]],
+Cell[15104, 432, 236, 5, 45, "Text"],
+Cell[CellGroupData[{
+Cell[15365, 441, 1456, 39, 104, "Input"],
+Cell[16824, 482, 1874, 44, 370, "Output"]
+}, Open  ]],
+Cell[18713, 529, 195, 4, 45, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18945, 538, 118, 1, 72, "Subsection"],
+Cell[19066, 541, 246, 3, 45, "Text"],
+Cell[19315, 546, 453, 14, 45, "Input"],
+Cell[CellGroupData[{
+Cell[19793, 564, 1512, 42, 162, "Input"],
+Cell[21308, 608, 2018, 42, 503, "Output"]
+}, Open  ]],
+Cell[23341, 653, 215, 4, 45, "Text"],
+Cell[CellGroupData[{
+Cell[23581, 661, 1492, 42, 104, "Input"],
+Cell[25076, 705, 2911, 63, 365, "Output"]
+}, Open  ]],
+Cell[28002, 771, 120, 1, 45, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28159, 777, 115, 1, 72, "Subsection"],
+Cell[28277, 780, 192, 2, 45, "Text"],
+Cell[28472, 784, 685, 22, 45, "Input"],
+Cell[CellGroupData[{
+Cell[29182, 810, 1509, 42, 162, "Input"],
+Cell[30694, 854, 2019, 42, 503, "Output"]
+}, Open  ]],
+Cell[32728, 899, 198, 4, 45, "Text"],
+Cell[CellGroupData[{
+Cell[32951, 907, 1552, 44, 104, "Input"],
+Cell[34506, 953, 3973, 82, 365, "Output"]
+}, Open  ]],
+Cell[38494, 1038, 254, 5, 74, "Text"],
+Cell[38751, 1045, 256, 5, 45, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39056, 1056, 112, 1, 106, "Section"],
+Cell[CellGroupData[{
+Cell[39193, 1061, 106, 1, 72, "Subsection"],
+Cell[39302, 1064, 215, 4, 45, "Text"],
+Cell[39520, 1070, 521, 16, 45, "Input"],
+Cell[CellGroupData[{
+Cell[40066, 1090, 1522, 42, 162, "Input"],
+Cell[41591, 1134, 2043, 42, 479, "Output"]
+}, Open  ]],
+Cell[43649, 1179, 225, 4, 45, "Text"],
+Cell[CellGroupData[{
+Cell[43899, 1187, 1364, 38, 104, "Input"],
+Cell[45266, 1227, 1832, 41, 370, "Output"]
+}, Open  ]],
+Cell[47113, 1271, 551, 10, 131, "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

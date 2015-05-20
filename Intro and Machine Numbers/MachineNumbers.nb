@@ -1,0 +1,430 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14164,        421]
+NotebookOptionsPosition[     11584,        336]
+NotebookOutlinePosition[     12615,        370]
+CellTagsIndexPosition[     12537,        365]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["Floating Point Numbers", "Title",
+ CellChangeTimes->{{3.6187835876659775`*^9, 3.6187835930880775`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+In this demo we will generate (positive) floating point numbers and then plot \
+their distribution.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.6187836214082627`*^9, 3.6187836230882206`*^9}, {
+  3.6187838764069724`*^9, 3.618783903845653*^9}, {3.6187845712720456`*^9, 
+  3.618784572096513*^9}}],
+
+Cell["\<\
+We first set the number of mantissa bits, the number of characteristic bits \
+and the offset.\
+\>", "Text",
+ CellChangeTimes->{{3.6187839120113196`*^9, 3.618783999629385*^9}, {
+  3.61878410153162*^9, 3.618784101699716*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"nMantissa", "=", "3"}], "\[IndentingNewLine]", 
+ RowBox[{"nChar", "=", "2"}], "\[IndentingNewLine]", 
+ RowBox[{"offset", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"2", "^", 
+    RowBox[{"(", 
+     RowBox[{"nChar", "-", "1"}], ")"}]}], "-", "1"}]}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBWIQHTD3wxbXb68cA2SjtoNojufWN0G0FPvUWyB6Y/rF
+1yDad89/MC3hvPkziH7qvR1Mz8ic8BtE7+CbCaYfHNRkcAPS+epfWEC0Uk9J
+AojOmDgDTPNxh1WC6HenlKtAtMXRbX0gOvNSzAwQPUV9eYIHkP4oFJACojd9
+Ns0F0Uc+J4DpBU2Z+0D0uf3zwbTcvSMnQbTR82dg+kuw9O4YkPsXHdwDolki
+VY+C6IzggGMgeoNw5TkQraO67yKIPn8i9C6I1pBkfgiibzFWPAPROwPngulr
+qxnfgugECV4wveLn+Q8g2m/qHTD958jpLyD6l2zaTxANACRlxGo=
+  "]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ "\nIn order to generate all possible mantissas we will take the set of \
+fractions of the form 1/(2^n) for n from 1 to nMantissa and then take the \
+power set (Subsets in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ")."
+}], "Text",
+ CellChangeTimes->{{3.6187841167963395`*^9, 3.6187841413553905`*^9}, {
+   3.618784178275478*^9, 3.6187842235233245`*^9}, 3.618915837170644*^9}],
+
+Cell[BoxData[{
+ RowBox[{"Nums", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"1", "/", 
+     RowBox[{"(", 
+      RowBox[{"2", "^", "n"}], ")"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "1", ",", "nMantissa"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Mantissas", "=", 
+  RowBox[{"Subsets", "[", "Nums", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6187785560504293`*^9, 3.618778626862953*^9}, {
+  3.618780187710145*^9, 3.6187802081278124`*^9}, {3.618825242076518*^9, 
+  3.618825244299293*^9}, {3.618826018618226*^9, 3.618826032646226*^9}}],
+
+Cell["We now sum over each power set and store the results.", "Text",
+ CellChangeTimes->{{3.6187842331388206`*^9, 3.618784242723298*^9}}],
+
+Cell[BoxData[
+ RowBox[{"MantissaSums", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Total", "[", 
+     RowBox[{"Mantissas", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "Mantissas", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6187786281441746`*^9, 3.6187786584254265`*^9}, {
+   3.618778704546623*^9, 3.618778726138962*^9}, {3.618780158639535*^9, 
+   3.6187801734870195`*^9}, {3.6187802395427637`*^9, 
+   3.6187802396378183`*^9}, {3.618780318854085*^9, 3.6187803189741545`*^9}, {
+   3.6187803569398475`*^9, 3.618780357455143*^9}, 3.618825254008574*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+Next we actually compute the floating point numbers. The set of floats is \
+shown as well as the number of floats corresponding to the specified number \
+of mantissa and characteristic bits.\
+\>", "Text",
+ CellChangeTimes->{{3.618784245113661*^9, 3.6187843221306715`*^9}, {
+   3.6187845919838767`*^9, 3.6187845952157216`*^9}, 3.6189158410656443`*^9}],
+
+Cell[BoxData[{
+ RowBox[{"MNums", "=", 
+  RowBox[{"Sort", "[", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"MantissaSums", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "*", 
+       RowBox[{"2", "^", 
+        RowBox[{"(", 
+         RowBox[{"Char", "-", "offset"}], ")"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "Mantissas", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Char", ",", "0", ",", 
+        RowBox[{
+         RowBox[{"2", "^", "nChar"}], "-", "1"}]}], "}"}]}], "]"}], "]"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Length", "[", "MNums", "]"}]}], "Input",
+ CellChangeTimes->{{3.6187787275257545`*^9, 3.618778822778187*^9}, {
+  3.618778870946709*^9, 3.618778898577498*^9}, {3.6187792100154643`*^9, 
+  3.618779229007316*^9}, {3.6187793152696085`*^9, 3.6187793153986826`*^9}, {
+  3.6187799966169786`*^9, 3.618780003631959*^9}, {3.61878008780906*^9, 
+  3.618780087857087*^9}, {3.6187801666721244`*^9, 3.6187801766558285`*^9}, {
+  3.6187802440473385`*^9, 3.618780244159402*^9}, {3.6187802922638903`*^9, 
+  3.6187803155421925`*^9}, {3.6189164890679216`*^9, 3.6189164902950444`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+Finally we can plot the numbers. ListPlot will plot a list of points (as one \
+might expect). If you hand ListPlot a list of singletons (as opposed to a \
+list of pairs) ListPlot will default to setting the x-coordinate of the point \
+to the order in which the point appears and use the point itself as the \
+y-coordinate. \
+\>", "Text",
+ CellChangeTimes->{{3.618784347720295*^9, 3.6187844370813675`*^9}, {
+   3.61878471729548*^9, 3.618784719478751*^9}, 3.618915844370644*^9}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "MNums", "]"}]], "Input",
+ CellChangeTimes->{{3.6187789076276717`*^9, 3.6187789499438505`*^9}}],
+
+Cell["\<\
+This is actually very convenient for us because we can see that the \
+distribution of floats is changing. Why is that evident from this graph?\
+\>", "Text",
+ CellChangeTimes->{{3.6187844410406203`*^9, 3.6187844947453127`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate Demo", "Section",
+ CellChangeTimes->{{3.618784503215149*^9, 3.618784519504458*^9}}],
+
+Cell[TextData[{
+ "You can produce interactive \[OpenCurlyDoubleQuote]widgets\
+\[CloseCurlyDoubleQuote] very easily in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " using the Manipulate command.\n\nFor example you can use manipulate to \
+create interactive plots."
+}], "Text",
+ CellChangeTimes->{{3.618913216257645*^9, 3.618913270744093*^9}, {
+   3.6189133642788506`*^9, 3.6189133696328506`*^9}, 3.618914211317155*^9, {
+   3.6189142613571587`*^9, 3.618914266379661*^9}, {3.6191843021797867`*^9, 
+   3.6191843675272684`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Sin", "[", 
+      RowBox[{"n", "*", "x"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{
+        RowBox[{"-", "2"}], "\[Pi]"}], ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "1", ",", "10", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6189142592809515`*^9, 3.6189142594839716`*^9}, {
+  3.6191843690740137`*^9, 3.6191844084770927`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate Demo", "Section",
+ CellChangeTimes->{{3.618784503215149*^9, 3.618784519504458*^9}}],
+
+Cell["\<\
+Back to the machine number demo!
+
+If we wrap all of the previous code into a Manipulate and set the number of \
+mantissa and characteristic bits as the manipulated variables we get a nice \
+way of seeing how these number of bits affect the distribution of machine \
+numbers.\
+\>", "Text",
+ CellChangeTimes->{{3.6189133993548503`*^9, 3.61891343765985*^9}, {
+  3.618914277721795*^9, 3.6189142778558083`*^9}, {3.619184433371704*^9, 
+  3.6191844542657347`*^9}, {3.619185410762841*^9, 3.619185464495841*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Sort", "[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"Total", "[", 
+               RowBox[{
+                RowBox[{"Subsets", "[", 
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"1", "/", 
+                    RowBox[{"(", 
+                    RowBox[{"2", "^", "n"}], ")"}]}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"n", ",", "1", ",", "nMantissa"}], "}"}]}], "]"}],
+                  "]"}], "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"Subsets", "[", 
+                  RowBox[{"Table", "[", 
+                   RowBox[{
+                    RowBox[{"1", "/", 
+                    RowBox[{"(", 
+                    RowBox[{"2", "^", "n"}], ")"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"n", ",", "1", ",", "nMantissa"}], "}"}]}], "]"}],
+                   "]"}], "]"}]}], "}"}]}], "]"}], "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "*", 
+         RowBox[{"2", "^", 
+          RowBox[{"(", 
+           RowBox[{"Char", "-", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", "^", 
+               RowBox[{"(", 
+                RowBox[{"nChar", "-", "1"}], ")"}]}], "-", "1"}], ")"}]}], 
+           ")"}]}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"Subsets", "[", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"1", "/", 
+               RowBox[{"(", 
+                RowBox[{"2", "^", "n"}], ")"}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{"n", ",", "1", ",", "nMantissa"}], "}"}]}], "]"}], 
+            "]"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Char", ",", "0", ",", 
+          RowBox[{
+           RowBox[{"2", "^", "nChar"}], "-", "1"}]}], "}"}]}], "]"}], "]"}], 
+     "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"nMantissa", ",", "3", ",", "6", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"nChar", ",", "2", ",", "5", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.618780560513176*^9, 3.618780674782473*^9}, {
+  3.6188258888811436`*^9, 3.618825890359996*^9}}],
+
+Cell["This can now be exported as a CDF.", "Text",
+ CellChangeTimes->{{3.6189134609308505`*^9, 3.6189134688688507`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1584, 818},
+WindowMargins->{{-2, Automatic}, {Automatic, 0}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "SlideShowHeader"->{
+  Cell[579, 22, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[792, 31, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[2154, 72, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[4045, 124, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[5792, 170, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[6760, 197, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[8073, 239, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"SlideShowHeader", 11902, 347}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[646, 25, 109, 1, 150, "Title"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[792, 31, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[881, 36, 304, 6, 58, "Subsubsection"],
+Cell[1188, 44, 233, 5, 45, "Text"],
+Cell[1424, 51, 681, 15, 104, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2154, 72, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[2221, 75, 401, 9, 102, "Text"],
+Cell[2625, 86, 570, 14, 75, "Input"],
+Cell[3198, 102, 137, 1, 45, "Text"],
+Cell[3338, 105, 670, 14, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4045, 124, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[4112, 127, 361, 7, 102, "Text"],
+Cell[4476, 136, 1279, 29, 75, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5792, 170, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[5859, 173, 487, 9, 102, "Text"],
+Cell[6349, 184, 135, 2, 45, "Input"],
+Cell[6487, 188, 236, 4, 45, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6760, 197, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[6849, 202, 100, 1, 106, "Section"],
+Cell[6952, 205, 532, 11, 102, "Text"],
+Cell[7487, 218, 537, 15, 45, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8073, 239, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[8162, 244, 100, 1, 106, "Section"],
+Cell[8265, 247, 513, 10, 131, "Text"],
+Cell[8781, 259, 2652, 70, 278, "Input"],
+Cell[11436, 331, 120, 1, 45, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,613 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     21813,        604]
+NotebookOptionsPosition[     19915,        540]
+NotebookOutlinePosition[     20278,        556]
+CellTagsIndexPosition[     20235,        553]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "The Bisection Method in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " "
+}], "Title",
+ CellChangeTimes->{{3.6190929343443494`*^9, 3.6190929427831697`*^9}}],
+
+Cell["Math/CS 355/655", "Subtitle",
+ CellChangeTimes->{{3.619092949529026*^9, 3.6190929534332542`*^9}}],
+
+Cell["Dr. Mastin", "Subsubtitle",
+ CellChangeTimes->{{3.619092961273735*^9, 3.6190929623523517`*^9}}],
+
+Cell["\<\
+In this notebook we will implement the bisection method. First we will get \
+the basic structure of the code working and then go back and make the \
+function more robust.
+
+Let\[CloseCurlyQuote]s first set our tolerance and define the function that \
+we will be working with.\
+\>", "Text",
+ CellChangeTimes->{{3.619092969209272*^9, 3.619092989720989*^9}, {
+  3.6190930273444896`*^9, 3.6190930845201645`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TOL", "=", "0.00001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"x", "-", "1"}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"x", "-", "2"}], ")"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.618934975631558*^9, 3.618934975715138*^9}, {
+   3.618935277198245*^9, 3.618935284947996*^9}, 3.618936186175489*^9, 
+   3.618936602950993*^9, {3.61893683140336*^9, 3.61893683154949*^9}, {
+   3.61893695286804*^9, 3.6189369623722153`*^9}, 3.6189539718166695`*^9, 
+   3.618954174885975*^9, {3.61900512636609*^9, 3.619005161669263*^9}, {
+   3.6190930947119856`*^9, 3.619093095026165*^9}, {3.6191031592712097`*^9, 
+   3.6191031842544928`*^9}}],
+
+Cell[TextData[{
+ "Since",
+ StyleBox[" Mathematica",
+  FontSlant->"Italic"],
+ " is a functional language, we will first set up functions for the various \
+tests and operations we will need.\n\nOne thing we need to be able to check \
+is that the function values at the end points of our intervals have different \
+signs. "
+}], "Text",
+ CellChangeTimes->{{3.619093156216133*^9, 3.6190931958627844`*^9}, {
+  3.6190932396788263`*^9, 3.6190933314372683`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"OppSigns", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], 
+      RowBox[{"f", "[", "y", "]"}]}], "<", "0"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.618935805525577*^9, 3.618935854085429*^9}, 
+   3.618935925734041*^9, {3.6189360325097733`*^9, 3.6189360371655807`*^9}}],
+
+Cell["\<\
+The stopping condition is that the the length of an interval produces is \
+greater than or equal to our tolerance.\
+\>", "Text",
+ CellChangeTimes->{{3.6190933339286804`*^9, 3.6190933843414884`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Test", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{"(", 
+        RowBox[{"x", "-", "y"}], ")"}], "]"}], "/", "2"}], "\[GreaterEqual]", 
+     "TOL"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.619093344104494*^9, 3.619093344472706*^9}, {
+  3.6190936920133467`*^9, 3.6190936920613747`*^9}}],
+
+Cell["\<\
+The heart of the algorithm is chopping an interval in half and selecting one \
+of the subintervals that passes the OppSigns test. Note that Select will \
+return a list of lists that satisfy OffSigns, so we need a convention for \
+choosing  one in case both intervals are selected. We will just take the \
+first inteval the passes OppSigns.\
+\>", "Text",
+ CellChangeTimes->{{3.619093391541605*^9, 3.619093431876653*^9}, {
+  3.6190935863719363`*^9, 3.619093639595348*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInt", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], "}"}]}], 
+       "}"}], ",", "OppSigns"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.618934981717876*^9, 3.618935017407207*^9}, {
+  3.618935064470583*^9, 3.618935091802478*^9}, {3.618935337217142*^9, 
+  3.618935338847983*^9}, {3.618935773192194*^9, 3.6189357882527933`*^9}, {
+  3.6189361180491*^9, 3.618936122413045*^9}, {3.619005040405969*^9, 
+  3.619005045232728*^9}, {3.619005108191704*^9, 3.6190051087220078`*^9}, {
+  3.6190051908319273`*^9, 3.619005192343791*^9}, {3.6190054501725364`*^9, 
+  3.619005459063191*^9}, {3.6190054910047245`*^9, 3.619005495956554*^9}, {
+  3.6190059688327703`*^9, 3.6190059719525533`*^9}, {3.6190060089607005`*^9, 
+  3.619006009683114*^9}, {3.619006368454125*^9, 3.6190064318233356`*^9}, {
+  3.619091626761156*^9, 3.619091636016444*^9}, {3.619093444010584*^9, 
+  3.619093452607497*^9}, {3.6190935678793664`*^9, 3.6190935685347404`*^9}}],
+
+Cell["\<\
+To actually run the method we use the NestWhile function. Actually, so that \
+we can see the intermediate steps we will use the NestWhileList function.\
+\>", "Text",
+ CellChangeTimes->{{3.6190935049404*^9, 3.6190935203321977`*^9}, {
+  3.6190937272104635`*^9, 3.619093745666011*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bisection", "[", "Start_", "]"}], ":=", 
+   RowBox[{"NestWhileList", "[", 
+    RowBox[{"GetInt", ",", "Start", ",", "Test"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.618935289651524*^9, 3.618935299772606*^9}, {
+   3.6189353972120113`*^9, 3.618935404420573*^9}, {3.618935436197928*^9, 
+   3.6189354364895678`*^9}, {3.6189354714373207`*^9, 
+   3.6189355074067373`*^9}, {3.61893565869027*^9, 3.61893566009019*^9}, {
+   3.6189357466581087`*^9, 3.6189357470963917`*^9}, {3.618936159664401*^9, 
+   3.6189361600355673`*^9}, {3.618936540390162*^9, 3.618936540873576*^9}, 
+   3.618936762837327*^9, {3.618936872740494*^9, 3.618936930042007*^9}, {
+   3.618936969402334*^9, 3.618936970133532*^9}, {3.619005051527326*^9, 
+   3.6190050536705494`*^9}, {3.6190051111033688`*^9, 3.619005111934842*^9}, {
+   3.619005195525608*^9, 3.619005198094077*^9}, {3.619005229789188*^9, 
+   3.6190052302534533`*^9}, {3.619005286956856*^9, 3.6190052873810973`*^9}, {
+   3.619005934912389*^9, 3.6190059407917457`*^9}, {3.6190060685097275`*^9, 
+   3.619006070149665*^9}, {3.6190064408034735`*^9, 3.6190064438682203`*^9}, {
+   3.6190064785630484`*^9, 3.6190064877392874`*^9}, {3.619092495238429*^9, 
+   3.619092556760584*^9}, {3.619093525214986*^9, 3.6190935318787947`*^9}, {
+   3.6190936571733904`*^9, 3.619093680676869*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s give it a try!", "Text",
+ CellChangeTimes->{{3.619093757274643*^9, 3.6190937612579207`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "2.5"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190937030616603`*^9, 3.6190937129002824`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", "2.5`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.75`", ",", "2.5`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.75`", ",", "2.125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9375`", ",", "2.125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9375`", ",", "2.03125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.984375`", ",", "2.03125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.984375`", ",", "2.0078125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.99609375`", ",", "2.0078125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.99609375`", ",", "2.001953125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9990234375`", ",", "2.001953125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9990234375`", ",", "2.00048828125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.999755859375`", ",", "2.00048828125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.999755859375`", ",", "2.0001220703125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.99993896484375`", ",", "2.0001220703125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.99993896484375`", ",", "2.000030517578125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9999847412109375`", ",", "2.000030517578125`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9999847412109375`", ",", "2.0000076293945312`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.9999961853027344`", ",", "2.0000076293945312`"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.6190937132294703`*^9, 3.6190937497823596`*^9, 
+  3.6190938535936785`*^9, 3.6190942007780695`*^9, 3.619094251254913*^9, 
+  3.6191037387153206`*^9}]
+}, Open  ]],
+
+Cell["\<\
+It works! But, as written the code is pretty easy to break. For example, if \
+we pass an interval so that the subintervals do not satisfy the OppSigns \
+condition bad things happen.\
+\>", "Text",
+ CellChangeTimes->{{3.6190937707783594`*^9, 3.6190938099867616`*^9}, {
+  3.619093914249339*^9, 3.61909392369674*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "2.0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190938116387043`*^9, 3.619093831643135*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(1\\)\[NoBreak] of \
+\[NoBreak]\\!\\({}\\)\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.619093832070379*^9, 3.6190938561691494`*^9}, 
+   3.6190942030603743`*^9, 3.6190942527727814`*^9, 3.619103740566378*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", "2.`"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+    "\[RightDoubleBracket]"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6190938251714373`*^9, 3.6190938561721535`*^9}, 
+   3.619094203061376*^9, 3.6190942527737827`*^9, 3.6191037405683784`*^9}]
+}, Open  ]],
+
+Cell["\<\
+What\[CloseCurlyQuote]s going on here? Since neither of the subintervals \
+satisfy OppSigns the GetInt function is returning an empty list. So, we \
+should take care of this case in GetInt. To do this we can use an If to check \
+if this happens and if it does we can Throw an error message.\
+\>", "Text",
+ CellChangeTimes->{{3.6190938689934826`*^9, 3.6190938932813606`*^9}, {
+  3.6190939285605235`*^9, 3.619093992120841*^9}, {3.6190940225442257`*^9, 
+  3.619094041536078*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInt", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], "}"}]}],
+          "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], "}"}]}],
+          "}"}], ",", "OppSigns"}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6190934390727615`*^9, 3.6190934394669876`*^9}, {
+  3.6191035722311864`*^9, 3.619103675166005*^9}}],
+
+Cell["\<\
+If we Throw something it needs to be caught by something, so we need to \
+change our Bisection function slightly.\
+\>", "Text",
+ CellChangeTimes->{{3.61909400616086*^9, 3.6190940100480947`*^9}, {
+  3.619094046064663*^9, 3.6190940722076006`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bisection", "[", "Start_", "]"}], ":=", 
+   RowBox[{"Catch", "[", 
+    RowBox[{"NestWhileList", "[", 
+     RowBox[{"GetInt", ",", "Start", ",", "Test"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.61909408029222*^9, 3.619094089170295*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "2.0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094011316806*^9, 3.6190940120662346`*^9}}],
+
+Cell[BoxData["\<\"Bad Interval\"\>"], "Output",
+ CellChangeTimes->{
+  3.6190940125315013`*^9, 3.6190941070575185`*^9, 3.619094209382989*^9, 
+   3.6190942579267597`*^9, {3.619103664418866*^9, 3.6191036859141507`*^9}, 
+   3.619103749024209*^9}]
+}, Open  ]],
+
+Cell["\<\
+This is better than just choking! But, there is still a case to worry about. \
+That is the case that the initial interval has the property that the zero is \
+the midpoint. \
+\>", "Text",
+ CellChangeTimes->{{3.6190941153672657`*^9, 3.619094170774929*^9}, 
+   3.619094322005343*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "3.0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094223976325*^9, 3.6190942314075794`*^9}}],
+
+Cell[BoxData["\<\"Bad Interval\"\>"], "Output",
+ CellChangeTimes->{{3.619094231894852*^9, 3.619094259649714*^9}, 
+   3.6191036872178917`*^9, 3.6191037518007956`*^9}]
+}, Open  ]],
+
+Cell["\<\
+This is not a bad interval! But, the two subintervals ARE bad because neither \
+contain a zero of the function.
+
+We can check for this before we start the Nest iteration.\
+\>", "Text",
+ CellChangeTimes->{{3.619094267590251*^9, 3.6190943247259007`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bisection", "[", "Start_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Start", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", 
+          RowBox[{"Start", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}], "]"}], 
+      "\[Equal]", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Start", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{"Start", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}], ")"}], "-", 
+        
+        RowBox[{"(", 
+         RowBox[{"TOL", "/", "2"}], ")"}]}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Start", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{"Start", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}], ")"}], "+", 
+        
+        RowBox[{"(", 
+         RowBox[{"TOL", "/", "2"}], ")"}]}]}], "}"}], ",", 
+     RowBox[{"Catch", "[", 
+      RowBox[{"NestWhile", "[", 
+       RowBox[{"GetInt", ",", "Start", ",", "Test"}], "]"}], "]"}]}], "]"}]}],
+   ";"}]], "Input",
+ CellChangeTimes->{{3.619093483007867*^9, 3.619093484066473*^9}, {
+   3.619094179170724*^9, 3.6190941837153187`*^9}, 3.6190942155315*^9, {
+   3.61909474003922*^9, 3.6190948166229815`*^9}, {3.6191029288855605`*^9, 
+   3.6191029296129756`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.3", ",", "3.5"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094217848824*^9, 3.619094218767353*^9}, {
+  3.6190943315257835`*^9, 3.619094342503058*^9}, {3.619102911672724*^9, 
+  3.619102913232617*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.9999877929687502`", ",", "2.000004577636719`"}], "}"}]], "Output",\
+
+ CellChangeTimes->{
+  3.619094343020352*^9, 3.619094767137703*^9, {3.6190947976891613`*^9, 
+   3.619094817809659*^9}, {3.6191029133837004`*^9, 3.619102931008774*^9}, {
+   3.619103348812559*^9, 3.6191033520593724`*^9}, 3.6191036984493656`*^9}]
+}, Open  ]],
+
+Cell["\<\
+So now if we happen to pass a starting interval whose midpoint is a zero we \
+will just notice that immediate and return the midpoint. In fact, we should \
+really always get a number back from Bisection instead of an interval.
+
+Since what we really want is the approximate to the zero and not the interval \
+we can simply take the midpoint of the returned interval.\
+\>", "Text",
+ CellChangeTimes->{{3.6190944092532024`*^9, 3.6190944204446006`*^9}, {
+  3.6190944880842447`*^9, 3.6190945043875647`*^9}, {3.6190945414677515`*^9, 
+  3.6190945922757826`*^9}, {3.6190948316015415`*^9, 3.6190948320087786`*^9}, {
+  3.619094868401569*^9, 3.619094893809091*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BisectionZero", "[", "Start_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"St", "=", "Start"}], ",", "z"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Int", "=", 
+      RowBox[{"Bisection", "[", "St", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Int", "\[Equal]", "\"\<Bad Interval\>\""}], ",", 
+       RowBox[{"Return", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+       RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Int", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "+", 
+        RowBox[{"Int", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.619094828874982*^9, 3.619094829090105*^9}, {
+  3.6190948952258987`*^9, 3.619095058764347*^9}, {3.619102775259774*^9, 
+  3.6191027828911333`*^9}, {3.6191028158909907`*^9, 3.6191028625856733`*^9}, {
+  3.619102958570523*^9, 3.6191031366342726`*^9}, {3.6191032164979105`*^9, 
+  3.619103236736474*^9}, {3.619103277751912*^9, 3.619103331600683*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BisectionZero", "[", 
+  RowBox[{"{", 
+   RowBox[{"0.9", ",", "1.01"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190950007612023`*^9, 3.6190950115373607`*^9}, {
+  3.619102789666008*^9, 3.619102789809087*^9}, {3.6191028675134916`*^9, 
+  3.619102867776642*^9}, {3.619103047479327*^9, 3.6191030658558283`*^9}, {
+  3.6191031430789595`*^9, 3.6191031450871053`*^9}, {3.619103191390564*^9, 
+  3.619103193229613*^9}, {3.619103224725619*^9, 3.619103271805516*^9}, {
+  3.6191033140456533`*^9, 3.61910331418073*^9}, {3.619103362309232*^9, 
+  3.6191033743000827`*^9}, {3.6191034329005675`*^9, 3.6191034877959385`*^9}, {
+  3.619103705538361*^9, 3.6191037164576006`*^9}}],
+
+Cell[BoxData["1.0000030517578125`"], "Output",
+ CellChangeTimes->{{3.6191033218190928`*^9, 3.6191033745462217`*^9}, {
+  3.6191034302500534`*^9, 3.61910348909768*^9}, {3.6191037016721506`*^9, 
+  3.619103716799796*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1584, 763},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1.5,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 181, 6, 150, "Title"],
+Cell[763, 30, 103, 1, 84, "Subtitle"],
+Cell[869, 33, 101, 1, 49, "Subsubtitle"],
+Cell[973, 36, 417, 9, 131, "Text"],
+Cell[1393, 47, 762, 17, 75, "Input"],
+Cell[2158, 66, 453, 10, 102, "Text"],
+Cell[2614, 78, 442, 12, 45, "Input"],
+Cell[3059, 92, 208, 4, 45, "Text"],
+Cell[3270, 98, 469, 14, 45, "Input"],
+Cell[3742, 114, 480, 8, 102, "Text"],
+Cell[4225, 124, 1456, 33, 45, "Input"],
+Cell[5684, 159, 292, 5, 45, "Text"],
+Cell[5979, 166, 1348, 21, 45, "Input"],
+Cell[7330, 189, 121, 1, 45, "Text"],
+Cell[CellGroupData[{
+Cell[7476, 194, 183, 4, 45, "Input"],
+Cell[7662, 200, 1678, 42, 101, "Output"]
+}, Open  ]],
+Cell[9355, 245, 323, 6, 74, "Text"],
+Cell[CellGroupData[{
+Cell[9703, 255, 181, 4, 45, "Input"],
+Cell[9887, 261, 565, 11, 35, "Message"],
+Cell[10455, 274, 363, 9, 44, "Output"]
+}, Open  ]],
+Cell[10833, 286, 486, 8, 74, "Text"],
+Cell[11322, 296, 1450, 44, 75, "Input"],
+Cell[12775, 342, 255, 5, 45, "Text"],
+Cell[13033, 349, 301, 8, 45, "Input"],
+Cell[CellGroupData[{
+Cell[13359, 361, 181, 4, 45, "Input"],
+Cell[13543, 367, 242, 4, 44, "Output"]
+}, Open  ]],
+Cell[13800, 374, 290, 6, 74, "Text"],
+Cell[CellGroupData[{
+Cell[14115, 384, 181, 4, 45, "Input"],
+Cell[14299, 390, 165, 2, 76, "Output"]
+}, Open  ]],
+Cell[14479, 395, 262, 6, 102, "Text"],
+Cell[14744, 403, 1646, 49, 104, "Input"],
+Cell[CellGroupData[{
+Cell[16415, 456, 279, 6, 45, "Input"],
+Cell[16697, 464, 353, 7, 44, "Output"]
+}, Open  ]],
+Cell[17065, 474, 664, 11, 131, "Text"],
+Cell[17732, 487, 1224, 29, 162, "Input"],
+Cell[CellGroupData[{
+Cell[18981, 520, 686, 11, 45, "Input"],
+Cell[19670, 533, 217, 3, 44, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

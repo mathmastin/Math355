@@ -1,0 +1,1103 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     36952,       1094]
+NotebookOptionsPosition[     34229,       1012]
+NotebookOutlinePosition[     34589,       1028]
+CellTagsIndexPosition[     34546,       1025]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Splines in Mathematica", "Title",
+ CellChangeTimes->{{3.621593141783346*^9, 3.6215931446484785`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Built in Splines", "Section",
+ CellChangeTimes->{{3.6215933757131824`*^9, 3.6215933785183744`*^9}, {
+  3.621596480267426*^9, 3.621596480875487*^9}}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " has the ability to compute splines, though they aren\[CloseCurlyQuote]t \
+the type of splines we will talk about in class.\n\nLet\[CloseCurlyQuote]s \
+define our data."
+}], "Text",
+ CellChangeTimes->{{3.6215931554087076`*^9, 3.6215931741059914`*^9}, {
+  3.6215933487062163`*^9, 3.6215933609589515`*^9}, {3.6215942829171715`*^9, 
+  3.621594284177171*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Data", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "5"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621594196477171*^9, 3.6215941973081713`*^9}, {
+   3.621594435263171*^9, 3.621594435954171*^9}, {3.6215974368054066`*^9, 
+   3.6215974567344065`*^9}, {3.6217620629130144`*^9, 
+   3.6217620684965725`*^9}, {3.6217621289006124`*^9, 3.6217621312948513`*^9}, 
+   3.6217625340421224`*^9, {3.6217667754662404`*^9, 3.621766787448042*^9}, 
+   3.621779440045123*^9}],
+
+Cell[BoxData[
+ RowBox[{"f", "=", 
+  RowBox[{"Interpolation", "[", 
+   RowBox[{"Data", ",", 
+    RowBox[{"Method", "->", "\"\<Spline\>\""}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.621548126888309*^9, 3.621548189507309*^9}, {
+   3.621548249465309*^9, 3.621548250450309*^9}, {3.621593502383549*^9, 
+   3.621593503171313*^9}, {3.621594201335171*^9, 3.621594201822171*^9}, 
+   3.621766884187271*^9}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"ListPlot", "[", "Data", "]"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.621548251566309*^9, 3.6215483052250957`*^9}, {
+  3.6215942083141713`*^9, 3.621594221355171*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Natural Splines", "Section",
+ CellChangeTimes->{{3.6215933844224644`*^9, 3.6215933872855988`*^9}}],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s now implement the method discussed in class for \
+computing the natural spline of the data.
+
+Remember, $h$ is simply the spacing between adjacent nodes (in the \
+$x$-direction).\
+\>", "Text",
+ CellChangeTimes->{{3.621593748297698*^9, 3.6215937717983475`*^9}, {
+  3.621594298144171*^9, 3.6215943236531715`*^9}, {3.6217664680385528`*^9, 
+  3.621766472841033*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"h", "[", "n_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Data", "[", 
+      RowBox[{"[", 
+       RowBox[{"n", "+", "1"}], "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}], "-", 
+    RowBox[{
+     RowBox[{"Data", "[", 
+      RowBox[{"[", "n", "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621548761978767*^9, 3.6215487703346024`*^9}, {
+  3.6215488446420326`*^9, 3.621548890502618*^9}, {3.621548921407708*^9, 
+  3.6215489545050173`*^9}, {3.6215934667262497`*^9, 3.6215934668662076`*^9}}],
+
+Cell["\<\
+The coefficients of the splines are computed using a system of linear \
+equations. We can write the $a$\[CloseCurlyQuote]s down easily because they \
+are just the function values at the nodes.\
+\>", "Text",
+ CellChangeTimes->{{3.6215937772488027`*^9, 3.6215938349790287`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Data", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6215936122835693`*^9, 3.621593615555588*^9}}],
+
+Cell["\<\
+To compute the $c$\[CloseCurlyQuote]s we solve a linear system. Do define the \
+coefficent matrix we use the DiagonalMatrix function.\
+\>", "Text",
+ CellChangeTimes->{{3.6215938417513514`*^9, 3.6215938750700197`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"L", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"h", "[", "i", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}],
+       "~", "Join", "~", 
+      RowBox[{"{", "0", "}"}]}], ",", 
+     RowBox[{"-", "1"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621548923105878*^9, 3.6215489235469217`*^9}, {
+  3.621548972251792*^9, 3.6215489849440613`*^9}, {3.621549028665433*^9, 
+  3.621549077527319*^9}, {3.621549165343099*^9, 3.621549181604725*^9}, {
+  3.6215504368389635`*^9, 3.621550443880555*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"U", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", "0", "}"}], "~", "Join", "~", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"h", "[", "i", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "2", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+       "]"}]}], ",", "1"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6215490959301586`*^9, 3.621549102603826*^9}, {
+  3.62154913544711*^9, 3.6215491531628814`*^9}, {3.6215491843139963`*^9, 
+  3.6215491877913437`*^9}, {3.6215504508641577`*^9, 3.6215504578647575`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Diag", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{"{", "1", "}"}], "~", "Join", "~", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"2", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"h", "[", "i", "]"}], "+", 
+          RowBox[{"h", "[", 
+           RowBox[{"i", "+", "1"}], "]"}]}], ")"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}], 
+     "~", "Join", "~", 
+     RowBox[{"{", "1", "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6215491920357685`*^9, 3.621549277951304*^9}, {
+  3.621550463711588*^9, 3.6215504850193253`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"L", "+", "U", "+", "Diag"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"M", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215492799873037`*^9, 3.621549305558304*^9}, {
+   3.621550490392251*^9, 3.621550497480833*^9}, {3.621550902038589*^9, 
+   3.6215509026245303`*^9}, {3.6215510658642693`*^9, 3.6215510663702693`*^9}, 
+   3.6215512539762697`*^9, {3.6215515974020066`*^9, 3.621551601275781*^9}}],
+
+Cell["Now we define the vector $B$...", "Text",
+ CellChangeTimes->{{3.621593901434383*^9, 3.621593924700056*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{
+    RowBox[{"{", "0", "}"}], "~", "Join", "~", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", 
+          RowBox[{"h", "[", 
+           RowBox[{"i", "+", "1"}], "]"}]}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "2"}], "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ")"}]}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", 
+          RowBox[{"h", "[", "i", "]"}]}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{
+         RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}], 
+    "~", "Join", "~", 
+    RowBox[{"{", "0", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"B", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215509405807343`*^9, 3.6215510082892694`*^9}, {
+   3.6215510682802696`*^9, 3.6215510686732693`*^9}, 3.6215515849855237`*^9, {
+   3.6215516159547167`*^9, 3.621551618994324*^9}}],
+
+Cell[TextData[{
+ "... and ask ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to solve the linear system."
+}], "Text",
+ CellChangeTimes->{{3.621593927139812*^9, 3.6215939363098946`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"LinearSolve", "[", 
+    RowBox[{"M", ",", "B"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"c", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215936359624634`*^9, 3.621593636401332*^9}}],
+
+Cell["\<\
+Now that we have the $c$\[CloseCurlyQuote]s we can compute the $b$\
+\[CloseCurlyQuote]s and the $d$\[CloseCurlyQuote]s from the equations in the \
+book.\
+\>", "Text",
+ CellChangeTimes->{{3.6215939419723287`*^9, 3.6215939581417117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"b", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "/", 
+        RowBox[{"h", "[", "i", "]"}]}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"a", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+        RowBox[{"a", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}], "-", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"h", "[", "i", "]"}], "/", "3"}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"2", 
+         RowBox[{"c", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], "+", 
+        RowBox[{"c", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ")"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621551113413269*^9, 3.6215512153902693`*^9}, {
+   3.6215513127052693`*^9, 3.621551328505269*^9}, 3.621551360063548*^9, {
+   3.621551414716477*^9, 3.621551417975128*^9}, {3.621551581335794*^9, 
+   3.6215515820529375`*^9}, {3.621551732568151*^9, 3.621551732710165*^9}}],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"c", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+       RowBox[{"c", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"3", 
+       RowBox[{"h", "[", "i", "]"}]}], ")"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621551734838378*^9, 3.6215517379196863`*^9}, {
+  3.6215519006899614`*^9, 3.6215519389637885`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s look at all of the coefficients together.", \
+"Text",
+ CellChangeTimes->{{3.621593969628563*^9, 3.621593977080817*^9}}],
+
+Cell[BoxData[{"a", "\[IndentingNewLine]", "b", "\[IndentingNewLine]", "c", "\
+\[IndentingNewLine]", "d"}], "Input",
+ CellChangeTimes->{{3.621551944339326*^9, 3.6215519488687787`*^9}, {
+  3.621593646624264*^9, 3.621593671135908*^9}}],
+
+Cell["\<\
+In order to use the interpolation we need to build the polynomials.\
+\>", "Text",
+ CellChangeTimes->{{3.621593984273098*^9, 3.6215939992466006`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Poly", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], "+", 
+     RowBox[{
+      RowBox[{"b", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{"(", 
+       RowBox[{"x", "-", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "+", 
+     RowBox[{
+      RowBox[{"c", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"x", "-", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "2"}]}], "+", 
+     RowBox[{
+      RowBox[{"d", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"x", "-", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "3"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621552136846575*^9, 3.62155220980287*^9}, {
+  3.621552245558445*^9, 3.6215522655734463`*^9}, {3.6215523143833265`*^9, 
+  3.6215523170625944`*^9}}],
+
+Cell["\<\
+We can use the Piecewise function to get a usable form of the spline.\
+\>", "Text",
+ CellChangeTimes->{{3.621594003846141*^9, 3.6215940207611713`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"P", "=", 
+  RowBox[{"Piecewise", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Poly", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "\[LessEqual]", "x", "\[LessEqual]", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{
+        RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], "]"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621594073704171*^9, 3.621594136281171*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s take a look at the spline!", "Text",
+ CellChangeTimes->{{3.6215973566394067`*^9, 3.6215973619214067`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", "Data", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"P", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6215522578256717`*^9, 3.621552298002689*^9}, {
+  3.6215523331752057`*^9, 3.6215523711640043`*^9}, {3.621552597201606*^9, 
+  3.621552608316717*^9}, {3.6215936959024763`*^9, 3.6215937343240957`*^9}, {
+  3.621594142175171*^9, 3.621594178357171*^9}}],
+
+Cell[TextData[{
+ "We can also compare the natural spline (in blue) to the spline computed by ",
+ StyleBox["Mathematica ",
+  FontSlant->"Italic"],
+ "(in red)."
+}], "Text",
+ CellChangeTimes->{{3.621597377648407*^9, 3.6215973915744066`*^9}, {
+  3.62176672527726*^9, 3.621766734102377*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+    RowBox[{"ListPlot", "[", "Data", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"P", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6215936902021866`*^9, 3.6215936914218206`*^9}, {
+  3.621594239550171*^9, 3.621594264547171*^9}, {3.621764882140979*^9, 
+  3.621764906394404*^9}}],
+
+Cell[TextData[{
+ "Things look different and this is due to the fact that we are using the \
+natural boundary conditions and ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is using some other condition on the boundaries. "
+}], "Text",
+ CellChangeTimes->{{3.621597397795407*^9, 3.621597429874407*^9}, {
+  3.6217621054832706`*^9, 3.6217621231000323`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Clamped Splines", "Section",
+ CellChangeTimes->{{3.6215933844224644`*^9, 3.6215933872855988`*^9}, {
+  3.621762163149037*^9, 3.621762163863108*^9}}],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s now implement the clamped spline. We need the \
+derivative of $f$ at the endpoints of the interval, so let\[CloseCurlyQuote]s \
+just keep track of that in a separate list.\
+\>", "Text",
+ CellChangeTimes->{{3.6217665052802615`*^9, 3.6217665481489744`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fp", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621762349492669*^9, 3.621762361570877*^9}}],
+
+Cell["\<\
+The linear coefficients are exactly the same as these just depend on the \
+condition that the splines match the function values.\
+\>", "Text",
+ CellChangeTimes->{{3.6217665611316757`*^9, 3.621766586399149*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Data", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6215936122835693`*^9, 3.621593615555588*^9}, {
+  3.621766557151074*^9, 3.6217665582479644`*^9}}],
+
+Cell["\<\
+To compute the $c$\[CloseCurlyQuote]s we solve a linear system. Do define the \
+coefficent matrix we use the DiagonalMatrix function.\
+\>", "Text",
+ CellChangeTimes->{{3.6215938417513514`*^9, 3.6215938750700197`*^9}}],
+
+Cell["\<\
+The quadratic coefficients are affected by the clamped boundary condition, so \
+we have different coefficient matrix for the linear system that determines \
+the $c$\[CloseCurlyQuote]s.\
+\>", "Text",
+ CellChangeTimes->{{3.6217665951342754`*^9, 3.6217666299697914`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"L", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"h", "[", "i", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}],
+       "~", "Join", "~", 
+      RowBox[{"{", 
+       RowBox[{"h", "[", 
+        RowBox[{
+         RowBox[{"Length", "[", "Data", "]"}], "-", "1"}], "]"}], "}"}]}], 
+     ",", 
+     RowBox[{"-", "1"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621548923105878*^9, 3.6215489235469217`*^9}, {
+  3.621548972251792*^9, 3.6215489849440613`*^9}, {3.621549028665433*^9, 
+  3.621549077527319*^9}, {3.621549165343099*^9, 3.621549181604725*^9}, {
+  3.6215504368389635`*^9, 3.621550443880555*^9}, {3.621764775054271*^9, 
+  3.6217647833070965`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"U", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"h", "[", "1", "]"}], "}"}], "~", "Join", "~", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"h", "[", "i", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "2", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+       "]"}]}], ",", "1"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6215490959301586`*^9, 3.621549102603826*^9}, {
+  3.62154913544711*^9, 3.6215491531628814`*^9}, {3.6215491843139963`*^9, 
+  3.6215491877913437`*^9}, {3.6215504508641577`*^9, 3.6215504578647575`*^9}, {
+  3.6217647005901732`*^9, 3.621764707461547*^9}, {3.6217647644042063`*^9, 
+  3.621764764477214*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Diag", "=", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", "*", 
+       RowBox[{"h", "[", "1", "]"}]}], "}"}], "~", "Join", "~", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"2", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"h", "[", "i", "]"}], "+", 
+          RowBox[{"h", "[", 
+           RowBox[{"i", "+", "1"}], "]"}]}], ")"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}], 
+     "~", "Join", "~", 
+     RowBox[{"{", 
+      RowBox[{"2", "*", 
+       RowBox[{"h", "[", 
+        RowBox[{
+         RowBox[{"Length", "[", "Data", "]"}], "-", "1"}], "]"}]}], "}"}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6215491920357685`*^9, 3.621549277951304*^9}, {
+  3.621550463711588*^9, 3.6215504850193253`*^9}, {3.6217622582565465`*^9, 
+  3.621762291637884*^9}, {3.6217624412858477`*^9, 3.621762441350854*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"L", "+", "U", "+", "Diag"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"M", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215492799873037`*^9, 3.621549305558304*^9}, {
+   3.621550490392251*^9, 3.621550497480833*^9}, {3.621550902038589*^9, 
+   3.6215509026245303`*^9}, {3.6215510658642693`*^9, 3.6215510663702693`*^9}, 
+   3.6215512539762697`*^9, {3.6215515974020066`*^9, 3.621551601275781*^9}}],
+
+Cell["Now we define the vector $B$ for the clamped case.", "Text",
+ CellChangeTimes->{{3.621593901434383*^9, 3.621593924700056*^9}, {
+  3.6217666440283856`*^9, 3.6217666470410843`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"3", "/", 
+         RowBox[{"h", "[", "1", "]"}]}], "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "-", 
+       RowBox[{"3", "*", 
+        RowBox[{"fp", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}]}], ")"}], "}"}], "~", "Join", "~", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", 
+          RowBox[{"h", "[", 
+           RowBox[{"i", "+", "1"}], "]"}]}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "2"}], "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ")"}]}], "-", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", 
+          RowBox[{"h", "[", "i", "]"}]}], ")"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{
+         RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], "]"}], 
+    "~", "Join", "~", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"3", "*", 
+       RowBox[{"fp", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "-", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"3", "/", 
+          RowBox[{"h", "[", 
+           RowBox[{
+            RowBox[{"Length", "[", "Data", "]"}], "-", "1"}], "]"}]}], ")"}], 
+        "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{"Length", "[", "Data", "]"}], "]"}], "]"}], "-", 
+          RowBox[{"a", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"Length", "[", "Data", "]"}], "-", "1"}], "]"}], "]"}]}],
+          ")"}]}], ")"}]}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"B", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215509405807343`*^9, 3.6215510082892694`*^9}, {
+   3.6215510682802696`*^9, 3.6215510686732693`*^9}, 3.6215515849855237`*^9, {
+   3.6215516159547167`*^9, 3.621551618994324*^9}, {3.6217623084815683`*^9, 
+   3.6217623315408745`*^9}, {3.6217623678135014`*^9, 3.621762384641184*^9}, {
+   3.621762446830402*^9, 3.621762519376656*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"LinearSolve", "[", 
+    RowBox[{"M", ",", "B"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"c", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6215936359624634`*^9, 3.621593636401332*^9}}],
+
+Cell["\<\
+Now that we have the $c$\[CloseCurlyQuote]s we can compute the $b$\
+\[CloseCurlyQuote]s and the $d$\[CloseCurlyQuote]s using the same equations \
+as before.\
+\>", "Text",
+ CellChangeTimes->{{3.6215939419723287`*^9, 3.6215939581417117`*^9}, {
+  3.6217666619615917`*^9, 3.6217666710186863`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"b", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"a", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+         RowBox[{"a", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", 
+       RowBox[{"h", "[", "i", "]"}]}], ")"}], "-", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"h", "[", "i", "]"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"c", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}], "+", 
+          RowBox[{"2", "*", 
+           RowBox[{"c", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}]}], ")"}], "/", "3"}]}], ")"}]}], 
+    ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621551113413269*^9, 3.6215512153902693`*^9}, {
+   3.6215513127052693`*^9, 3.621551328505269*^9}, 3.621551360063548*^9, {
+   3.621551414716477*^9, 3.621551417975128*^9}, {3.621551581335794*^9, 
+   3.6215515820529375`*^9}, {3.621551732568151*^9, 3.621551732710165*^9}, {
+   3.621762803061022*^9, 3.621762874133128*^9}}],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"c", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+       RowBox[{"c", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{"3", 
+       RowBox[{"h", "[", "i", "]"}]}], ")"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621551734838378*^9, 3.6215517379196863`*^9}, {
+  3.6215519006899614`*^9, 3.6215519389637885`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s look at all of the coefficients together.", \
+"Text",
+ CellChangeTimes->{{3.621593969628563*^9, 3.621593977080817*^9}}],
+
+Cell[BoxData[{"a", "\[IndentingNewLine]", "b", "\[IndentingNewLine]", "c", "\
+\[IndentingNewLine]", "d"}], "Input",
+ CellChangeTimes->{{3.621551944339326*^9, 3.6215519488687787`*^9}, {
+  3.621593646624264*^9, 3.621593671135908*^9}}],
+
+Cell["\<\
+In order to use the interpolation we need to build the polynomials.\
+\>", "Text",
+ CellChangeTimes->{{3.621593984273098*^9, 3.6215939992466006`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"PolyClamp", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], "+", 
+     RowBox[{
+      RowBox[{"b", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{"(", 
+       RowBox[{"x", "-", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "+", 
+     RowBox[{
+      RowBox[{"c", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"x", "-", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "2"}]}], "+", 
+     RowBox[{
+      RowBox[{"d", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"x", "-", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "3"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621552136846575*^9, 3.62155220980287*^9}, {
+  3.621552245558445*^9, 3.6215522655734463`*^9}, {3.6215523143833265`*^9, 
+  3.6215523170625944`*^9}, {3.621764929166681*^9, 3.6217649296397285`*^9}}],
+
+Cell["\<\
+We can use the Piecewise function to get a usable form of the spline.\
+\>", "Text",
+ CellChangeTimes->{{3.621594003846141*^9, 3.6215940207611713`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"PClamp", "=", 
+  RowBox[{"Piecewise", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"PolyClamp", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "\[LessEqual]", "x", "\[LessEqual]", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{
+        RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], "]"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.621594073704171*^9, 3.621594136281171*^9}, {
+  3.621764932387003*^9, 3.621764933594124*^9}, {3.6217650347212353`*^9, 
+  3.6217650354013033`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s take a look at the clamped spline!", "Text",
+ CellChangeTimes->{{3.6215973566394067`*^9, 3.6215973619214067`*^9}, {
+  3.621766684412347*^9, 3.621766685998188*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", "Data", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"PClamp", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6215522578256717`*^9, 3.621552298002689*^9}, {
+  3.6215523331752057`*^9, 3.6215523711640043`*^9}, {3.621552597201606*^9, 
+  3.621552608316717*^9}, {3.6215936959024763`*^9, 3.6215937343240957`*^9}, {
+  3.621594142175171*^9, 3.621594178357171*^9}, {3.6217649368214464`*^9, 
+  3.621764937637528*^9}}],
+
+Cell[TextData[{
+ "We can also compare the clamped spline (in blue) to the spline computed by ",
+ StyleBox["Mathematica ",
+  FontSlant->"Italic"],
+ "(in red)",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ "as well as the natural spline (in green)."
+}], "Text",
+ CellChangeTimes->{{3.621597377648407*^9, 3.6215973915744066`*^9}, {
+  3.621766690559732*^9, 3.621766718813906*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+    RowBox[{"ListPlot", "[", "Data", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"PClamp", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"P", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "Data", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Green"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6215936902021866`*^9, 3.6215936914218206`*^9}, {
+  3.621594239550171*^9, 3.621594264547171*^9}, {3.6217648576635313`*^9, 
+  3.621764862177983*^9}, {3.621764944529217*^9, 3.62176494495426*^9}, {
+  3.6217649876985335`*^9, 3.6217650019209557`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1584, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 107, 1, 150, "Title"],
+Cell[CellGroupData[{
+Cell[712, 27, 154, 2, 106, "Section"],
+Cell[869, 31, 422, 9, 102, "Text"],
+Cell[1294, 42, 666, 16, 45, "Input"],
+Cell[1963, 60, 398, 8, 45, "Input"],
+Cell[2364, 70, 657, 18, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3058, 93, 104, 1, 106, "Section"],
+Cell[3165, 96, 394, 9, 102, "Text"],
+Cell[3562, 107, 604, 16, 45, "Input"],
+Cell[4169, 125, 286, 5, 74, "Text"],
+Cell[4458, 132, 421, 13, 45, "Input"],
+Cell[4882, 147, 227, 4, 45, "Text"],
+Cell[5112, 153, 736, 19, 45, "Input"],
+Cell[5851, 174, 672, 17, 45, "Input"],
+Cell[6526, 193, 739, 21, 45, "Input"],
+Cell[7268, 216, 462, 8, 75, "Input"],
+Cell[7733, 226, 113, 1, 45, "Text"],
+Cell[7849, 229, 1425, 41, 75, "Input"],
+Cell[9277, 272, 193, 6, 45, "Text"],
+Cell[9473, 280, 261, 6, 75, "Input"],
+Cell[9737, 288, 246, 5, 45, "Text"],
+Cell[9986, 295, 1227, 36, 45, "Input"],
+Cell[11216, 333, 672, 21, 45, "Input"],
+Cell[11891, 356, 148, 2, 45, "Text"],
+Cell[12042, 360, 232, 3, 133, "Input"],
+Cell[12277, 365, 159, 3, 45, "Text"],
+Cell[12439, 370, 1386, 43, 75, "Input"],
+Cell[13828, 415, 161, 3, 45, "Text"],
+Cell[13992, 420, 822, 24, 45, "Input"],
+Cell[14817, 446, 135, 1, 45, "Text"],
+Cell[14955, 449, 778, 20, 45, "Input"],
+Cell[15736, 471, 286, 7, 45, "Text"],
+Cell[16025, 480, 1134, 32, 75, "Input"],
+Cell[17162, 514, 360, 8, 74, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17559, 527, 153, 2, 106, "Section"],
+Cell[17715, 531, 288, 5, 45, "Text"],
+Cell[18006, 538, 183, 5, 45, "Input"],
+Cell[18192, 545, 220, 4, 45, "Text"],
+Cell[18415, 551, 472, 14, 45, "Input"],
+Cell[18890, 567, 227, 4, 45, "Text"],
+Cell[19120, 573, 278, 5, 74, "Text"],
+Cell[19401, 580, 898, 24, 45, "Input"],
+Cell[20302, 606, 807, 20, 45, "Input"],
+Cell[21112, 628, 1035, 29, 45, "Input"],
+Cell[22150, 659, 462, 8, 75, "Input"],
+Cell[22615, 669, 185, 2, 45, "Text"],
+Cell[22803, 673, 2694, 79, 133, "Input"],
+Cell[25500, 754, 261, 6, 75, "Input"],
+Cell[25764, 762, 303, 6, 45, "Text"],
+Cell[26070, 770, 1290, 37, 45, "Input"],
+Cell[27363, 809, 672, 21, 45, "Input"],
+Cell[28038, 832, 148, 2, 45, "Text"],
+Cell[28189, 836, 232, 3, 133, "Input"],
+Cell[28424, 841, 159, 3, 45, "Text"],
+Cell[28586, 846, 1439, 43, 75, "Input"],
+Cell[30028, 891, 161, 3, 45, "Text"],
+Cell[30192, 896, 934, 26, 45, "Input"],
+Cell[31129, 924, 192, 2, 45, "Text"],
+Cell[31324, 928, 834, 21, 45, "Input"],
+Cell[32161, 951, 371, 10, 45, "Text"],
+Cell[32535, 963, 1666, 45, 75, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

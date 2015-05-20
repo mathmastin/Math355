@@ -1,0 +1,96 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2491,         87]
+NotebookOptionsPosition[      2075,         68]
+NotebookOutlinePosition[      2417,         83]
+CellTagsIndexPosition[      2374,         80]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Linear Convergence vs. Quadratic Convergence", "Title",
+ CellChangeTimes->{{3.619957381558194*^9, 3.619957389656004*^9}}],
+
+Cell["We can create lists of the two sequences using Table.", "Text",
+ CellChangeTimes->{{3.6199574048495226`*^9, 3.6199574319872365`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"lin", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"1", "/", 
+      RowBox[{"2", "^", "n"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "1", ",", "10"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"quad", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"1", "/", 
+      RowBox[{"(", 
+       RowBox[{"2", "^", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"2", "^", "n"}], "-", "1"}], ")"}]}], ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "1", ",", "10"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.619951901175811*^9, 3.6199519920869007`*^9}, {
+  3.6199574681538525`*^9, 3.6199575650195384`*^9}}],
+
+Cell["\<\
+ListLinePlot will generate a nice graph of the two sequences converging to 0.\
+\>", "Text",
+ CellChangeTimes->{{3.6199574431213493`*^9, 3.6199574563226695`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"lin", ",", "quad"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.619951921717865*^9, 3.619951932650958*^9}, {
+  3.619951996651357*^9, 3.619952015674259*^9}}]
+}, Open  ]]
+},
+WindowSize->{767, 738},
+WindowMargins->{{Automatic, 408}, {22, Automatic}},
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 127, 1, 166, "Title"],
+Cell[710, 25, 139, 1, 30, "Text"],
+Cell[852, 28, 734, 23, 52, "Input"],
+Cell[1589, 53, 171, 3, 30, "Text"],
+Cell[1763, 58, 296, 7, 31, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

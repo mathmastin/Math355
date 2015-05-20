@@ -1,0 +1,297 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9924,        288]
+NotebookOptionsPosition[      8834,        251]
+NotebookOutlinePosition[      9195,        267]
+CellTagsIndexPosition[      9152,        264]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Approximation with Legendre Polynomails", "Title",
+ CellChangeTimes->{{3.6258408275566444`*^9, 3.6258408356594543`*^9}}],
+
+Cell["\<\
+In this notebook will implement the approximation of continuous functions on \
+the interval [-1,1] using Legendre polynomials.\
+\>", "Text",
+ CellChangeTimes->{{3.6258408436392527`*^9, 3.6258408669925876`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"n", "=", "3"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "degree", " ", "of", " ", "the", " ", "approximating", " ", 
+    "polynomial"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.625833128608521*^9, 3.625833136885775*^9}, {
+  3.625838530977005*^9, 3.6258385338652935`*^9}, {3.6258399658804855`*^9, 
+  3.6258399860635033`*^9}, {3.6258400164575424`*^9, 3.625840016649562*^9}, {
+  3.6258408695998487`*^9, 3.6258408863245206`*^9}, {3.6258411176666527`*^9, 
+  3.625841171214007*^9}}],
+
+Cell["\<\
+First, let\[CloseCurlyQuote]s define the inner product and the function to \
+get the projection.\
+\>", "Text",
+ CellChangeTimes->{{3.6258408935032387`*^9, 3.625840913244212*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"IP", "[", 
+   RowBox[{"f_", ",", "g_"}], "]"}], ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"f", " ", "g"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.625833110047677*^9, 3.625833154718762*^9}, {
+  3.6258394817240744`*^9, 3.6258395105389557`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"IP", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"g", "[", "x", "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.625839555096411*^9, 3.6258395673886404`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Proj", "[", 
+   RowBox[{"f_", ",", "g_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"IP", "[", 
+    RowBox[{"f", ",", "g"}], "]"}], "/", 
+   RowBox[{"IP", "[", 
+    RowBox[{"g", ",", "g"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6258396767395744`*^9, 3.6258397005339537`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Proj", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"g", "[", "x", "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6258397015260525`*^9, 3.6258397081277127`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is happy to supply us with the polynomials that we need (the so-called \
+Legendre polynomials). We will talk soon about how to generate orthogonal \
+polynomials and give a definition for the Legendre polynomials.\n\nIt is \
+worth pointing out again that we could use any set of orthogonal functions \
+here and the idea is exactly the same! We are simply making the choice to use \
+polynomials."
+}], "Text",
+ CellChangeTimes->{{3.6258409213430223`*^9, 3.625840948185706*^9}, {
+  3.626372334719988*^9, 3.6263725207007985`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Polys", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"LegendreP", "[", 
+     RowBox[{"i", ",", "x"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", "n"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.625833072508792*^9, 3.6258330981779375`*^9}, {
+  3.6258375680949545`*^9, 3.6258375938389544`*^9}, {3.6258378364789543`*^9, 
+  3.6258378371169543`*^9}, {3.6258380939433055`*^9, 3.6258380940413156`*^9}, {
+  3.625838406105519*^9, 3.6258384129892073`*^9}, {3.6258384623741455`*^9, 
+  3.6258384671946273`*^9}, {3.6258385363275394`*^9, 3.625838536443551*^9}}],
+
+Cell["\<\
+Just to be sure that these are orthogonal we can compute the pairwise inner \
+products.\
+\>", "Text",
+ CellChangeTimes->{{3.6258409563235197`*^9, 3.6258409686127486`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"IP", "[", 
+     RowBox[{
+      RowBox[{"Polys", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], ",", 
+      RowBox[{"Polys", "[", 
+       RowBox[{"[", "j", "]"}], "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "Polys", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", 
+      RowBox[{"Length", "[", "Polys", "]"}]}], "}"}]}], "]"}], "//", 
+  "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.6258402103539305`*^9, 3.6258402775006447`*^9}}],
+
+Cell["\<\
+Now to build the approximating polynomial!
+
+This function will generate the coeficients using a given function f.\
+\>", "Text",
+ CellChangeTimes->{{3.625840974197307*^9, 3.6258409991127987`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"LSCoefs", "[", 
+   RowBox[{"f_", ",", "polys_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Proj", "[", 
+     RowBox[{"f", ",", 
+      RowBox[{"polys", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "polys", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6258331041282406`*^9, 3.625833104511585*^9}, {
+  3.6258331925414224`*^9, 3.625833269303918*^9}, {3.625838435131421*^9, 
+  3.6258384353114395`*^9}, {3.62583848232014*^9, 3.6258384824651537`*^9}, {
+  3.625839644681369*^9, 3.6258396457904797`*^9}, {3.6258397190088005`*^9, 
+  3.625839730662966*^9}}],
+
+Cell[BoxData[
+ RowBox[{"coefs", "=", 
+  RowBox[{"LSCoefs", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", "Polys"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.625841012776164*^9, 3.6258410168765745`*^9}}],
+
+Cell["Now, let\[CloseCurlyQuote]s look at an example.", "Text",
+ CellChangeTimes->{{3.6258410447773647`*^9, 3.6258410506199484`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{"Exp", "[", "x", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6258391340263033`*^9, 3.6258391382937307`*^9}, {
+  3.6258392086307526`*^9, 3.6258392088897524`*^9}, {3.6258398663935375`*^9, 
+  3.6258398737092695`*^9}, {3.6258399379396915`*^9, 3.625839940650963*^9}, {
+  3.6258403255094447`*^9, 3.6258404179776907`*^9}, {3.6258404899728894`*^9, 
+  3.625840490640956*^9}, {3.6264503971593103`*^9, 3.6264503993285275`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"P", "=", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"coefs", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], "*", 
+     RowBox[{"Polys", "[", 
+      RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "coefs", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.625833296070326*^9, 3.625833305480686*^9}, {
+   3.625837389315954*^9, 3.6258374413149543`*^9}, {3.6258374740409546`*^9, 
+   3.6258374799729548`*^9}, {3.6258375101999545`*^9, 3.6258375145109544`*^9}, 
+   3.6258376167699547`*^9, 3.625838190210932*^9, {3.625838499956903*^9, 
+   3.6258385017730846`*^9}, {3.6258404675046425`*^9, 3.625840476346527*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Expand", "[", "P", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.62584002343224*^9, 3.625840024838381*^9}, {
+  3.626446644090166*^9, 3.626446649082167*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", "P"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6258375295779543`*^9, 3.6258375427039547`*^9}, {
+  3.6258381128011913`*^9, 3.6258381198308945`*^9}, {3.625838177975708*^9, 
+  3.6258381840903196`*^9}, {3.625838228557766*^9, 3.625838228972807*^9}, {
+  3.625838393797288*^9, 3.6258383973346415`*^9}, {3.6258399476416616`*^9, 
+  3.625839948381736*^9}, {3.625840386093502*^9, 3.6258403873116245`*^9}}],
+
+Cell["\<\
+The total error of the approximation is given by the L^2 norm of the function \
+(f-P).\
+\>", "Text",
+ CellChangeTimes->{{3.626353098382715*^9, 3.6263531180629597`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Error", "=", 
+  RowBox[{"N", "[", 
+   RowBox[{"Integrate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"f", "[", "x", "]"}], "-", "P"}], ")"}], "^", "2"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6263530391102047`*^9, 3.626353086979089*^9}}]
+}, Open  ]]
+},
+WindowSize->{1600, 818},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification->2.,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 126, 1, 330, "Title"],
+Cell[709, 25, 220, 4, 98, "Text"],
+Cell[932, 31, 699, 17, 137, "Input"],
+Cell[1634, 50, 188, 4, 60, "Text"],
+Cell[1825, 56, 370, 10, 60, "Input"],
+Cell[2198, 68, 204, 5, 60, "Input"],
+Cell[2405, 75, 310, 9, 60, "Input"],
+Cell[2718, 86, 208, 5, 60, "Input"],
+Cell[2929, 93, 593, 11, 212, "Text"],
+Cell[3525, 106, 610, 12, 60, "Input"],
+Cell[4138, 120, 181, 4, 60, "Text"],
+Cell[4322, 126, 587, 17, 99, "Input"],
+Cell[4912, 145, 205, 5, 136, "Text"],
+Cell[5120, 152, 714, 17, 60, "Input"],
+Cell[5837, 171, 213, 5, 60, "Input"],
+Cell[6053, 178, 133, 1, 120, "Text"],
+Cell[6189, 181, 487, 8, 120, "Input"],
+Cell[6679, 191, 726, 16, 120, "Input"],
+Cell[7408, 209, 201, 4, 120, "Input"],
+Cell[7612, 215, 610, 13, 120, "Input"],
+Cell[8225, 230, 178, 4, 120, "Text"],
+Cell[8406, 236, 412, 12, 120, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

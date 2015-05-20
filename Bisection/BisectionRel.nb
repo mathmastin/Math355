@@ -1,0 +1,163 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5168,        154]
+NotebookOptionsPosition[      4831,        139]
+NotebookOutlinePosition[      5268,        156]
+CellTagsIndexPosition[      5225,        153]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"BisectionMethodRel", "[", 
+    RowBox[{"Start_", ",", " ", "Func_", ",", "Tol_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"St", "=", "Start"}], ",", 
+       RowBox[{"f", "=", "Func"}], ",", 
+       RowBox[{"TOL", "=", "Tol"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"OppSigns", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", "x", "]"}], 
+          RowBox[{"f", "[", "y", "]"}]}], "\[LessEqual]", " ", "0"}], "]"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Test", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"(", 
+            RowBox[{"x", "-", "y"}], ")"}], "]"}], "/", "2"}], 
+         "\[GreaterEqual]", "TOL"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"GetInt", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "]"}], "\[Equal]", 
+          "0"}], ",", 
+         RowBox[{"Return", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "-", 
+             RowBox[{"TOL", "/", "2"}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "+", 
+             RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"x", ",", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                 "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"x", ",", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                 "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Int", "=", 
+       RowBox[{"Catch", "[", 
+        RowBox[{"NestWhile", "[", 
+         RowBox[{"GetInt", ",", "Start", ",", "Test", ",", "1", ",", "50"}], 
+         "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"Int", "\[Equal]", "\"\<Bad Interval\>\""}], ",", 
+        RowBox[{"Return", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+        RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Int", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "+", 
+         RowBox[{"Int", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6192671295496564`*^9, 3.6192671325026565`*^9}}]
+},
+WindowSize->{784, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 4270, 117, 510, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

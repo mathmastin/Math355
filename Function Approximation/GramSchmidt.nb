@@ -1,0 +1,455 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14349,        446]
+NotebookOptionsPosition[     12667,        388]
+NotebookOutlinePosition[     13026,        404]
+CellTagsIndexPosition[     12983,        401]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Gram-Schmidt for Polynomials", "Title",
+ CellChangeTimes->{{3.6263696733754272`*^9, 3.626369680666427*^9}}],
+
+Cell["\<\
+In this notebook we will look at the Gram-Schmidt process for polynomials. \
+Specifically, we will design the methods needed to writing a module to \
+generate sets of orthogonal polynomials with respect to an arbitrary weight \
+function.\
+\>", "Text",
+ CellChangeTimes->{{3.626369686145427*^9, 3.626369734237427*^9}}],
+
+Cell["\<\
+For now, we will work over the interval [-1,1] and for simplicity we will \
+just set the weight function to the constant function 1 (though our code will \
+be written in terms of the general w).\
+\>", "Text",
+ CellChangeTimes->{{3.6263697470794272`*^9, 3.626369799324427*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"w", "[", "x_", "]"}], ":=", "1"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6263544372836485`*^9, 3.626354437624648*^9}, {
+  3.6263545281526484`*^9, 3.626354535044648*^9}, {3.6263547262966485`*^9, 
+  3.6263547299306483`*^9}, {3.626354837985648*^9, 3.6263548420826483`*^9}, {
+  3.6263549427596483`*^9, 3.626354943348648*^9}, {3.626355443718952*^9, 
+  3.626355443955976*^9}}],
+
+Cell["\<\
+We will assume that the first polynomial is the constant function 1 and that \
+the second polynomial is given by the following formula.\
+\>", "Text",
+ CellChangeTimes->{{3.6263698074374275`*^9, 3.626369831890427*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"B1", "[", "y_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"x", "*", 
+       RowBox[{"w", "[", "x", "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], "/", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"w", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.626354594787648*^9, 3.6263546360676484`*^9}, {
+  3.6263546718266487`*^9, 3.6263546810736485`*^9}, {3.6263547873076487`*^9, 
+  3.6263547899216485`*^9}, {3.626355377817363*^9, 3.62635537789237*^9}}],
+
+Cell["\<\
+We now add the first two polynomials to our list. Note that we are using pure \
+functions!\
+\>", "Text",
+ CellChangeTimes->{{3.6263698388354273`*^9, 3.626369845691427*^9}, {
+  3.626370432652804*^9, 3.626370437524291*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"phi", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "&"}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"#", "-", 
+        RowBox[{"B1", "[", "#", "]"}]}], ")"}], "&"}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.626354731393648*^9, 3.6263547433386483`*^9}, {
+  3.6263548444396486`*^9, 3.6263548624216485`*^9}, {3.6263548976486483`*^9, 
+  3.6263549263396482`*^9}, {3.626355586239203*^9, 3.6263555877043495`*^9}, {
+  3.626355625951174*^9, 3.6263556263572145`*^9}, {3.6263675754032354`*^9, 
+  3.6263675883560524`*^9}}],
+
+Cell["\<\
+The formula for the kth polynomial is given in terms of two quantities, B_k \
+and C_k, so we define these now.\
+\>", "Text",
+ CellChangeTimes->{{3.626369850626427*^9, 3.626369876665427*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bk", "[", "phi_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"x", "*", 
+       RowBox[{"w", "[", "x", "]"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"phi", "[", "x", "]"}], ")"}], "^", "2"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], "/", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"w", "[", "x", "]"}], "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"phi", "[", "x", "]"}], "^", "2"}], ")"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.626354247508459*^9, 3.626354254093142*^9}, {
+   3.6263543235436487`*^9, 3.626354526879648*^9}, 3.6263545872646484`*^9, {
+   3.6263549752446485`*^9, 3.6263549759376483`*^9}, {3.6263554581463947`*^9, 
+   3.62635549359894*^9}, {3.6263557366612434`*^9, 3.6263557512397013`*^9}, {
+   3.6263670883418713`*^9, 3.626367162544283*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Ck", "[", 
+    RowBox[{"phi1_", ",", "phi2_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"x", "*", 
+       RowBox[{"w", "[", "x", "]"}], "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"phi2", "[", "x", "]"}], "*", 
+         RowBox[{"phi1", "[", "x", "]"}]}], ")"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], "/", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"w", "[", "x", "]"}], "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"phi1", "[", "x", "]"}], "^", "2"}], ")"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6263545168546486`*^9, 3.626354585551648*^9}, {
+   3.6263557749430714`*^9, 3.6263557908316603`*^9}, {3.6263671912149625`*^9, 
+   3.626367229264434*^9}, {3.626367389859483*^9, 3.626367416967635*^9}, 
+   3.6263698820434275`*^9}],
+
+Cell["\<\
+There are many ways to implement the Gram-Schmidt method. The way we will do \
+it is to define a function that takes the next step in the process and then \
+we will just call that function the appropriate number of times. The next \
+step depends on the previous two functions. Our notation is that these appear \
+in index order, so phi1 is really the second to last function in our list and \
+phi2 is the last function in our list.\
+\>", "Text",
+ CellChangeTimes->{{3.6263699006494274`*^9, 3.6263699898154273`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NextGS", "[", 
+   RowBox[{"phi1_", ",", "phi2_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"#", "-", 
+       RowBox[{"Bk", "[", "phi2", "]"}]}], ")"}], "*", 
+     RowBox[{"phi2", "[", "#", "]"}]}], "-", 
+    RowBox[{
+     RowBox[{"Ck", "[", 
+      RowBox[{"phi1", ",", "phi2"}], "]"}], "*", 
+     RowBox[{"phi1", "[", "#", "]"}]}]}], "&"}]}]], "Input",
+ CellChangeTimes->{{3.6263674206721525`*^9, 3.6263675255501847`*^9}, {
+  3.6263676089552298`*^9, 3.626367616003525*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s give it a shot! ", "Text",
+ CellChangeTimes->{{3.626370001405427*^9, 3.626370026806427*^9}, 
+   3.626370238739414*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NextGS", "[", 
+  RowBox[{
+   RowBox[{"phi", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], ",", 
+   RowBox[{"phi", "[", 
+    RowBox[{"[", "2", "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.626370258373378*^9, 3.6263702587324133`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"#1", "-", 
+      RowBox[{"Bk", "[", 
+       RowBox[{
+        RowBox[{"#1", "-", 
+         RowBox[{"B1", "[", "#1", "]"}]}], "&"}], "]"}]}], ")"}], " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"#1", "-", 
+        RowBox[{"B1", "[", "#1", "]"}]}], "&"}], ")"}], "[", "#1", "]"}]}], 
+   "-", 
+   RowBox[{
+    RowBox[{"Ck", "[", 
+     RowBox[{
+      RowBox[{"1", "&"}], ",", 
+      RowBox[{
+       RowBox[{"#1", "-", 
+        RowBox[{"B1", "[", "#1", "]"}]}], "&"}]}], "]"}], " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "&"}], ")"}], "[", "#1", "]"}]}]}], "&"}]], "Output",
+ CellChangeTimes->{3.62662473700872*^9}]
+}, Open  ]],
+
+Cell["\<\
+Uh, what? Remember that we are using pure functions. So, if we want to see a \
+nice expression we need to evaluate it.\
+\>", "Text",
+ CellChangeTimes->{{3.6263702643819785`*^9, 3.6263702787024107`*^9}, {
+  3.6263703506946087`*^9, 3.626370397189258*^9}, {3.6263704429918375`*^9, 
+  3.6263704769502335`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NextGS", "[", 
+   RowBox[{
+    RowBox[{"phi", "[", 
+     RowBox[{"[", "1", "]"}], "]"}], ",", 
+    RowBox[{"phi", "[", 
+     RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.626367528920836*^9, 3.6263675633210707`*^9}, {
+  3.62636762044608*^9, 3.626367620689056*^9}, {3.6263679789770374`*^9, 
+  3.6263679831760373`*^9}, {3.626370498200358*^9, 3.6263704990884466`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["1", "3"]}], "+", 
+  SuperscriptBox["x", "2"]}]], "Output",
+ CellChangeTimes->{3.626624755699589*^9}]
+}, Open  ]],
+
+Cell["\<\
+This looks a lot better! Since our weight function is 1 we should get the \
+third Legendre polynomial when we call NextGS.\
+\>", "Text",
+ CellChangeTimes->{{3.6263702431968603`*^9, 3.626370249488489*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expand", "[", 
+  RowBox[{"LegendreP", "[", 
+   RowBox[{"2", ",", "x"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.626370028830427*^9, 3.6263700549304276`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["1", "2"]}], "+", 
+  FractionBox[
+   RowBox[{"3", " ", 
+    SuperscriptBox["x", "2"]}], "2"]}]], "Output",
+ CellChangeTimes->{3.626624765084527*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Uhm... this seems a bit odd. We don\[CloseCurlyQuote]t quite get the same \
+polynomial as what ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " takes as the degree two Legendre polynomial... why?"
+}], "Text",
+ CellChangeTimes->{{3.626370063379427*^9, 3.6263700977423162`*^9}}],
+
+Cell["\<\
+Ok, back to the Gram-Schmidt method. What we want to do is call NextGS and \
+append the result to our list of functions. This is pretty easy to do using \
+AppendTo.\
+\>", "Text",
+ CellChangeTimes->{{3.6263701274542875`*^9, 3.626370154061948*^9}}],
+
+Cell[BoxData[
+ RowBox[{"GSStep", ":=", 
+  RowBox[{"AppendTo", "[", 
+   RowBox[{"phi", ",", 
+    RowBox[{"NextGS", "[", 
+     RowBox[{
+      RowBox[{"phi", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"Length", "[", "phi", "]"}], "-", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"phi", "[", 
+       RowBox[{"[", 
+        RowBox[{"Length", "[", "phi", "]"}], "]"}], "]"}]}], "]"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.626368261023052*^9, 3.6263682671916695`*^9}, {
+  3.626368368891838*^9, 3.626368416405589*^9}}],
+
+Cell["\<\
+So now, everytime we call GSStep our list of polynomials grows by one!\
+\>", "Text",
+ CellChangeTimes->{{3.6263701599065323`*^9, 3.6263701737599173`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"GSStep", ";"}]], "Input",
+ CellChangeTimes->{{3.6263684596829166`*^9, 3.6263684640973577`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"phi", "[", 
+   RowBox[{"[", "3", "]"}], "]"}], "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.6263683786108103`*^9, 3.626368381075056*^9}, {
+  3.6263684254714956`*^9, 3.6263684903429823`*^9}, {3.6263685781537623`*^9, 
+  3.6263685862255697`*^9}, {3.626370176826224*^9, 3.6263702231348543`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox["1", "3"]}], "+", 
+  SuperscriptBox["x", "2"]}]], "Output",
+ CellChangeTimes->{3.626624854731491*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"GSStep", ";"}]], "Input",
+ CellChangeTimes->{{3.626370208161357*^9, 3.6263702118227234`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expand", "[", 
+  RowBox[{
+   RowBox[{"phi", "[", 
+    RowBox[{"[", "4", "]"}], "]"}], "[", "x", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6263702124317837`*^9, 3.6263702186954107`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox[
+    RowBox[{"3", " ", "x"}], "5"]}], "+", 
+  SuperscriptBox["x", "3"]}]], "Output",
+ CellChangeTimes->{3.626624861732191*^9}]
+}, Open  ]],
+
+Cell["\<\
+Now that we have all the components written we can basically just copy and \
+paste to create a stand-alone module that will generate the first n \
+orthogonal polynomials with respect to some weight function w. Let\
+\[CloseCurlyQuote]s do this in a separate notebook so it will easier for you \
+to find it and use it.\
+\>", "Text",
+ CellChangeTimes->{{3.626370514842022*^9, 3.626370579566494*^9}}]
+}, Open  ]]
+},
+WindowSize->{1584, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->2.,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 113, 1, 201, "Title"],
+Cell[696, 25, 327, 6, 136, "Text"],
+Cell[1026, 33, 286, 5, 98, "Text"],
+Cell[1315, 40, 575, 13, 137, "Input"],
+Cell[1893, 55, 227, 4, 98, "Text"],
+Cell[2123, 61, 692, 18, 60, "Input"],
+Cell[2818, 81, 231, 5, 60, "Text"],
+Cell[3052, 88, 579, 15, 60, "Input"],
+Cell[3634, 105, 200, 4, 60, "Text"],
+Cell[3837, 111, 1050, 27, 99, "Input"],
+Cell[4890, 140, 1019, 28, 99, "Input"],
+Cell[5912, 170, 525, 8, 174, "Text"],
+Cell[6440, 180, 551, 16, 60, "Input"],
+Cell[6994, 198, 147, 2, 60, "Text"],
+Cell[CellGroupData[{
+Cell[7166, 204, 262, 7, 60, "Input"],
+Cell[7431, 213, 725, 26, 84, "Output"]
+}, Open  ]],
+Cell[8171, 242, 316, 6, 98, "Text"],
+Cell[CellGroupData[{
+Cell[8512, 252, 444, 10, 60, "Input"],
+Cell[8959, 264, 156, 5, 106, "Output"]
+}, Open  ]],
+Cell[9130, 272, 214, 4, 98, "Text"],
+Cell[CellGroupData[{
+Cell[9369, 280, 187, 4, 60, "Input"],
+Cell[9559, 286, 203, 7, 110, "Output"]
+}, Open  ]],
+Cell[9777, 296, 300, 7, 98, "Text"],
+Cell[10080, 305, 256, 5, 98, "Text"],
+Cell[10339, 312, 534, 15, 60, "Input"],
+Cell[10876, 329, 164, 3, 60, "Text"],
+Cell[11043, 334, 119, 2, 60, "Input"],
+Cell[CellGroupData[{
+Cell[11187, 340, 330, 6, 60, "Input"],
+Cell[11520, 348, 156, 5, 106, "Output"]
+}, Open  ]],
+Cell[11691, 356, 117, 2, 60, "Input"],
+Cell[CellGroupData[{
+Cell[11833, 362, 213, 5, 60, "Input"],
+Cell[12049, 369, 181, 6, 106, "Output"]
+}, Open  ]],
+Cell[12245, 378, 406, 7, 136, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

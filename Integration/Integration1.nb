@@ -1,0 +1,546 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17690,        537]
+NotebookOptionsPosition[     15795,        476]
+NotebookOutlinePosition[     16158,        492]
+CellTagsIndexPosition[     16115,        489]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Trapezoid and Simpson\[CloseCurlyQuote]s Rules", "Title",
+ CellChangeTimes->{{3.623142763371233*^9, 3.6231427893688326`*^9}}],
+
+Cell[TextData[{
+ "In this demo we will implement our first numerical integration techniques \
+in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " and convince ourselves that these methods are really the same a simply \
+integrating a Lagrange polynomial.\n\nFirst, let\[CloseCurlyQuote]s choose a \
+function."
+}], "Text",
+ CellChangeTimes->{{3.623142799214817*^9, 3.623142853412236*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"x", "^", "4"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6231426024351406`*^9, 3.623142610078905*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"x", "^", "2"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.623142911838078*^9, 3.6231429239092855`*^9}}],
+
+Cell["\<\
+Now we can implement the rules. We will be interested in the error terms, so \
+we can get the modules to return a list where the first item is the \
+approximation and the second is the error bound.\
+\>", "Text",
+ CellChangeTimes->{{3.623142860781973*^9, 3.6231428908649807`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Trap", "[", 
+   RowBox[{"f_", ",", "a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"h", ",", 
+      RowBox[{"x0", "=", "a"}], ",", 
+      RowBox[{"x1", "=", "b"}], ",", "M", ",", "x"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"h", "=", 
+      RowBox[{"b", "-", "a"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"M", "=", 
+      RowBox[{"Maximize", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"f", "''"}], "[", "x", "]"}], ",", 
+          RowBox[{"x0", "\[LessEqual]", "x", "\[LessEqual]", "x1"}]}], "}"}], 
+        ",", "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"h", "/", "2"}], ")"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"f", "[", "x0", "]"}], "+", 
+           RowBox[{"f", "[", "x1", "]"}]}], ")"}]}], "]"}], ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"h", "^", "3"}], "/", "12"}], "*", "M"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.623141652613251*^9, 3.6231417653808355`*^9}, {
+   3.623141821874484*^9, 3.623141861464443*^9}, {3.6231418948227787`*^9, 
+   3.623142162823576*^9}, 3.6231421941587095`*^9, {3.623142402250867*^9, 
+   3.623142408826867*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Simpson", "[", 
+   RowBox[{"f_", ",", "a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x0", "=", "a"}], ",", ",", "x1", ",", 
+      RowBox[{"x2", "=", "b"}], ",", 
+      RowBox[{"h", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"b", "-", "a"}], ")"}], "/", "2"}]}], ",", "M", ",", "x"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x1", "=", 
+      RowBox[{"x0", "+", "h"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"M", "=", 
+      RowBox[{"Maximize", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"f", "'''"}], "[", "x", "]"}], ",", 
+          RowBox[{"x0", "\[LessEqual]", "x", "\[LessEqual]", "x2"}]}], "}"}], 
+        ",", "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"h", "/", "3"}], ")"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"f", "[", "x0", "]"}], "+", 
+           RowBox[{"4", 
+            RowBox[{"f", "[", "x1", "]"}]}], "+", 
+           RowBox[{"f", "[", "x2", "]"}]}], ")"}]}], "]"}], ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"h", "^", "5"}], "/", "90"}], "*", "M"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6231422184831414`*^9, 3.623142379790867*^9}, {
+  3.623142901863081*^9, 3.623142901947089*^9}, {3.6231435018796835`*^9, 
+  3.6231435020927043`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Trapezoid Rule", "Subsection",
+ CellChangeTimes->{{3.623143088898864*^9, 3.6231430918298635`*^9}}],
+
+Cell["Now we estimate the intergral using the Trapezoid Rule.", "Text",
+ CellChangeTimes->{{3.623142932495144*^9, 3.623142945973491*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Trap", "[", 
+  RowBox[{"f", ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.623141767011999*^9, 3.62314179992229*^9}, {
+  3.6231421798082743`*^9, 3.6231421799232855`*^9}, {3.6231423983378673`*^9, 
+  3.623142398467867*^9}, {3.6231425939792957`*^9, 3.6231426175696545`*^9}}],
+
+Cell[TextData[{
+ "Whoa! This is way wrong... and we should have expected this. The interval ",
+ StyleBox["[0,2] ",
+  FontSlant->"Italic"],
+ "is way to big to be estimating the function as a single line. We will see \
+in the next section that we should really by using Lagrange polynomials on \
+subintervals. We will do this in the next section and we will call that the \
+Composite Trapezoid Rule."
+}], "Text",
+ CellChangeTimes->{{3.6231429507639704`*^9, 3.6231430037272663`*^9}, {
+  3.6231435166851635`*^9, 3.6231435297864733`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P1", "[", "x_", "]"}], ":=", 
+  RowBox[{"InterpolatingPolynomial", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"f", "[", "0", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        RowBox[{"f", "[", "2", "]"}]}], "}"}]}], "}"}], ",", "x"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"P1", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6231430662158637`*^9, 3.6231430705008636`*^9}, {
+  3.623143367339864*^9, 3.6231433696908636`*^9}}],
+
+Cell[TextData[{
+ "To see that we really are just integrating a degree ",
+ StyleBox["1",
+  FontSlant->"Italic"],
+ " Lagrange polynomial we can ask ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to  integrate the Lagrange polynomial!"
+}], "Text",
+ CellChangeTimes->{{3.623143011719065*^9, 3.6231430489337864`*^9}, {
+  3.6231433801908636`*^9, 3.623143388056864*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"P1", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "2"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6231427374456406`*^9, 3.6231427524101367`*^9}, {
+  3.6231430553798637`*^9, 3.6231430567048635`*^9}, {3.6231433648418636`*^9, 
+  3.6231433727228637`*^9}}],
+
+Cell["We get the same result as we did from the Trapezoid Rule!", "Text",
+ CellChangeTimes->{{3.6231433923618636`*^9, 3.6231434110178633`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Simpson\[CloseCurlyQuote]s Rule", "Subsection",
+ CellChangeTimes->{{3.6231431013538637`*^9, 3.6231431031768637`*^9}}],
+
+Cell["Now let\[CloseCurlyQuote]s look at Simpson\[CloseCurlyQuote]s Rule.", \
+"Text",
+ CellChangeTimes->{{3.6231431079538636`*^9, 3.6231431161738634`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simpson", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"#", "^", "4"}], "&"}], ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6231423590868673`*^9, 3.6231423667318673`*^9}, {
+  3.623142597914689*^9, 3.6231425990037975`*^9}}],
+
+Cell["\<\
+As we should expect (because we are now using a second degree interpolation \
+polynomial) we get a better answer).\
+\>", "Text",
+ CellChangeTimes->{{3.6231431283358636`*^9, 3.6231431359428635`*^9}, {
+  3.6231431682168636`*^9, 3.6231431817968636`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P2", "[", "x_", "]"}], ":=", 
+  RowBox[{"InterpolatingPolynomial", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"f", "[", "0", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"f", "[", "1", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        RowBox[{"f", "[", "2", "]"}]}], "}"}]}], "}"}], ",", "x"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"P2", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6231431870798635`*^9, 3.6231431915268636`*^9}, {
+  3.6231434176258636`*^9, 3.6231434193508635`*^9}, {3.623420899476232*^9, 
+  3.623420930997232*^9}}],
+
+Cell["\<\
+Again, a better thing to do would be to chuck up our interval and apply \
+Simpson\[CloseCurlyQuote]s Rule to each subinterval. We will do this soon and \
+this will be called the Composite Simpson\[CloseCurlyQuote]s Rule.\
+\>", "Text",
+ CellChangeTimes->{{3.6231432160908637`*^9, 3.6231432716728635`*^9}}],
+
+Cell[TextData[{
+ "To again convince ourselves that we are really just integrating a degree ",
+ StyleBox["2 ",
+  FontSlant->"Italic"],
+ "Lagrange polynomial we can ask ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to integrate the interpolant."
+}], "Text",
+ CellChangeTimes->{{3.6231432864598637`*^9, 3.6231433327548637`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"P2", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "2"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.623142576804578*^9, 3.6231425774196396`*^9}, 
+   3.6231426308579826`*^9, {3.623142700166913*^9, 3.6231427074666433`*^9}, {
+   3.623143338648864*^9, 3.623143339983864*^9}, {3.6231434155258636`*^9, 
+   3.6231434217358637`*^9}}],
+
+Cell["\<\
+Again, we see that integrating the interpolation polynomial is the same!\
+\>", "Text",
+ CellChangeTimes->{{3.6231425034222403`*^9, 3.6231425709149895`*^9}, {
+  3.6231434320068636`*^9, 3.6231434484048634`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Measuring Precision", "Section",
+ CellChangeTimes->{{3.623410184883667*^9, 3.6234101882746673`*^9}}],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s integrate some lower degree polynomials to make a \
+point!\
+\>", "Text",
+ CellChangeTimes->{{3.6234102232416673`*^9, 3.6234102361236672`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"g", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"4", "x"}], "-", "2"}]}]], "Input",
+ CellChangeTimes->{{3.623410189378667*^9, 3.623410239048667*^9}, {
+  3.6234102838396673`*^9, 3.6234102839226675`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Trap", "[", 
+  RowBox[{"g", ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.623410206802667*^9, 3.6234102113266673`*^9}, {
+  3.623410286341667*^9, 3.6234102864246674`*^9}}],
+
+Cell["Hmmm... we got an error of 0 here, why?", "Text",
+ CellChangeTimes->{{3.623410246156667*^9, 3.6234102532666674`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P3", "[", "x_", "]"}], ":=", 
+  RowBox[{"InterpolatingPolynomial", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"g", "[", "0", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        RowBox[{"g", "[", "2", "]"}]}], "}"}]}], "}"}], ",", "x"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"g", "[", "x", "]"}], ",", 
+     RowBox[{"P3", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6234102613206673`*^9, 3.6234102934436674`*^9}, {
+  3.623410331784667*^9, 3.623410334161667*^9}}],
+
+Cell["\<\
+Because the function IS its interpolant!
+
+What about Simpson\[CloseCurlyQuote]s Rule?\
+\>", "Text",
+ CellChangeTimes->{{3.623410270727667*^9, 3.623410276262667*^9}, {
+  3.623410390143667*^9, 3.6234103961276674`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simpson", "[", 
+  RowBox[{"g", ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6234104052336674`*^9, 3.623410414225667*^9}}],
+
+Cell["\<\
+So, Simpson\[CloseCurlyQuote]s rule is giving the exact result for a linear \
+polynomial as well! What about a quadratic?\
+\>", "Text",
+ CellChangeTimes->{{3.623410424064667*^9, 3.6234104464386673`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"h", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"51", 
+    RowBox[{"x", "^", "2"}]}], "-", 
+   RowBox[{"3", "x"}], "+", "2"}]}]], "Input",
+ CellChangeTimes->{{3.623410280610667*^9, 3.6234103088656673`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Trap", "[", 
+  RowBox[{"h", ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6234104557806673`*^9, 3.6234104632006674`*^9}}],
+
+Cell["\<\
+Well.... the Trapezoid Rule fails miserably, what about Simpson\
+\[CloseCurlyQuote]s Rule?\
+\>", "Text",
+ CellChangeTimes->{{3.623410477032667*^9, 3.623410492206667*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simpson", "[", 
+  RowBox[{"h", ",", "0", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6234103099976673`*^9, 3.623410317824667*^9}, {
+  3.623410375702667*^9, 3.623410375944667*^9}}],
+
+Cell["\<\
+Success! Simpson\[CloseCurlyQuote]s Rule gives the exact integral for this \
+degree 2 polynomial! 
+
+Why?\
+\>", "Text",
+ CellChangeTimes->{{3.623410504166667*^9, 3.623410524680667*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P4", "[", "x_", "]"}], ":=", 
+  RowBox[{"InterpolatingPolynomial", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"h", "[", "0", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"h", "[", "1", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", 
+        RowBox[{"h", "[", "2", "]"}]}], "}"}]}], "}"}], ",", "x"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"h", "[", "x", "]"}], ",", 
+     RowBox[{"P4", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     RowBox[{"-", "1"}], ",", "2"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6234103399326673`*^9, 3.6234103835576673`*^9}}],
+
+Cell["\<\
+Because the function IS its second degree interpolant!
+
+The point here is that we can measure the precision of a quadrature formula \
+by the largest degree of polynomials for which the formula is exact.
+
+The Trapezoid Rule is  a precision 1 method. 
+Simpson\[CloseCurlyQuote]s Rule is a precision 2 method.\
+\>", "Text",
+ CellChangeTimes->{{3.623410529407667*^9, 3.6234106260272226`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1600, 818},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification->1.25,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 135, 1, 127, "Title"],
+Cell[718, 25, 392, 9, 114, "Text"],
+Cell[1113, 36, 190, 5, 36, "Input"],
+Cell[1306, 43, 280, 7, 36, "Input"],
+Cell[1589, 52, 289, 5, 63, "Text"],
+Cell[1881, 59, 1579, 44, 129, "Input"],
+Cell[3463, 105, 1718, 49, 129, "Input"],
+Cell[CellGroupData[{
+Cell[5206, 158, 104, 1, 59, "Subsection"],
+Cell[5313, 161, 137, 1, 38, "Text"],
+Cell[5453, 164, 309, 5, 36, "Input"],
+Cell[5765, 171, 533, 10, 64, "Text"],
+Cell[6301, 183, 811, 24, 60, "Input"],
+Cell[7115, 209, 371, 10, 39, "Text"],
+Cell[7489, 221, 382, 9, 36, "Input"],
+Cell[7874, 232, 143, 1, 38, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8054, 238, 123, 1, 59, "Subsection"],
+Cell[8180, 241, 155, 2, 38, "Text"],
+Cell[8338, 245, 258, 6, 36, "Input"],
+Cell[8599, 253, 261, 5, 38, "Text"],
+Cell[8863, 260, 961, 28, 60, "Input"],
+Cell[9827, 290, 314, 5, 38, "Text"],
+Cell[10144, 297, 334, 9, 39, "Text"],
+Cell[10481, 308, 454, 10, 36, "Input"],
+Cell[10938, 320, 219, 4, 38, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11194, 329, 106, 1, 86, "Section"],
+Cell[11303, 332, 175, 4, 38, "Text"],
+Cell[11481, 338, 240, 6, 36, "Input"],
+Cell[11724, 346, 209, 4, 36, "Input"],
+Cell[11936, 352, 123, 1, 38, "Text"],
+Cell[12062, 355, 809, 24, 60, "Input"],
+Cell[12874, 381, 226, 6, 88, "Text"],
+Cell[13103, 389, 161, 3, 36, "Input"],
+Cell[13267, 394, 213, 4, 38, "Text"],
+Cell[13483, 400, 244, 7, 36, "Input"],
+Cell[13730, 409, 160, 3, 36, "Input"],
+Cell[13893, 414, 180, 4, 38, "Text"],
+Cell[14076, 420, 210, 4, 36, "Input"],
+Cell[14289, 426, 194, 6, 88, "Text"],
+Cell[14486, 434, 880, 27, 60, "Input"],
+Cell[15369, 463, 398, 9, 162, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

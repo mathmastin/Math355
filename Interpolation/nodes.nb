@@ -1,0 +1,203 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      6696,        194]
+NotebookOptionsPosition[      5999,        165]
+NotebookOutlinePosition[      6485,        186]
+CellTagsIndexPosition[      6408,        181]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Increasing the number of nodes in polynomial interpolation.", "Title",
+ CellChangeTimes->{{3.493378291792444*^9, 3.493378301548431*^9}, {
+  3.493378409814919*^9, 3.49337841694096*^9}}],
+
+Cell["\<\
+
+
+In this demonstration, we consider the effect of changing the number of nodes \
+in polynomial interpolation. It seems very reasonable to expect that as the \
+number of nodes goes to infinity (at least, supposing that they're \
+sufficiently \"evenly spaced\") the interpolating polynomial converges to the \
+function being interpolated. 
+
+
+As we will see, the challenge will be deciding how to choose the nodes. \
+Sometimes we don\[CloseCurlyQuote]t have a choice (for example, if the data \
+came from an experiment and the x-values are forced on us). But, if we do \
+have a choice... how should we choose them?
+
+For now, let\[CloseCurlyQuote]s just take evenly spaced nodes.
+
+\
+\>", "Text",
+ CellChangeTimes->{{3.493378419837035*^9, 3.493378511549788*^9}, {
+   3.4933785419500093`*^9, 3.493378581481299*^9}, 3.493378643230587*^9, {
+   3.620558259187068*^9, 3.620558329573044*^9}, {3.620564991346757*^9, 
+   3.6205650214417663`*^9}, {3.620565092748896*^9, 3.620565103174939*^9}, 
+   3.621002209657065*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+
+
+
+
+Let\[CloseCurlyQuote]s look at the polynomial interpolation of several \
+functions with varying numbers of nodes.
+
+x Sin[x]
+\[LineSeparator]x^2 + Sinh[x] 
+
+1/(x^2 + 1)\
+\>", "Text",
+ CellChangeTimes->{{3.620565014086031*^9, 3.6205650523598576`*^9}, {
+   3.620565153351956*^9, 3.6205651536439853`*^9}, 3.620945768442415*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"F", "[", "x_", "]"}], " ", "=", 
+     RowBox[{"x", " ", 
+      RowBox[{"Sin", "[", "x", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Data", " ", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "10"}], " ", "+", " ", 
+            RowBox[{"i", "*", 
+             RowBox[{"20", "/", "n"}]}]}], ",", 
+           RowBox[{"F", "[", 
+            RowBox[{
+             RowBox[{"-", "10"}], " ", "+", " ", 
+             RowBox[{"i", "*", 
+              RowBox[{"20", "/", "n"}]}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "0", ",", "n"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"F", "[", "x", "]"}], ",", 
+            RowBox[{"InterpolatingPolynomial", "[", 
+             RowBox[{"Data", ",", "x"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"-", "10"}], ",", "10"}], "}"}], ",", 
+          RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+          RowBox[{"FrameTicks", "\[Rule]", "None"}], ",", 
+          RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "750"}]}], "]"}], ",", 
+        RowBox[{"ListPlot", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Data", ",", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Data", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "0"}], "}"}], 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"PointSize", "\[Rule]", "Large"}], "}"}]}]}], "]"}]}], 
+       "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "1", ",", "20", ",", "1"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Dynamic", "[", "pts", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.4933773417681017`*^9, 3.4933773509660473`*^9}, {
+   3.4933774339605494`*^9, 3.4933774494279003`*^9}, {3.493377487988853*^9, 
+   3.493377498126615*^9}, {3.4933775338764668`*^9, 3.493377542793537*^9}, {
+   3.493377582439673*^9, 3.493377582877968*^9}, {3.493377625767634*^9, 
+   3.493377636136023*^9}, {3.493377678679105*^9, 3.4933776805254707`*^9}, {
+   3.4933777952722607`*^9, 3.493377892834538*^9}, {3.493377932260882*^9, 
+   3.49337798339282*^9}, {3.493378030238263*^9, 3.493378244678746*^9}, {
+   3.4933782819648533`*^9, 3.493378283347919*^9}, {3.4933783301387777`*^9, 
+   3.4933783731437283`*^9}, {3.49337851888277*^9, 3.493378548681609*^9}, {
+   3.493378584094269*^9, 3.493378630401389*^9}, 3.6205583520712924`*^9, {
+   3.6205583873207145`*^9, 3.6205584066369176`*^9}, 3.620558453344901*^9, {
+   3.6209397180242867`*^9, 3.6209397393147726`*^9}, 3.620941103705899*^9}],
+
+Cell["\<\
+This wild oscillation near the edge of the interval is called Runge\
+\[CloseCurlyQuote]s Phenomenon. It turns out that choice of nodes can have a \
+drastic effect on the error in interpolation. Let\[CloseCurlyQuote]s talk \
+more about the error in polynomial interpolation to see how we can deal with \
+this issue.\
+\>", "Text",
+ CellChangeTimes->{{3.620941047738302*^9, 3.620941084855014*^9}}]
+}, Open  ]]
+},
+WindowSize->{1596, 818},
+WindowMargins->{{Automatic, -1}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "SlideShowHeader"->{
+  Cell[1813, 54, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"SlideShowHeader", 6297, 175}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 190, 2, 101, "Title"],
+Cell[760, 26, 1016, 23, 239, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1813, 54, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[1880, 57, 338, 15, 239, "Text"],
+Cell[2221, 74, 3355, 79, 172, "Input"],
+Cell[5579, 155, 404, 7, 49, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

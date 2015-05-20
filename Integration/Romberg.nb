@@ -1,0 +1,295 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10184,        286]
+NotebookOptionsPosition[      9314,        255]
+NotebookOutlinePosition[      9653,        270]
+CellTagsIndexPosition[      9610,        267]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Romberg Integration", "Title",
+ CellChangeTimes->{{3.623758327456771*^9, 3.623758330514076*^9}}],
+
+Cell["\<\
+Romberg integration is simply the application of \
+Richardson\[CloseCurlyQuote]s Extrapolation to a quadrature formula. We will \
+look at this applied to the Trapezoid Rule.\
+\>", "Text",
+ CellChangeTimes->{{3.6237583351535406`*^9, 3.623758366230648*^9}}],
+
+Cell["\<\
+We will need the Composite Trapezoid Rule. For efficiency purposes we will \
+implement the formula from Theorem 4.5 instead of iterating over our \
+Trapezoid Rule code.\
+\>", "Text",
+ CellChangeTimes->{{3.6237583864786725`*^9, 3.6237584253555593`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CompTrap", "[", 
+   RowBox[{"f_", ",", "a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "h", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"h", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"b", "-", "a"}], ")"}], "/", "n"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"h", "/", "2"}], ")"}], "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"f", "[", "a", "]"}], "+", 
+        RowBox[{"2", "*", 
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{"a", "+", 
+             RowBox[{"j", "*", "h"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", 
+             RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}], "+", 
+        RowBox[{"f", "[", "b", "]"}]}], ")"}]}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6237546948863764`*^9, 3.623754704705358*^9}, {
+  3.623755673541232*^9, 3.62375577893077*^9}, {3.6237559784957247`*^9, 
+  3.623755999240799*^9}, {3.6237583743204565`*^9, 3.62375838045107*^9}}],
+
+Cell["\<\
+We can implement Richardson\[CloseCurlyQuote]s Extrapolation pretty easily as \
+a recursive module. It is important to note that this is VERY inefficient \
+because we are calling CompTrap WAY too many times. But, for readability we \
+will just do it this way. In practice you would implement this differently to \
+avoid repetitive computation (see the book for a way of doing this). \
+\>", "Text",
+ CellChangeTimes->{{3.623758430231047*^9, 3.6237585198850117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RombergTrap", "[", 
+   RowBox[{"f_", ",", "a_", ",", "b_", ",", "k_", ",", "j_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"j", "==", "1"}], ",", 
+      RowBox[{"CompTrap", "[", 
+       RowBox[{"f", ",", "a", ",", "b", ",", 
+        RowBox[{"2", "^", 
+         RowBox[{"(", 
+          RowBox[{"k", "-", "1"}], ")"}]}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"RombergTrap", "[", 
+        RowBox[{"f", ",", "a", ",", "b", ",", "k", ",", 
+         RowBox[{"j", "-", "1"}]}], "]"}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"4", "^", 
+             RowBox[{"(", 
+              RowBox[{"j", "-", "1"}], ")"}]}], "-", "1"}], ")"}]}], ")"}], 
+        "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"RombergTrap", "[", 
+           RowBox[{"f", ",", "a", ",", "b", ",", "k", ",", 
+            RowBox[{"j", "-", "1"}]}], "]"}], "-", 
+          RowBox[{"RombergTrap", "[", 
+           RowBox[{"f", ",", "a", ",", "b", ",", 
+            RowBox[{"k", "-", "1"}], ",", 
+            RowBox[{"j", "-", "1"}]}], "]"}]}], ")"}]}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6237547062825155`*^9, 3.6237547358224697`*^9}, {
+   3.6237547785387406`*^9, 3.623754837928679*^9}, {3.6237548682717133`*^9, 
+   3.6237548997518606`*^9}, {3.623754978523737*^9, 3.6237550362745113`*^9}, {
+   3.6237550823351173`*^9, 3.6237551157284565`*^9}, {3.623755160878971*^9, 
+   3.6237551609479775`*^9}, {3.623755467888669*^9, 3.6237554705189314`*^9}, {
+   3.6237562439232645`*^9, 3.623756244041276*^9}, {3.6237562900488763`*^9, 
+   3.6237562925081224`*^9}, 3.623758526287652*^9}],
+
+Cell["To test this out we will use the same function as before.", "Text",
+ CellChangeTimes->{{3.623758530597083*^9, 3.623758540878111*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"x", "*", 
+    RowBox[{"Sin", "[", "x", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", "\[Pi]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n", "=", "8"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.623755050420926*^9, 3.6237550585467386`*^9}, {
+  3.6237552575346355`*^9, 3.6237552576746492`*^9}, {3.6237563392537966`*^9, 
+  3.623756339555827*^9}, {3.6237577403360643`*^9, 3.623757746762707*^9}, {
+  3.623757933130342*^9, 3.6237579342714562`*^9}, {3.6237580428573136`*^9, 
+  3.6237580428943176`*^9}}],
+
+Cell["\<\
+The goal is to make a comparison of the correct digits between Composite \
+Trapezoid and Romberg Integration. So, first we make some tables of the data.\
+\>", "Text",
+ CellChangeTimes->{{3.6237586268347054`*^9, 3.6237586891879406`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CompData", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"CompTrap", "[", 
+        RowBox[{"f", ",", "a", ",", "b", ",", 
+         RowBox[{"2", "^", "i"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", "100"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RombData", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"RombergTrap", "[", 
+        RowBox[{"f", ",", "a", ",", "b", ",", "i", ",", "i"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", "100"}], 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.623756700991932*^9, 3.6237567168529315`*^9}, {
+   3.623757698625894*^9, 3.623757844062436*^9}, {3.623757875413571*^9, 
+   3.623757877462776*^9}, {3.6237579366826973`*^9, 3.623757958039833*^9}, 
+   3.623758056586686*^9, {3.6237581080268297`*^9, 3.6237581292909565`*^9}}],
+
+Cell["This is our standard method for comparing correct digits.", "Text",
+ CellChangeTimes->{{3.6237586948075023`*^9, 3.623758704816503*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CorrectDigits", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Abs", "[", 
+      RowBox[{"Log", "[", 
+       RowBox[{"10", ",", 
+        RowBox[{"Abs", "[", 
+         RowBox[{"x", " ", "-", "y"}], "]"}]}], "]"}], "]"}], ",", "100"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6237566062589316`*^9, 3.623756630326932*^9}, {
+   3.6237580731203394`*^9, 3.623758076812709*^9}, 3.623758123288356*^9}],
+
+Cell["\<\
+Now we make some table of the correct digits with each method.\
+\>", "Text",
+ CellChangeTimes->{{3.623758709419963*^9, 3.623758718766898*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CompDataDigits", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"CorrectDigits", "[", 
+      RowBox[{
+       RowBox[{"CompData", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\[Pi]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CompRombDigits", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"CorrectDigits", "[", 
+      RowBox[{
+       RowBox[{"RombData", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\[Pi]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6237579058126106`*^9, 3.623757930248054*^9}, {
+  3.6237579656875973`*^9, 3.623757983832412*^9}, {3.6237580941894464`*^9, 
+  3.6237581210181293`*^9}}],
+
+Cell["And look at the data...", "Text",
+ CellChangeTimes->{{3.623758734672488*^9, 3.6237587375527763`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"CompDataDigits", ",", "CompRombDigits"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "Full"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6237579851365423`*^9, 3.62375802821585*^9}, {
+  3.623758085092537*^9, 3.623758090290056*^9}}],
+
+Cell["\<\
+Romberg Integration is WAY better! It would be interesting (and maybe you \
+will do it in homework) to compare Romberg Trapezoid to Composite Simpson.\
+\>", "Text",
+ CellChangeTimes->{{3.623758767725793*^9, 3.623758821137134*^9}}]
+}, Open  ]]
+},
+WindowSize->{784, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 102, 1, 101, "Title"],
+Cell[685, 25, 265, 5, 49, "Text"],
+Cell[953, 32, 262, 5, 49, "Text"],
+Cell[1218, 39, 1167, 32, 92, "Input"],
+Cell[2388, 73, 475, 7, 87, "Text"],
+Cell[2866, 82, 1901, 45, 152, "Input"],
+Cell[4770, 129, 139, 1, 30, "Text"],
+Cell[4912, 132, 688, 16, 92, "Input"],
+Cell[5603, 150, 246, 4, 49, "Text"],
+Cell[5852, 156, 1044, 27, 52, "Input"],
+Cell[6899, 185, 141, 1, 30, "Text"],
+Cell[7043, 188, 506, 14, 31, "Input"],
+Cell[7552, 204, 152, 3, 30, "Text"],
+Cell[7707, 209, 866, 24, 52, "Input"],
+Cell[8576, 235, 107, 1, 30, "Text"],
+Cell[8686, 238, 369, 8, 31, "Input"],
+Cell[9058, 248, 240, 4, 49, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

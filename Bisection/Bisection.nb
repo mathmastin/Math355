@@ -1,0 +1,1250 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     43710,       1241]
+NotebookOptionsPosition[     37692,       1062]
+NotebookOutlinePosition[     39553,       1115]
+CellTagsIndexPosition[     39474,       1110]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "The Bisection Method in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " "
+}], "Title",
+ CellChangeTimes->{{3.6190929343443494`*^9, 3.6190929427831697`*^9}}],
+
+Cell["Math/CS 355/655", "Subtitle",
+ CellChangeTimes->{{3.619092949529026*^9, 3.6190929534332542`*^9}}],
+
+Cell["Dr. Mastin", "Subsubtitle",
+ CellChangeTimes->{{3.619092961273735*^9, 3.6190929623523517`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+
+There is Colloquium today at 4:00!
+
+\
+\>", "Chapter",
+ CellChangeTimes->{{3.619354686130615*^9, 3.619354705134344*^9}, {
+  3.619354754571559*^9, 3.619354757122141*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+In this notebook we will implement the bisection method. First we will get \
+the basic structure of the code working and then go back and make the \
+function more robust.
+
+As we saw in the last class, the bisection method will generate a sequence \
+that converges to a root of the given function. But, in practice we only need \
+to approximation to within a certain error bound. For simplicity, we will \
+terminate the algorithm with the absolute error is below a specified tolerance.
+
+Let\[CloseCurlyQuote]s first set this tolerance and define the function that \
+we will be working with. We will pass these as arguments later, but for now \
+we will just hardcode them.\
+\>", "Text",
+ CellChangeTimes->{{3.619092969209272*^9, 3.619092989720989*^9}, {
+   3.6190930273444896`*^9, 3.6190930845201645`*^9}, {3.6191041195569468`*^9, 
+   3.61910414158053*^9}, {3.619263542635146*^9, 3.619263629723854*^9}, {
+   3.6192652553852625`*^9, 3.619265255696232*^9}, 3.6193547617955484`*^9, {
+   3.619354983017878*^9, 3.619354983662233*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TOL", "=", "0.0001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"x", "-", "1"}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"x", "-", "2"}], ")"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.618934975631558*^9, 3.618934975715138*^9}, {
+   3.618935277198245*^9, 3.618935284947996*^9}, 3.618936186175489*^9, 
+   3.618936602950993*^9, {3.61893683140336*^9, 3.61893683154949*^9}, {
+   3.61893695286804*^9, 3.6189369623722153`*^9}, 3.6189539718166695`*^9, 
+   3.618954174885975*^9, {3.61900512636609*^9, 3.619005161669263*^9}, {
+   3.6190930947119856`*^9, 3.619093095026165*^9}, {3.6191031592712097`*^9, 
+   3.6191031842544928`*^9}, 3.619185941908841*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"OppSigns", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], 
+      RowBox[{"f", "[", "y", "]"}]}], "<", " ", "0"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.618935805525577*^9, 3.618935854085429*^9}, 
+   3.618935925734041*^9, {3.6189360325097733`*^9, 3.6189360371655807`*^9}, {
+   3.619105077032074*^9, 3.6191050781277*^9}, {3.6191056967952237`*^9, 
+   3.619105697506629*^9}}],
+
+Cell["\<\
+As the book suggests, we could use the Sign function to avoid possible \
+underflows and overflows.\
+\>", "Text",
+ CellChangeTimes->{{3.6191076040961204`*^9, 3.6191076195039167`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"OppSigns", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Sign", "[", 
+       RowBox[{"f", "[", "x", "]"}], "]"}], "*", 
+      RowBox[{"Sign", "[", 
+       RowBox[{"f", "[", "y", "]"}], "]"}]}], "<", " ", "0"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.619107596210601*^9, 3.6191076329065733`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ "\nThe stopping condition is that half the length of an interval produced is \
+less than our tolerance (recall from Theorem 2.1 that this is the absolute \
+error of the approximate). We will be using the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " equivalent of a while loop, so we want the Test function to be True until \
+the stopping condition is met. "
+}], "Text",
+ CellChangeTimes->{{3.6190933339286804`*^9, 3.6190933843414884`*^9}, {
+   3.61910416963656*^9, 3.619104240171866*^9}, 3.619185965296841*^9, {
+   3.6192636571025915`*^9, 3.619263688730754*^9}, 3.619354958224696*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Test", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{"(", 
+        RowBox[{"x", "-", "y"}], ")"}], "]"}], "/", "2"}], "\[GreaterEqual]", 
+     "TOL"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.619093344104494*^9, 3.619093344472706*^9}, {
+  3.6190936920133467`*^9, 3.6190936920613747`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+The heart of the algorithm is chopping an interval in half and selecting one \
+of the subintervals that passes the OppSigns test. Note that Select will \
+return a list of lists that satisfy OffSigns, so we need a convention for \
+choosing one in case both intervals are selected (this happens when there is \
+a root in both intervals). We will just take the first inteval the passes \
+OppSigns.\
+\>", "Text",
+ CellChangeTimes->{{3.619093391541605*^9, 3.619093431876653*^9}, {
+   3.6190935863719363`*^9, 3.619093639595348*^9}, {3.6192637144083214`*^9, 
+   3.619263731916072*^9}, 3.61935495535357*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInt", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], "}"}]}], 
+       "}"}], ",", "OppSigns"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.618934981717876*^9, 3.618935017407207*^9}, {
+  3.618935064470583*^9, 3.618935091802478*^9}, {3.618935337217142*^9, 
+  3.618935338847983*^9}, {3.618935773192194*^9, 3.6189357882527933`*^9}, {
+  3.6189361180491*^9, 3.618936122413045*^9}, {3.619005040405969*^9, 
+  3.619005045232728*^9}, {3.619005108191704*^9, 3.6190051087220078`*^9}, {
+  3.6190051908319273`*^9, 3.619005192343791*^9}, {3.6190054501725364`*^9, 
+  3.619005459063191*^9}, {3.6190054910047245`*^9, 3.619005495956554*^9}, {
+  3.6190059688327703`*^9, 3.6190059719525533`*^9}, {3.6190060089607005`*^9, 
+  3.619006009683114*^9}, {3.619006368454125*^9, 3.6190064318233356`*^9}, {
+  3.619091626761156*^9, 3.619091636016444*^9}, {3.619093444010584*^9, 
+  3.619093452607497*^9}, {3.6190935678793664`*^9, 3.6190935685347404`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+To actually run the method we use the NestWhile function. \
+\>", "Text",
+ CellChangeTimes->{{3.6190935049404*^9, 3.6190935203321977`*^9}, {
+   3.6190937272104635`*^9, 3.619093745666011*^9}, {3.61918600332261*^9, 
+   3.6191860124155188`*^9}, 3.619354953224701*^9}],
+
+Cell[BoxData[
+ RowBox[{"?", "NestWhile"}]], "Input",
+ CellChangeTimes->{{3.6191078379707503`*^9, 3.619107841410719*^9}}],
+
+Cell["\<\
+Actually, so that we can see the intermediate steps we will use the \
+NestWhileList function.\
+\>", "Text",
+ CellChangeTimes->{3.6191860167409515`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bisection", "[", "Start_", "]"}], ":=", 
+   RowBox[{"NestWhileList", "[", 
+    RowBox[{"GetInt", ",", "Start", ",", "Test", ",", "1", ",", "50"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.618935289651524*^9, 3.618935299772606*^9}, {
+   3.6189353972120113`*^9, 3.618935404420573*^9}, {3.618935436197928*^9, 
+   3.6189354364895678`*^9}, {3.6189354714373207`*^9, 
+   3.6189355074067373`*^9}, {3.61893565869027*^9, 3.61893566009019*^9}, {
+   3.6189357466581087`*^9, 3.6189357470963917`*^9}, {3.618936159664401*^9, 
+   3.6189361600355673`*^9}, {3.618936540390162*^9, 3.618936540873576*^9}, 
+   3.618936762837327*^9, {3.618936872740494*^9, 3.618936930042007*^9}, {
+   3.618936969402334*^9, 3.618936970133532*^9}, {3.619005051527326*^9, 
+   3.6190050536705494`*^9}, {3.6190051111033688`*^9, 3.619005111934842*^9}, {
+   3.619005195525608*^9, 3.619005198094077*^9}, {3.619005229789188*^9, 
+   3.6190052302534533`*^9}, {3.619005286956856*^9, 3.6190052873810973`*^9}, {
+   3.619005934912389*^9, 3.6190059407917457`*^9}, {3.6190060685097275`*^9, 
+   3.619006070149665*^9}, {3.6190064408034735`*^9, 3.6190064438682203`*^9}, {
+   3.6190064785630484`*^9, 3.6190064877392874`*^9}, {3.619092495238429*^9, 
+   3.619092556760584*^9}, {3.619093525214986*^9, 3.6190935318787947`*^9}, {
+   3.6190936571733904`*^9, 3.619093680676869*^9}, 3.6191078294088583`*^9}],
+
+Cell["Let\[CloseCurlyQuote]s give it a try!", "Text",
+ CellChangeTimes->{{3.619093757274643*^9, 3.6190937612579207`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "2.5"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190937030616603`*^9, 3.6190937129002824`*^9}}],
+
+Cell["It works! But, as written the code is pretty easy to break. ", "Text",
+ CellChangeTimes->{{3.6190937707783594`*^9, 3.6190938099867616`*^9}, {
+   3.619093914249339*^9, 3.61909392369674*^9}, {3.6192637693158116`*^9, 
+   3.6192637761364937`*^9}, 3.6193547996883397`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+For example, if we pass an interval so that neither of the subintervals \
+satisfy the OppSigns condition bad things happen.\
+\>", "Text",
+ CellChangeTimes->{3.619354807004068*^9, 3.6193549507371907`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.1", ",", "1.9"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190938116387043`*^9, 3.619093831643135*^9}, {
+  3.619105122662161*^9, 3.6191051335663805`*^9}}],
+
+Cell["\<\
+What\[CloseCurlyQuote]s going on here? Since neither of the subintervals \
+satisfy OppSigns the GetInt function is returning an empty list. So, we \
+should take care of this case in GetInt. To do this we can use an If to check \
+if this happens and if it does we can Throw an error message.\
+\>", "Text",
+ CellChangeTimes->{{3.6190938689934826`*^9, 3.6190938932813606`*^9}, {
+  3.6190939285605235`*^9, 3.619093992120841*^9}, {3.6190940225442257`*^9, 
+  3.619094041536078*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetInt", "[", 
+     RowBox[{"{", 
+      RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+            "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+      RowBox[{
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+            "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.6190934390727615`*^9, 3.6190934394669876`*^9}, {
+   3.6191035722311864`*^9, 3.619103675166005*^9}, 3.619354948106824*^9}],
+
+Cell["\<\
+If we Throw something it needs to be caught, so we need to change our \
+Bisection function slightly. Catch will return the value of the first Throw \
+encountered during execution.
+
+Also, since we really only want the last interval we will go ahead and switch \
+to NestWhile now.\
+\>", "Text",
+ CellChangeTimes->{{3.61909400616086*^9, 3.6190940100480947`*^9}, {
+  3.619094046064663*^9, 3.6190940722076006`*^9}, {3.6191039061189785`*^9, 
+  3.619103922966609*^9}, {3.61910430241944*^9, 3.619104387443021*^9}, {
+  3.619263804783358*^9, 3.61926380700358*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bisection", "[", "Start_", "]"}], ":=", 
+   RowBox[{"Catch", "[", 
+    RowBox[{"NestWhile", "[", 
+     RowBox[{"GetInt", ",", "Start", ",", "Test", ",", "1", ",", "50"}], 
+     "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.61909408029222*^9, 3.619094089170295*^9}, {
+   3.6191039265936794`*^9, 3.6191039271529994`*^9}, 3.619107819089963*^9}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.1", ",", "1.9"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094011316806*^9, 3.6190940120662346`*^9}, {
+  3.619105148110688*^9, 3.619105150838249*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+This is better than just choking! But, there is still a case to worry about. \
+That is the case that the initial interval has the property that the zero is \
+the midpoint. \
+\>", "Text",
+ CellChangeTimes->{{3.6190941153672657`*^9, 3.619094170774929*^9}, 
+   3.619094322005343*^9, 3.61935494440453*^9}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.5", ",", "2.5"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094223976325*^9, 3.6190942314075794`*^9}, {
+  3.6191049926398516`*^9, 3.61910499628695*^9}, {3.6191051678939967`*^9, 
+  3.619105179597684*^9}}],
+
+Cell["\<\
+This is not really a bad interval! But, the two subintervals ARE bad because \
+neither contain a zero of the function (since it\[CloseCurlyQuote]s the \
+midpoint).
+
+\
+\>", "Text",
+ CellChangeTimes->{{3.619094267590251*^9, 3.6190943247259007`*^9}, {
+   3.6191037899676075`*^9, 3.619103808327102*^9}, {3.619104420258773*^9, 
+   3.619104421251342*^9}, {3.6191059135340734`*^9, 3.619105933365432*^9}, {
+   3.61910635522647*^9, 3.6191063623305283`*^9}, {3.619186046670944*^9, 
+   3.6191860499542723`*^9}, {3.6192638452934084`*^9, 3.619263850524932*^9}, 
+   3.619354854901123*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+To fix this we can check if the midpoint of the interval is a zero.\
+\>", "Text",
+ CellChangeTimes->{3.619354860611407*^9, 3.6193549420369*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInt", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "]"}], "\[Equal]", "0"}],
+      ",", 
+     RowBox[{"Return", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "-", 
+         RowBox[{"TOL", "/", "2"}]}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "+", 
+         RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+             "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+        RowBox[{"{", "}"}]}], ",", 
+       RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"x", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+             "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.619106209590247*^9, 3.6191062470026264`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.5", ",", "2.5"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6191062490798125`*^9, 3.6191062523166623`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+This version of GetInt is pretty robust, but there is another condition we \
+should check. The algorithm in the book assumes that the endpoints of the \
+initial interval give values of the function with opposite signs. But, if one \
+of the endpoints is a zero then our algorithm could notice this and act \
+accordingly.\
+\>", "Text",
+ CellChangeTimes->{{3.6191062740350747`*^9, 3.619106275987193*^9}, {
+   3.6191064001381345`*^9, 3.6191064693056602`*^9}, {3.6191076739680386`*^9, 
+   3.619107674399302*^9}, 3.619354939101838*^9}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "4.0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6191062767426205`*^9, 3.6191062836845884`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+We can add this check to GetInt as well.\
+\>", "Text",
+ CellChangeTimes->{{3.6191064812654943`*^9, 3.6191064878972807`*^9}, 
+   3.619354937092849*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetInt", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"f", "[", "x", "]"}], "\[Equal]", "0"}], ",", 
+     RowBox[{"Return", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"x", "-", 
+         RowBox[{"TOL", "/", "2"}]}], ",", 
+        RowBox[{"x", "+", 
+         RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "[", "y", "]"}], "\[Equal]", "0"}], ",", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"y", "-", 
+           RowBox[{"TOL", "/", "2"}]}], ",", 
+          RowBox[{"y", "+", 
+           RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "]"}], "\[Equal]", 
+          "0"}], ",", 
+         RowBox[{"Return", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "-", 
+             RowBox[{"TOL", "/", "2"}]}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "+", 
+             RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"x", ",", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                 "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+           RowBox[{
+            RowBox[{"Select", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"x", ",", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                 "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], "]"}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.619093483007867*^9, 3.619093484066473*^9}, {
+   3.619094179170724*^9, 3.6190941837153187`*^9}, 3.6190942155315*^9, {
+   3.61909474003922*^9, 3.6190948166229815`*^9}, {3.6191029288855605`*^9, 
+   3.6191029296129756`*^9}, {3.61910381214528*^9, 3.6191038779008536`*^9}, {
+   3.619104037941306*^9, 3.619104040892993*^9}, {3.619105945517349*^9, 
+   3.619105983444022*^9}, {3.619106086923153*^9, 3.6191061142907915`*^9}, {
+   3.619106502185446*^9, 3.6191065232985106`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Bisection", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.0", ",", "4.0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619094217848824*^9, 3.619094218767353*^9}, {
+  3.6190943315257835`*^9, 3.619094342503058*^9}, {3.619102911672724*^9, 
+  3.619102913232617*^9}, {3.6191061311424246`*^9, 3.619106133085532*^9}, {
+  3.619106176126129*^9, 3.61910617868559*^9}, {3.619106529026787*^9, 
+  3.619106530978898*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+What we really want is an approximation to the zero and not the interval. If \
+you want to define local variables that can then be passed on to other \
+functions you can defined a Module.\
+\>", "Text",
+ CellChangeTimes->{{3.6190944092532024`*^9, 3.6190944204446006`*^9}, {
+   3.6190944880842447`*^9, 3.6190945043875647`*^9}, {3.6190945414677515`*^9, 
+   3.6190945922757826`*^9}, {3.6190948316015415`*^9, 
+   3.6190948320087786`*^9}, {3.619094868401569*^9, 3.619094893809091*^9}, {
+   3.6191044429547415`*^9, 3.6191045297933655`*^9}, {3.619106540089108*^9, 
+   3.619106541136715*^9}, 3.619354934812132*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BisectionMethod", "[", "Start_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"St", "=", "Start"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Int", "=", 
+      RowBox[{"Bisection", "[", "St", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Int", "\[Equal]", "\"\<Bad Interval\>\""}], ",", 
+       RowBox[{"Return", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+       RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Int", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "+", 
+        RowBox[{"Int", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.619094828874982*^9, 3.619094829090105*^9}, {
+   3.6190948952258987`*^9, 3.619095058764347*^9}, {3.619102775259774*^9, 
+   3.6191027828911333`*^9}, {3.6191028158909907`*^9, 
+   3.6191028625856733`*^9}, {3.619102958570523*^9, 3.6191031366342726`*^9}, {
+   3.6191032164979105`*^9, 3.619103236736474*^9}, {3.619103277751912*^9, 
+   3.619103331600683*^9}, {3.619106558901855*^9, 3.619106559036932*^9}, 
+   3.619107563091677*^9}],
+
+Cell[BoxData[
+ RowBox[{"BisectionMethod", "[", 
+  RowBox[{"{", 
+   RowBox[{"1.1", ",", "3."}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6190950007612023`*^9, 3.6190950115373607`*^9}, {
+   3.619102789666008*^9, 3.619102789809087*^9}, {3.6191028675134916`*^9, 
+   3.619102867776642*^9}, {3.619103047479327*^9, 3.6191030658558283`*^9}, {
+   3.6191031430789595`*^9, 3.6191031450871053`*^9}, {3.619103191390564*^9, 
+   3.619103193229613*^9}, {3.619103224725619*^9, 3.619103271805516*^9}, {
+   3.6191033140456533`*^9, 3.61910331418073*^9}, {3.619103362309232*^9, 
+   3.6191033743000827`*^9}, {3.6191034329005675`*^9, 
+   3.6191034877959385`*^9}, {3.619103705538361*^9, 3.6191037164576006`*^9}, {
+   3.619103975096398*^9, 3.6191039874384484`*^9}, {3.619104051759204*^9, 
+   3.6191040518712683`*^9}, 3.6191048549771852`*^9, 3.6191075575535126`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+It would be nice to be able to pass in the tolerance and the function as \
+well. We can wrap all of the previous code into a single Module to accomplish \
+this. We didn\[CloseCurlyQuote]t do this at first because it is a little \
+difficult to see what is going on by just looking at the final product!\
+\>", "Text",
+ CellChangeTimes->{{3.6191045671927395`*^9, 3.619104637592965*^9}, 
+   3.6193549325963497`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"BisectionMethod", "[", 
+    RowBox[{"Start_", ",", " ", "Func_", ",", "Tol_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"St", "=", "Start"}], ",", 
+       RowBox[{"f", "=", "Func"}], ",", 
+       RowBox[{"TOL", "=", "Tol"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"OppSigns", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", "x", "]"}], 
+          RowBox[{"f", "[", "y", "]"}]}], "\[LessEqual]", " ", "0"}], "]"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Test", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"(", 
+            RowBox[{"x", "-", "y"}], ")"}], "]"}], "/", "2"}], 
+         "\[GreaterEqual]", "TOL"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"GetInt", "[", 
+        RowBox[{"{", 
+         RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"f", "[", "x", "]"}], "\[Equal]", "0"}], ",", 
+         RowBox[{"Return", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"x", "-", 
+             RowBox[{"TOL", "/", "2"}]}], ",", 
+            RowBox[{"x", "+", 
+             RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "[", "y", "]"}], "\[Equal]", "0"}], ",", 
+           RowBox[{"Return", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"y", "-", 
+               RowBox[{"TOL", "/", "2"}]}], ",", 
+              RowBox[{"y", "+", 
+               RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"f", "[", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "]"}], 
+              "\[Equal]", "0"}], ",", 
+             RowBox[{"Return", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "-", 
+                 RowBox[{"TOL", "/", "2"}]}], ",", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], "+", 
+                 RowBox[{"TOL", "/", "2"}]}]}], "}"}], "]"}], ",", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Select", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                    
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                    "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "\[Equal]", 
+                RowBox[{"{", "}"}]}], ",", 
+               RowBox[{"Throw", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+               RowBox[{
+                RowBox[{"Select", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"x", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}]}], "}"}], ",", 
+                    
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"x", "+", "y"}], ")"}], "/", "2"}], ",", "y"}], 
+                    "}"}]}], "}"}], ",", "OppSigns"}], "]"}], "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], "]"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Int", "=", 
+       RowBox[{"Catch", "[", 
+        RowBox[{"NestWhile", "[", 
+         RowBox[{"GetInt", ",", "Start", ",", "Test", ",", "1", ",", "50"}], 
+         "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"Int", "\[Equal]", "\"\<Bad Interval\>\""}], ",", 
+        RowBox[{"Return", "[", "\"\<Bad Interval\>\"", "]"}], ",", 
+        RowBox[{"{", "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Int", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "+", 
+         RowBox[{"Int", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "/", "2"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6191046097400475`*^9, 3.6191046101312733`*^9}, {
+   3.6191046409809*^9, 3.6191047781412783`*^9}, {3.6191052103062286`*^9, 
+   3.619105210641421*^9}, 3.6191067055506535`*^9, {3.6191068256843023`*^9, 
+   3.6191068291322713`*^9}, {3.619107028963461*^9, 3.61910706912341*^9}, {
+   3.619107113674868*^9, 3.6191071189308715`*^9}, {3.6191072167547703`*^9, 
+   3.6191072269856186`*^9}, {3.619107261833529*^9, 3.6191072953766975`*^9}, 
+   3.6191075557124605`*^9, {3.619107803173867*^9, 3.6191078048518267`*^9}, 
+   3.6193760826887035`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+We can now call the method and supply the interval, function, and tolerance. \
+\
+\>", "Text",
+ CellChangeTimes->{{3.619107746862693*^9, 3.619107771110546*^9}, {
+   3.619263920164895*^9, 3.6192639601418924`*^9}, 3.61935492950944*^9}],
+
+Cell[BoxData[
+ RowBox[{"BisectionMethod", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1.0", ",", "4.0"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"#", "-", "1"}], ")"}], 
+     RowBox[{"(", 
+      RowBox[{"#", "-", "2"}], ")"}]}], "&"}], ",", "0.0001"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.61910753658453*^9, 3.619107543050225*^9}, {
+  3.6191077176249843`*^9, 3.619107734673724*^9}}],
+
+Cell[BoxData[
+ RowBox[{"BisectionMethod", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0.0", ",", "4.0"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"Cos", "[", "#", "]"}], "&"}], ",", "0.001"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6191047804265823`*^9, 3.6191049271364193`*^9}, {
+  3.6191052173182383`*^9, 3.6191052296372747`*^9}, {3.6191065884907618`*^9, 
+  3.619106627017785*^9}, {3.6191068125528*^9, 3.6191068146329885`*^9}, {
+  3.6191071010066323`*^9, 3.61910710154994*^9}, {3.6191071383019433`*^9, 
+  3.6191071390463653`*^9}, {3.6191073092206097`*^9, 3.6191073094927654`*^9}, {
+  3.619107393035503*^9, 3.619107406621269*^9}, {3.6191074424277277`*^9, 
+  3.619107470642849*^9}, {3.6191075453075185`*^9, 3.6191075466582866`*^9}, {
+  3.6191079233445396`*^9, 3.619107931271079*^9}}],
+
+Cell[TextData[{
+ "Notice the funny # notation. In ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " an expression of the form shown in the second argument of these function \
+calls is called ",
+ StyleBox["pure function",
+  FontWeight->"Bold"],
+ ". When a pure function is applied to a set of arguments the first argument \
+will replace #, the second argument will replace #2, and so on. "
+}], "Text",
+ CellChangeTimes->{{3.619263964202298*^9, 3.619263993076185*^9}, {
+  3.619264026642542*^9, 3.6192640301328907`*^9}, {3.6192642231531906`*^9, 
+  3.619264252696145*^9}, {3.619264441596033*^9, 3.6192644417420473`*^9}, {
+  3.6193551394027395`*^9, 3.6193551582400866`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "Function"}]], "Input",
+ CellChangeTimes->{{3.6192640310719843`*^9, 3.619264032675145*^9}, {
+  3.6192640929151683`*^9, 3.6192641052324*^9}}],
+
+Cell["For Example,", "Text",
+ CellChangeTimes->{{3.6192642734152164`*^9, 3.61926427694857*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"#", "*", "#2"}], "&"}], "[", 
+  RowBox[{"2", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.619264254626338*^9, 3.619264267130588*^9}}],
+
+Cell["\<\
+We skipped this section of the intro slides, but you can get a peak into how \
+these expressions are handled using FullForm.\
+\>", "Text",
+ CellChangeTimes->{{3.619264389137788*^9, 3.6192644129541693`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FullForm", "[", 
+  RowBox[{
+   RowBox[{"#", "*", "#2"}], "&"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6192643655384283`*^9, 3.619264377921666*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FullForm", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"#", "-", "1"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"#", "-", "2"}], ")"}]}], "&"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6192644158494587`*^9, 3.619264427990672*^9}}],
+
+Cell[TextData[{
+ "Here we can see the heart of how ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " handles expressions... they are all lists where the head of each element \
+tells the kernel what to do with the elements in the list.\n\nThis notation \
+seems a bit awkward, but using it is the easiest way to pass a function as an \
+argument to a Method in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.6192643042903037`*^9, 3.6192643310019746`*^9}, {
+  3.6192644388407574`*^9, 3.6192645394398165`*^9}, {3.6193551649740653`*^9, 
+  3.619355165382943*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["\<\
+
+We wrap up the bisection method with a few comments.\
+\>", "Text",
+ CellChangeTimes->{{3.619265081306672*^9, 3.619265092180585*^9}, 
+   3.619354925458495*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+The bisection method is very reliable. As long as you supply a \
+\[OpenCurlyDoubleQuote]good\[CloseCurlyDoubleQuote] interval the method will \
+converge to a root of the function (though which root depends on the \
+implementation). \
+\>", "Item",
+ CellChangeTimes->{{3.619265101801623*^9, 3.6192651319006124`*^9}, {
+  3.619355184008353*^9, 3.6193551978382034`*^9}}],
+
+Cell["\<\
+However, the convergence is generally slow (as compared to other algorithms). \
+\>", "Item",
+ CellChangeTimes->{{3.619265101801623*^9, 3.619265177991003*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+So, in practice there are \"better\" ways to find roots of functions. \
+\>", "Subitem",
+ CellChangeTimes->{{3.619265101801623*^9, 3.6192651803697653`*^9}}],
+
+Cell["\<\
+But, these \[OpenCurlyDoubleQuote]better\[CloseCurlyDoubleQuote] ways will \
+have the downside that they will not always converge.\
+\>", "Subitem",
+ CellChangeTimes->{{3.619265101801623*^9, 3.6192652236724343`*^9}, {
+  3.641138313429733*^9, 3.64113831416409*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1584, 763},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+Magnification->1.5,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "SlideShowHeader"->{
+  Cell[1007, 39, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[1291, 55, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[3219, 101, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[4524, 146, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[5711, 181, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[7884, 235, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[10536, 297, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[11578, 327, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[14436, 411, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[15724, 448, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[18268, 532, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[19098, 556, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[23292, 676, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[26137, 741, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[32412, 905, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[36379, 1019, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"SlideShowHeader", 38033, 1074}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 181, 6, 150, "Title"],
+Cell[763, 30, 103, 1, 84, "Subtitle"],
+Cell[869, 33, 101, 1, 49, "Subsubtitle"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1007, 39, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[1074, 42, 180, 8, 118, "Chapter"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1291, 55, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[1358, 58, 1038, 19, 273, "Text"],
+Cell[2399, 79, 783, 17, 75, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3219, 101, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[3286, 104, 550, 15, 45, "Input"],
+Cell[3839, 121, 192, 4, 45, "Text"],
+Cell[4034, 127, 453, 14, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4524, 146, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[4591, 149, 611, 11, 102, "Text"],
+Cell[5205, 162, 469, 14, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5711, 181, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[5778, 184, 610, 11, 131, "Text"],
+Cell[6391, 197, 1456, 33, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7884, 235, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[7951, 238, 274, 6, 74, "Text"],
+Cell[8228, 246, 120, 2, 45, "Input"],
+Cell[8351, 250, 161, 4, 45, "Text"],
+Cell[8515, 256, 1398, 22, 45, "Input"],
+Cell[9916, 280, 121, 1, 45, "Text"],
+Cell[10040, 283, 183, 4, 45, "Input"],
+Cell[10226, 289, 273, 3, 45, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10536, 297, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[10603, 300, 214, 5, 74, "Text"],
+Cell[10820, 307, 232, 5, 45, "Input"],
+Cell[11055, 314, 486, 8, 74, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11578, 327, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[11645, 330, 1554, 45, 104, "Input"],
+Cell[13202, 377, 564, 11, 131, "Text"],
+Cell[13769, 390, 397, 9, 45, "Input"],
+Cell[14169, 401, 230, 5, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14436, 411, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[14503, 414, 312, 7, 102, "Text"],
+Cell[14818, 423, 282, 6, 45, "Input"],
+Cell[15103, 431, 584, 12, 102, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15724, 448, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[15791, 451, 154, 4, 74, "Text"],
+Cell[15948, 457, 2097, 64, 104, "Input"],
+Cell[18048, 523, 183, 4, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18268, 532, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[18335, 535, 540, 10, 102, "Text"],
+Cell[18878, 547, 183, 4, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19098, 556, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[19165, 559, 161, 5, 74, "Text"],
+Cell[19329, 566, 3499, 95, 162, "Input"],
+Cell[22831, 663, 424, 8, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23292, 676, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[23359, 679, 616, 11, 102, "Text"],
+Cell[23978, 692, 1274, 29, 162, "Input"],
+Cell[25255, 723, 845, 13, 45, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26137, 741, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[26204, 744, 422, 8, 102, "Text"],
+Cell[26629, 754, 5746, 146, 365, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32412, 905, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[32479, 908, 243, 6, 74, "Text"],
+Cell[32725, 916, 423, 13, 45, "Input"],
+Cell[33151, 931, 783, 14, 45, "Input"],
+Cell[33937, 947, 674, 14, 74, "Text"],
+Cell[34614, 963, 168, 3, 45, "Input"],
+Cell[34785, 968, 95, 1, 45, "Text"],
+Cell[34883, 971, 186, 5, 45, "Input"],
+Cell[35072, 978, 216, 4, 45, "Text"],
+Cell[35291, 984, 172, 4, 45, "Input"],
+Cell[35466, 990, 268, 8, 45, "Input"],
+Cell[35737, 1000, 605, 14, 131, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36379, 1019, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[36446, 1022, 169, 5, 74, "Text"],
+Cell[CellGroupData[{
+Cell[36640, 1031, 375, 7, 68, "Item"],
+Cell[37018, 1040, 168, 3, 43, "Item"],
+Cell[CellGroupData[{
+Cell[37211, 1047, 165, 3, 36, "Subitem"],
+Cell[37379, 1052, 273, 5, 36, "Subitem"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

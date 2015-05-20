@@ -1,0 +1,1804 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     66826,       1795]
+NotebookOptionsPosition[     61989,       1655]
+NotebookOutlinePosition[     62382,       1672]
+CellTagsIndexPosition[     62339,       1669]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["(Natural) Splines in Action", "Title",
+ CellChangeTimes->{{3.621889259926448*^9, 3.621889263391102*^9}, {
+  3.622147902462325*^9, 3.6221479110641856`*^9}}],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s look at some fun examples of using splines!
+
+First, we copy our spline code from last time into a module so we can create \
+splines from data more easily.\
+\>", "Text",
+ CellChangeTimes->{{3.6218904195107594`*^9, 3.621890466040412*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Spline", "[", "Data_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "h", ",", "a", ",", "L", ",", "U", ",", "Diag", ",", "M", ",", "B", ",", 
+      "c", ",", "b", ",", "d", ",", "Poly", ",", "P"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"h", "[", "n_", "]"}], ":=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Data", "[", 
+         RowBox[{"[", 
+          RowBox[{"n", "+", "1"}], "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "-", 
+       RowBox[{
+        RowBox[{"Data", "[", 
+         RowBox[{"[", "n", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"a", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"L", "=", 
+      RowBox[{"DiagonalMatrix", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"h", "[", "i", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{
+              RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], 
+          "]"}], "~", "Join", "~", 
+         RowBox[{"{", "0", "}"}]}], ",", 
+        RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"U", "=", 
+      RowBox[{"DiagonalMatrix", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", "0", "}"}], "~", "Join", "~", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"h", "[", "i", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "2", ",", 
+             RowBox[{
+              RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+          "]"}]}], ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Diag", "=", 
+      RowBox[{"DiagonalMatrix", "[", 
+       RowBox[{
+        RowBox[{"{", "1", "}"}], "~", "Join", "~", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"2", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"h", "[", "i", "]"}], "+", 
+             RowBox[{"h", "[", 
+              RowBox[{"i", "+", "1"}], "]"}]}], ")"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{
+             RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], 
+         "]"}], "~", "Join", "~", 
+        RowBox[{"{", "1", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"M", "=", 
+      RowBox[{"L", "+", "U", "+", "Diag"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"B", "=", 
+      RowBox[{
+       RowBox[{"{", "0", "}"}], "~", "Join", "~", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"3", "/", 
+             RowBox[{"h", "[", 
+              RowBox[{"i", "+", "1"}], "]"}]}], ")"}], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"a", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "+", "2"}], "]"}], "]"}], "-", 
+             RowBox[{"a", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ")"}]}], "-", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"3", "/", 
+             RowBox[{"h", "[", "i", "]"}]}], ")"}], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"a", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+             RowBox[{"a", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "Data", "]"}], "-", "2"}]}], "}"}]}], 
+        "]"}], "~", "Join", "~", 
+       RowBox[{"{", "0", "}"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"c", "=", 
+      RowBox[{"LinearSolve", "[", 
+       RowBox[{"M", ",", "B"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"b", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1", "/", 
+            RowBox[{"h", "[", "i", "]"}]}], ")"}], 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"a", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+            RowBox[{"a", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}]}], "-", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"h", "[", "i", "]"}], "/", "3"}], ")"}], 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"2", 
+             RowBox[{"c", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "+", 
+            RowBox[{"c", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ")"}]}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"d", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"c", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+           RowBox[{"c", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{"3", 
+           RowBox[{"h", "[", "i", "]"}]}], ")"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Poly", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"a", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "+", 
+         RowBox[{
+          RowBox[{"b", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], 
+          RowBox[{"(", 
+           RowBox[{"x", "-", 
+            RowBox[{
+             RowBox[{"Data", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}], "+", 
+         RowBox[{
+          RowBox[{"c", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", 
+             RowBox[{
+              RowBox[{"Data", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "2"}]}], "+", 
+         RowBox[{
+          RowBox[{"d", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", 
+             RowBox[{
+              RowBox[{"Data", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "3"}]}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"P", "=", 
+      RowBox[{"Piecewise", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Poly", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Data", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[LessEqual]", "x", 
+            "\[LessEqual]", 
+            RowBox[{
+             RowBox[{"Data", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "+", "1"}], "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "Data", "]"}], "-", "1"}]}], "}"}]}], 
+        "]"}], "]"}]}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.621889272667174*^9, 3.621889273139127*^9}, {
+  3.621893470039809*^9, 3.621893474174809*^9}, {3.621893541093809*^9, 
+  3.621893586029809*^9}, {3.622205776491847*^9, 3.6222057769068885`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Example 1", "Section",
+ CellChangeTimes->{{3.6218528416870127`*^9, 3.6218528429531393`*^9}, {
+  3.6218868543842635`*^9, 3.621886855329358*^9}, {3.621890344947304*^9, 
+  3.6218903450133104`*^9}}],
+
+Cell[TextData[{
+ "For our first example we will use some of the \
+\[OpenCurlyDoubleQuote]curated\[CloseCurlyDoubleQuote] data that is \
+accessable from inside ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to analyze population data in France."
+}], "Text",
+ CellChangeTimes->{{3.6218904735401616`*^9, 3.621890502674075*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Wolfram Curated Data", "Subsection",
+ CellChangeTimes->{{3.6221928581686096`*^9, 3.6221928627092466`*^9}}],
+
+Cell[TextData[{
+ "Wolfram maintains many databases that can be accessed from within ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". In fact, these are the same databases that Siri accesses when you ask \
+questions about flight data, population data, etc...\n\nAn example from the \
+help files is locating the international space station:"
+}], "Text",
+ CellChangeTimes->{{3.6221931674984837`*^9, 3.6221932040338297`*^9}, {
+  3.622193252446988*^9, 3.6221932662646065`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"data", "=", 
+     RowBox[{"SatelliteData", "[", 
+      RowBox[{
+       NamespaceBox["LinguisticAssistant",
+        DynamicModuleBox[{WolframAlphaClient`Private`query$$ = 
+         "international space station", WolframAlphaClient`Private`boxes$$ = 
+         TemplateBox[{"\"International Space Station\"", 
+           RowBox[{"Entity", "[", 
+             RowBox[{"\"Satellite\"", ",", "\"25544\""}], "]"}], 
+           "\"Entity[\\\"Satellite\\\", \\\"25544\\\"]\"", "\"satellite\""}, 
+          "Entity"], WolframAlphaClient`Private`allassumptions$$ = {}, 
+         WolframAlphaClient`Private`assumptions$$ = {}, 
+         WolframAlphaClient`Private`open$$ = {1, 2}}, 
+         DynamicBox[ToBoxes[
+           AlphaIntegration`LinguisticAssistantBoxes["", 1, 
+            Dynamic[WolframAlphaClient`Private`query$$], 
+            Dynamic[WolframAlphaClient`Private`boxes$$], 
+            Dynamic[WolframAlphaClient`Private`allassumptions$$], 
+            Dynamic[WolframAlphaClient`Private`assumptions$$], 
+            Dynamic[WolframAlphaClient`Private`open$$]], StandardForm],
+          ImageSizeCache->{358., {14., 27.}},
+          
+          TrackedSymbols:>{
+           WolframAlphaClient`Private`query$$, 
+            WolframAlphaClient`Private`boxes$$, 
+            WolframAlphaClient`Private`allassumptions$$, 
+            WolframAlphaClient`Private`assumptions$$, 
+            WolframAlphaClient`Private`open$$}],
+         DynamicModuleValues:>{},
+         UndoTrackedVariables:>{WolframAlphaClient`Private`open$$}],
+        BaseStyle->{"Deploy"},
+        DeleteWithContents->True,
+        Editable->False,
+        SelectWithContents->True], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Position\>\"", ",", "\"\<SatelliteLocationLine\>\"", ",", 
+         "\"\<SatelliteVisibilityDistance\>\""}], "}"}]}], "]"}]}], "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"GeoGraphics", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Gray", ",", 
+       RowBox[{"Thickness", "[", ".005", "]"}], ",", 
+       RowBox[{"Arrowheads", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0.05", ",", "0.4"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0.05", ",", "0.13"}], "}"}]}], "}"}], "]"}], ",", 
+       RowBox[{"Arrow", "@@", 
+        RowBox[{"data", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ",", "Red", ",", 
+       RowBox[{"PointSize", "[", ".01", "]"}], ",", 
+       RowBox[{"Point", "[", 
+        RowBox[{"data", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+       RowBox[{"Opacity", "[", ".1", "]"}], ",", "Black", ",", 
+       RowBox[{"GeoVisibleRegion", "[", 
+        RowBox[{"data", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"GeoCenter", "\[Rule]", 
+      RowBox[{"data", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+     RowBox[{"GeoRange", "\[Rule]", "\"\<World\>\""}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.622193268072426*^9, 3.622193268596373*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "GeoGraphics"}]], "Input",
+ CellChangeTimes->{{3.622193291006132*^9, 3.6221932951207204`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"GeoGraphics", "[", 
+  RowBox[{
+   RowBox[{"GeoCenter", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"36.1367497", ",", 
+      RowBox[{"-", "80.27848219999998"}]}], "}"}]}], ",", 
+   RowBox[{"GeoZoomLevel", "\[Rule]", "12"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.622193341847332*^9, 3.6221933448763323`*^9}, {
+  3.622193544427332*^9, 3.622193619596332*^9}, {3.622193666401332*^9, 
+  3.622193871280332*^9}, {3.6222127500579877`*^9, 3.622212763938599*^9}}],
+
+Cell["\<\
+Or maybe we want to plot a geodesic on the Earth from Wake Forest University \
+to Paris, France!\
+\>", "Text",
+ CellChangeTimes->{{3.6222058209932966`*^9, 3.622205845381735*^9}, {
+  3.6222103758939247`*^9, 3.6222104127869244`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"GeoGraphics", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.6222129979341974`*^9, 3.6222130043605547`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"GeoGraphics", "[", 
+  RowBox[{
+   RowBox[{"GeoPath", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"36.1367497", ",", 
+        RowBox[{"-", "80.27848219999998"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"48.8567", ",", "2.3508"}], "}"}]}], "}"}], "]"}], ",", 
+   RowBox[{"GeoRange", "\[Rule]", "\"\<World\>\""}], ",", 
+   RowBox[{"Frame", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6222103097519245`*^9, 3.6222103188719244`*^9}, {
+  3.6222103567689247`*^9, 3.6222103630139246`*^9}}],
+
+Cell["\<\
+Speaking of France... we can also access data about countries around the \
+work. For example, we can get the population of France in 2010.\
+\>", "Text",
+ CellChangeTimes->{{3.6222103817329245`*^9, 3.6222103921869245`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CountryData", "[", 
+   RowBox[{"\"\<France\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Population\>\"", ",", 
+      RowBox[{"{", 
+       RowBox[{"2010", ",", "1", ",", "1"}], "}"}]}], "}"}]}], "]"}], "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.62184794950521*^9, 3.6218479616592097`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Question: How can we use splines to model population data? In particular, \
+suppose we only have access to population data at 5 year intervals. How can \
+we estimate the population between these data points?\
+\>", "Subsection",
+ CellChangeTimes->{{3.6218913578805866`*^9, 3.6218913731961184`*^9}, {
+  3.6218914117649746`*^9, 3.6218914444182396`*^9}}],
+
+Cell["\<\
+To access the population data we can Table over the Wolfram population \
+database and grab the population at every 5th year.
+So that we can check the error in our spline estimate we will also grab the \
+population for each year.\
+\>", "Text",
+ CellChangeTimes->{{3.621891174608261*^9, 3.6218913080996094`*^9}, {
+  3.6218913923690352`*^9, 3.6218914095057487`*^9}, {3.621891447201518*^9, 
+  3.621891514992296*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"FrancePopData", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"year", ",", 
+      RowBox[{
+       RowBox[{"CountryData", "[", 
+        RowBox[{"\"\<France\>\"", ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<Population\>\"", ",", 
+           RowBox[{"{", 
+            RowBox[{"year", ",", "1", ",", "1"}], "}"}]}], "}"}]}], "]"}], 
+       "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"year", ",", "1970", ",", "2010", ",", "5"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FullPopData", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"year", ",", 
+       RowBox[{
+        RowBox[{"CountryData", "[", 
+         RowBox[{"\"\<France\>\"", ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Population\>\"", ",", 
+            RowBox[{"{", 
+             RowBox[{"year", ",", "1", ",", "1"}], "}"}]}], "}"}]}], "]"}], 
+        "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"year", ",", "1970", ",", "2010", ",", "1"}], "}"}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.6218477672296586`*^9, 3.6218477675555935`*^9}, {
+  3.6218477983572097`*^9, 3.62184803414221*^9}, {3.6218532253258753`*^9, 
+  3.621853240631345*^9}}],
+
+Cell["Before we get started we can take a look at the data points.", "Text",
+ CellChangeTimes->{{3.621891526084406*^9, 3.6218915350292997`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", "FrancePopData", "]"}]], "Input",
+ CellChangeTimes->{{3.6218479837122097`*^9, 3.62184799801021*^9}, {
+  3.6218480370962095`*^9, 3.62184803758421*^9}}],
+
+Cell["\<\
+Since we have a module to generate our spline we can easily compute the \
+polynomials.\
+\>", "Text",
+ CellChangeTimes->{{3.6218915437081676`*^9, 3.6218915681976166`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FrancePop", "=", 
+  RowBox[{"Spline", "[", "FrancePopData", "]"}]}]], "Input",
+ CellChangeTimes->{{3.62184801444121*^9, 3.62184804523621*^9}, {
+   3.6218528549363375`*^9, 3.621852856409485*^9}, 3.6218530684155684`*^9, 
+   3.621891571254922*^9}],
+
+Cell["\<\
+This isn\[CloseCurlyQuote]t a Pure Function, so if we want to find the \
+population in a particular year we must use a Replacement Rule.\
+\>", "Text",
+ CellChangeTimes->{{3.621891581989996*^9, 3.621891604288225*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FrancePop", "[", "2001", "]"}]], "Input",
+ CellChangeTimes->{{3.6222131816121807`*^9, 3.622213186861706*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FrancePop", "/.", 
+  RowBox[{"x", "\[Rule]", "2001"}]}]], "Input",
+ CellChangeTimes->{{3.621853316893718*^9, 3.6218533204953575`*^9}}],
+
+Cell["\<\
+We can, of course, plot the original data set along with the spline.\
+\>", "Text",
+ CellChangeTimes->{{3.621891616327429*^9, 3.621891630054802*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", "FrancePopData", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"FrancePop", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "1970", ",", "2010"}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.621853126977711*^9, 3.6218531516822405`*^9}}],
+
+Cell["\<\
+Remember that we actually have access to the yearly population data, so we \
+can see how good our spline approximation is!\
+\>", "Text",
+ CellChangeTimes->{{3.6218916449382896`*^9, 3.6218916672785234`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ListPlot", "[", "FullPopData", "]"}], ",", 
+     RowBox[{"ListPlot", "[", 
+      RowBox[{"FrancePopData", ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Large", ",", "Red"}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{"FrancePop", ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "1970", ",", "2010"}], "}"}]}], "]"}]}], "}"}], 
+   "]"}], "\n"}]], "Input",
+ CellChangeTimes->{{3.621853304620945*^9, 3.621853305111896*^9}, 
+   3.6218893303146253`*^9, {3.621890554302237*^9, 3.6218905626580725`*^9}}],
+
+Cell["\<\
+This is kind of astonishing! The fit is incredibly good! To see the error \
+quantitatively we can define a function that returns the actual population in \
+a given year...\
+\>", "Text",
+ CellChangeTimes->{{3.6218916800508003`*^9, 3.621891740691864*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ActualPop", "[", "d_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"CountryData", "[", 
+    RowBox[{"\"\<France\>\"", ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Population\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{"d", ",", "1", ",", "1"}], "}"}]}], "}"}]}], "]"}], "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.621848392661543*^9, 3.6218484344597225`*^9}, {
+  3.6218485167799535`*^9, 3.6218485455258274`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ActualPop", "[", "2001", "]"}]], "Input",
+ CellChangeTimes->{{3.621848504022678*^9, 3.6218485079170675`*^9}}],
+
+Cell["... and use it to compute the relative error.", "Text",
+ CellChangeTimes->{{3.621891757693564*^9, 3.6218917680696015`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"RelError", "[", "d_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"FrancePop", "/.", 
+        RowBox[{"x", "\[Rule]", "d"}]}], ")"}], "-", 
+      RowBox[{"ActualPop", "[", "d", "]"}]}], "]"}], "/", 
+    RowBox[{"ActualPop", "[", "d", "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6218484227335496`*^9, 3.6218484596902447`*^9}, {
+  3.621849451043606*^9, 3.621849459961606*^9}, {3.6218530951428947`*^9, 
+  3.621853098601549*^9}, {3.621853183211087*^9, 3.6218532098554225`*^9}}],
+
+Cell["\<\
+So, what is the relative error for our estimation of the population in 2001?\
+\>", "Text",
+ CellChangeTimes->{{3.6218917741092052`*^9, 3.6218917870555*^9}}],
+
+Cell[BoxData[
+ RowBox[{"RelError", "[", "2001", "]"}]], "Input",
+ CellChangeTimes->{{3.6218484826745434`*^9, 3.6218484925265284`*^9}, {
+  3.621849468475606*^9, 3.621849468777606*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"AbsoluteError", "[", "d_", "]"}], ":=", 
+   RowBox[{"Abs", "[", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"FrancePop", "/.", 
+       RowBox[{"x", "\[Rule]", "d"}]}], ")"}], "-", 
+     RowBox[{"ActualPop", "[", "d", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6222134572295046`*^9, 3.6222134739355044`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"AbsoluteError", "[", "2001", "]"}]], "Input",
+ CellChangeTimes->{{3.6222134969755044`*^9, 3.6222135231595044`*^9}}],
+
+Cell["\<\
+The answer: really small!
+
+Let\[CloseCurlyQuote]s plot the relative error over the entire interval \
+(1970-2010).\
+\>", "Text",
+ CellChangeTimes->{{3.6218917925990543`*^9, 3.6218918240141954`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"RelError", "[", "d", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "1970", ",", "2010", ",", "1"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.621848460421318*^9, 3.6218484865949354`*^9}, {
+  3.621848552656541*^9, 3.621848552859561*^9}, {3.6218485843477097`*^9, 
+  3.621848643825657*^9}, {3.621849472573606*^9, 3.621849472836606*^9}, {
+  3.6218905977785845`*^9, 3.6218906069204984`*^9}}],
+
+Cell["There is a spike near 1970... why might this be?", "Text",
+ CellChangeTimes->{{3.6218918313059244`*^9, 3.621891843700164*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example 2", "Section",
+ CellChangeTimes->{{3.6218868818680115`*^9, 3.6218868866304874`*^9}, {
+  3.621890347729582*^9, 3.6218903478835974`*^9}}],
+
+Cell["\<\
+Now for an example from statistics. First we should talk a bit about random \
+processes and probability (crash course on the board!).\
+\>", "Text",
+ CellChangeTimes->{{3.6218918681196055`*^9, 3.621891895218315*^9}, {
+  3.6218926851693025`*^9, 3.621892691422928*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Question: If we roll 10 dice, what is the expected sum of the rolls? How can \
+we compute the probability that the sum will be in a certain interval?\
+\>", "Subsection",
+ CellChangeTimes->{{3.621892697421528*^9, 3.6218927143802233`*^9}, {
+  3.621892934982281*^9, 3.6218929573625193`*^9}, {3.621893034127195*^9, 
+  3.621893050330815*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"numRolls", "=", "10"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "number", " ", "of", " ", "dice", " ", "we", " ", 
+    "will", " ", "roll", " ", "in", " ", "each", " ", "trial"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"numSamples", "=", "100000"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "number", " ", "of", " ", "trials", " ", "we", " ",
+     "will", " ", "take"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"To", " ", 
+     RowBox[{"summarize", ":", " ", 
+      RowBox[{
+      "we", " ", "will", " ", "roll", " ", "10", " ", "dice", " ", 
+       "100"}]}]}], ",", 
+    RowBox[{"000", " ", "times"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"box", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "2", ",", "2", ",", "2", ",", "2", ",", "3",
+      ",", "4", ",", "4", ",", "4", ",", "5", ",", "6"}], "}"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "The", " ", "dice", " ", "are", " ", "weighted", " ", "and", " ", "this", 
+    " ", "list", " ", "gives", " ", "the", " ", "possible", " ", "outcomes"}],
+    "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Roll", "[", "n_", "]"}], ":=", 
+   RowBox[{"RandomChoice", "[", 
+    RowBox[{"box", ",", 
+     RowBox[{"{", "n", "}"}]}], "]"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Roll", "[", "n_", "]"}], " ", "will", " ", "roll", " ", "n_", 
+    " ", "dice"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Rolls", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Roll", "[", "numRolls", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "numSamples"}], "}"}]}], "]"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Rolls", " ", "will", " ", "perform", " ", "numSamples", " ", "trials", 
+    " ", 
+    RowBox[{"(", 
+     RowBox[{
+     "which", " ", "is", " ", "to", " ", "roll", " ", "numRolls", " ", 
+      "dice"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"RollData", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Total", "[", 
+      RowBox[{"Rolls", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "numSamples"}], "}"}]}], "]"}]}], ";", 
+  RowBox[{"(*", 
+   RowBox[{
+   "RollData", " ", "computes", " ", "the", " ", "sum", " ", "of", " ", 
+    "each", " ", "trial"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Data", "=", 
+   RowBox[{"Tally", "[", "RollData", "]"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "To", " ", "create", " ", "our", " ", "distribution", " ", "we", " ", 
+    "need", " ", "to", " ", "count", " ", "how", " ", "many", " ", "times", 
+    " ", "we", " ", "got", " ", "each", " ", "outcome"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"NormData", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Data", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"Data", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "2"}], "]"}], "]"}], "/", "numSamples"}]}], "}"}],
+      ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}]}], ";", 
+  RowBox[{"(*", 
+   RowBox[{
+   "We", " ", "normalize", " ", "the", " ", "data", " ", "by", " ", 
+    "dividing", " ", "each", " ", "sum", " ", "by", " ", "numSamples", " ", 
+    RowBox[{"(", 
+     RowBox[{
+     "so", " ", "that", " ", "the", " ", "total", " ", "area", " ", "under", 
+      " ", "the", " ", "curve", " ", "is", " ", "1"}], ")"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"ListPlot", "[", "NormData", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6218469087885103`*^9, 3.62184690905101*^9}, {
+   3.62184710042371*^9, 3.6218471018749475`*^9}, {3.6218471431693387`*^9, 
+   3.6218471488654957`*^9}, {3.621847221983839*^9, 3.6218472405217094`*^9}, {
+   3.6218476277225657`*^9, 3.621847672582592*^9}, {3.6218507843863034`*^9, 
+   3.621850785940459*^9}, {3.621850875014365*^9, 3.6218508760774717`*^9}, 
+   3.6218509889967623`*^9, {3.6218510740722694`*^9, 3.62185118458832*^9}, {
+   3.621851356561515*^9, 3.6218514346663246`*^9}, {3.6218514775956173`*^9, 
+   3.621851487387596*^9}, {3.621851522357093*^9, 3.621851579493806*^9}, {
+   3.6218517366415195`*^9, 3.6218519786467175`*^9}, {3.6218520309739494`*^9, 
+   3.6218520553363857`*^9}, {3.6218524024650955`*^9, 
+   3.6218524028041286`*^9}, {3.6218527524880943`*^9, 3.621852753186164*^9}, {
+   3.6218919066774607`*^9, 3.6218919244532385`*^9}, {3.6218920655773497`*^9, 
+   3.6218921228060713`*^9}, {3.6218922560173917`*^9, 3.621892413864175*^9}, {
+   3.6218925127350607`*^9, 3.621892559158703*^9}, {3.6218926053713236`*^9, 
+   3.6218926729830837`*^9}, {3.6218927221910043`*^9, 3.6218928082126055`*^9}, 
+   3.6218956570656624`*^9, {3.6219384157490597`*^9, 3.621938422332718*^9}, {
+   3.622214210133874*^9, 3.6222142289215083`*^9}}],
+
+Cell["Now we are ready to compute the spline!", "Text",
+ CellChangeTimes->{{3.6218928618969736`*^9, 3.621892868452629*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SDist", "=", 
+   RowBox[{"Spline", "[", 
+    RowBox[{"Sort", "[", "NormData", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", "NormData", "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"SDist", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "5", ",", "50"}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.621852656281474*^9, 3.621852661621008*^9}, {
+  3.6218527064964952`*^9, 3.6218528074485893`*^9}}],
+
+Cell[TextData[{
+ "To answer our first question we can simply find the maximum value of our \
+spline! We could use calculus, but we have ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "!"
+}], "Text",
+ CellChangeTimes->{{3.621893212108429*^9, 3.621893235176814*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Maximize", "[", 
+   RowBox[{"SDist", ",", "x"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.621892915387322*^9, 3.6218929257233553`*^9}, {
+  3.621893075636345*^9, 3.6218931556167293`*^9}, {3.6218931971074295`*^9, 
+  3.6218932000028505`*^9}}],
+
+Cell["\<\
+To answer our second question we can simply integrate our spline over \
+whatever interval we wish.\
+\>", "Text",
+ CellChangeTimes->{{3.621893242108427*^9, 3.6218932628072867`*^9}, {
+  3.6218932972024064`*^9, 3.621893310077831*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"SDist", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "28", ",", "29"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.621852715217367*^9, 3.6218527373895845`*^9}, {
+  3.6221484249216423`*^9, 3.622148427996642*^9}, {3.622214459730579*^9, 
+  3.6222144616917753`*^9}, {3.622214504979103*^9, 3.6222145090195074`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example 3", "Section",
+ CellChangeTimes->{{3.6218868483846636`*^9, 3.621886850478873*^9}}],
+
+Cell[TextData[{
+ "Our third example is geometric! A random walk is a path in $\\mathbb{R}^3$ \
+that is generated by a random process. We will look at ",
+ StyleBox["random lattice walks",
+  FontWeight->"Bold"],
+ " which are walks where each steps is to an ",
+ StyleBox["integer point",
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.621894032162809*^9, 3.6218940827438087`*^9}, {
+  3.6218943545820494`*^9, 3.621894440691037*^9}, {3.621894932248188*^9, 
+  3.621894936776641*^9}, {3.6220320582466507`*^9, 3.62203209104393*^9}, {
+  3.622063832823911*^9, 3.622063897933421*^9}, {3.622148444232642*^9, 
+  3.6221484747026424`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"numSteps", "=", "1000"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "number", " ", "of", " ", "steps", " ", "in", " ", 
+    "each", " ", "walk"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Steps", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "At", " ", "each", " ", "step", " ", "we", " ", "go", " ", "1", " ", 
+    "unit", " ", "in", " ", "a", " ", "coordinate", " ", "direction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ChooseStep", ":=", 
+    RowBox[{"RandomChoice", "[", 
+     RowBox[{"Steps", ",", 
+      RowBox[{"{", "1", "}"}]}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "ChooseStep", " ", "will", " ", "randomly", " ", "choose", " ", "a", " ", 
+    "direction"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Step", "[", "Start_", "]"}], ":=", 
+    RowBox[{"Start", "+", 
+     RowBox[{"ChooseStep", "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Step", " ", "implements", " ", "taking", " ", "a", " ", "single", " ", 
+     RowBox[{"step", ".", " ", "Note"}], " ", "that", " ", "ChooseStep", " ", 
+     "returns", " ", "a", " ", "list"}], ",", " ", 
+    RowBox[{"so", " ", "it", " ", "must", " ", "be", " ", "derefenced"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"RandomWalk", "[", "Start_", "]"}], ":=", 
+    RowBox[{"NestList", "[", 
+     RowBox[{"Step", ",", "Start", ",", "numSteps"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "To", " ", "generate", " ", "the", " ", "walk", " ", "we", " ", "can", " ",
+     "use", " ", "NestList"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"W", "=", 
+   RowBox[{"RandomWalk", "[", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0"}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Line", "[", "W", "]"}], "}"}], ",", 
+   RowBox[{"BoxRatios", "\[Rule]", "Automatic"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6218893800966253`*^9, 3.621889462724625*^9}, 
+   3.62189412488912*^9, {3.621894237936725*^9, 3.621894334739082*^9}, {
+   3.6218944869856663`*^9, 3.6218944871536827`*^9}, {3.621894611586125*^9, 
+   3.62189461174014*^9}, {3.6218946651274786`*^9, 3.62189466624259*^9}, {
+   3.6218949523972025`*^9, 3.6218949524882116`*^9}, {3.62189522069403*^9, 
+   3.6218952400249624`*^9}, {3.6218952714981093`*^9, 
+   3.6218953442453833`*^9}, {3.6219390896984572`*^9, 
+   3.6219390956940565`*^9}, {3.6219391657230587`*^9, 
+   3.6219391660380907`*^9}, {3.622032098929719*^9, 3.6220320994397697`*^9}, {
+   3.6220545985265265`*^9, 3.6220546305077243`*^9}, {3.6220547320368767`*^9, 
+   3.622054758393512*^9}, {3.6220622359472394`*^9, 3.6220622544290876`*^9}, {
+   3.6220623278264265`*^9, 3.6220623408467283`*^9}, {3.622062563140956*^9, 
+   3.6220625690895505`*^9}, {3.6220638999856267`*^9, 3.622063916093237*^9}, {
+   3.6220640033509617`*^9, 3.622064093256952*^9}, {3.622064269136538*^9, 
+   3.6220643051851425`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s take a look at several random walks.", "Text",
+ CellChangeTimes->{{3.622064337011325*^9, 3.622064363786002*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Colors", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "Red", ",", "Blue", ",", "Green", ",", "Orange", ",", "Yellow", ",", 
+     "Black"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Colors", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"Line", "[", 
+        RowBox[{"RandomWalk", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0", ",", "0"}], "}"}], "]"}], "]"}]}], "}"}], 
+     "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "6"}], "}"}]}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6220620954104695`*^9, 3.622062226725317*^9}, {
+  3.622062349225566*^9, 3.622062474301072*^9}}],
+
+Cell["\<\
+After each walk you end up some distance from the origin... which begs the \
+question:\
+\>", "Text",
+ CellChangeTimes->{{3.622064370215645*^9, 3.6220643914557686`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Question: If you take a random lattice walk of length 1000, how far from the \
+origin do you expect to end up? What is the probality that your distance from \
+the origin will be in some interval?\
+\>", "Subsection",
+ CellChangeTimes->{{3.6218954378777456`*^9, 3.6218955192038774`*^9}, {
+  3.6220304322960567`*^9, 3.6220304333998413`*^9}, {3.6221484992836423`*^9, 
+  3.6221485031436424`*^9}}],
+
+Cell["\<\
+The setup here is basically the same as the last example. We will take a \
+large number of random walks and then build the distribution as a spline on \
+that data set. Because this code can take a while to run we will start by \
+looking at random walks of length 100.\
+\>", "Text",
+ CellChangeTimes->{{3.621895420690027*^9, 3.621895427964754*^9}, {
+  3.6220321188877144`*^9, 3.6220321211529408`*^9}, {3.622064402630886*^9, 
+  3.622064439464569*^9}, {3.6221485116866426`*^9, 3.6221485291706424`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"numSteps", "=", "100"}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "number", " ", "of", " ", "steps", " ", "for", " ",
+     "each", " ", "walk"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"numSamples", "=", "1000"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Set", " ", "the", " ", "total", " ", "number", " ", "of", " ", "walks", 
+    " ", "to", " ", "take"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Steps", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", 
+        RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "At", " ", "each", " ", "step", " ", "we", " ", "go", " ", "1", " ", 
+    "unit", " ", "in", " ", "a", " ", "coordinate", " ", "direction"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ChooseStep", ":=", 
+    RowBox[{"RandomChoice", "[", 
+     RowBox[{"Steps", ",", 
+      RowBox[{"{", "1", "}"}]}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "ChooseStep", " ", "will", " ", "randomly", " ", "choose", " ", "a", " ", 
+    "direction"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Step", "[", "Start_", "]"}], ":=", 
+    RowBox[{"Start", "+", 
+     RowBox[{"ChooseStep", "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Step", " ", "implements", " ", "taking", " ", "a", " ", "single", " ", 
+     RowBox[{"step", ".", " ", "Note"}], " ", "that", " ", "ChooseStep", " ", 
+     "returns", " ", "a", " ", "list"}], ",", " ", 
+    RowBox[{"so", " ", "it", " ", "must", " ", "be", " ", "derefenced"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"TakeWalk", "[", "Start_", "]"}], ":=", 
+    RowBox[{"Nest", "[", 
+     RowBox[{"Step", ",", "Start", ",", "numSteps"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "TakeWalk", " ", "will", " ", "generate", " ", "the", " ", "walk"}], ",", 
+    " ", 
+    RowBox[{
+    "but", " ", "this", " ", "time", " ", "we", " ", "use", " ", "Nest", " ", 
+     RowBox[{"(", 
+      RowBox[{"instead", " ", "of", " ", "NestList"}], ")"}], " ", "because", 
+     " ", "we", " ", "only", " ", "really", " ", "care", " ", "about", " ", 
+     "where", " ", "the", " ", "walk", " ", "ends"}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6220298609816923`*^9, 3.6220299748022027`*^9}, {
+   3.62203003840184*^9, 3.622030119026452*^9}, {3.622030263518916*^9, 
+   3.6220302730474234`*^9}, 3.6220303041461773`*^9, {3.622030375847219*^9, 
+   3.622030420049543*^9}, {3.622030675554762*^9, 3.6220306765323706`*^9}, {
+   3.6220307224529953`*^9, 3.6220308209925632`*^9}, {3.622030909013049*^9, 
+   3.6220309482471256`*^9}, {3.6220310298379655`*^9, 3.622031040762873*^9}, {
+   3.622031113659583*^9, 3.6220311155213966`*^9}, {3.6220319569395213`*^9, 
+   3.622031958164644*^9}, {3.622032136433469*^9, 3.62203213924675*^9}, 
+   3.6220325658166065`*^9, {3.6220328577710094`*^9, 3.622032860815009*^9}, {
+   3.6220491636310997`*^9, 3.6220491637480993`*^9}, 3.6220492160760994`*^9, 
+   3.6220492950960994`*^9, {3.6220532073046784`*^9, 3.6220532122016783`*^9}, 
+   3.6220532609056787`*^9, {3.6220533164376783`*^9, 3.6220533165686784`*^9}, {
+   3.6220536279046783`*^9, 3.6220536304406786`*^9}, {3.622053781450827*^9, 
+   3.6220537815178337`*^9}, {3.6220603419488397`*^9, 3.622060344072052*^9}, 
+   3.62206043546119*^9, 3.6220604992915726`*^9, 3.6220606552081623`*^9, 
+   3.6220607847891192`*^9, {3.622062770567696*^9, 3.622062774155055*^9}, {
+   3.622062887643402*^9, 3.6220628909237304`*^9}, {3.6220645367782993`*^9, 
+   3.622064539851607*^9}, {3.622064572939915*^9, 3.6220646436679873`*^9}, 
+   3.6220654039784517`*^9, {3.6221122990289106`*^9, 3.6221122994601593`*^9}, {
+   3.6221123667086053`*^9, 3.6221123686677256`*^9}, {3.6221132085958843`*^9, 
+   3.62211322443266*^9}, {3.6221328220530443`*^9, 3.6221328318694544`*^9}, 
+   3.6221328970443044`*^9, {3.6221329419153194`*^9, 3.622132942362368*^9}, {
+   3.622133109828907*^9, 3.6221331114383125`*^9}, {3.622133526083047*^9, 
+   3.6221335265205193`*^9}, {3.6221336100640707`*^9, 3.62213369289392*^9}, {
+   3.622133755469899*^9, 3.62213377817848*^9}, {3.6221480869296427`*^9, 
+   3.6221481032566423`*^9}, {3.622148144699642*^9, 3.622148146095642*^9}, {
+   3.6221485322456427`*^9, 3.6221485348416424`*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s test out TakeWalk.", "Text",
+ CellChangeTimes->{{3.6221337873363137`*^9, 3.62213379232067*^9}}],
+
+Cell[BoxData[
+ RowBox[{"TakeWalk", "[", 
+  RowBox[{"{", 
+   RowBox[{"0", ",", "0", ",", "0"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.62203040161784*^9, 3.622030408324455*^9}, {
+  3.622030447905867*^9, 3.6220304587109685`*^9}, {3.6220309333276176`*^9, 
+  3.6220309800649433`*^9}, {3.622031037110238*^9, 3.6220310380811415`*^9}}],
+
+Cell["\<\
+To take our walks we start with a list of size numSamples with each element \
+equal to the origin.\
+\>", "Text",
+ CellChangeTimes->{{3.6221337977643995`*^9, 3.6221338292176504`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Starts", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "numSamples"}], "}"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6220310538075686`*^9, 3.622031054251524*^9}, {
+  3.622031195469618*^9, 3.6220311961056175`*^9}}],
+
+Cell["\<\
+To actually take the walks we can Map TakeWalk over the list Starts. \
+AbsoluteTiming will tell us how long (by the wall clock) the computation took.\
+\>", "Text",
+ CellChangeTimes->{{3.6221339434640493`*^9, 3.6221339736606636`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TimedWalks", "=", 
+   RowBox[{"AbsoluteTiming", "[", 
+    RowBox[{"Map", "[", 
+     RowBox[{"TakeWalk", ",", "Starts"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TimedWalks", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6220628435979986`*^9, 3.622062862928931*^9}, {
+  3.6220646752121415`*^9, 3.6220646767402945`*^9}}],
+
+Cell["\<\
+This is a perfect time us parallel processing since the walks are completely \
+independent. Let\[CloseCurlyQuote]s play around a bit to see how much faster \
+the parallelized version is.\
+\>", "Text",
+ CellChangeTimes->{{3.6221339817073865`*^9, 3.622134026322163*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TimedWalksParallel", "=", 
+   RowBox[{"AbsoluteTiming", "[", 
+    RowBox[{"ParallelMap", "[", 
+     RowBox[{"TakeWalk", ",", "Starts"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TimedWalksParallel", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6220305703458624`*^9, 3.622030620844655*^9}, {
+  3.6220310047244773`*^9, 3.6220310085230975`*^9}, {3.622031052421707*^9, 
+  3.6220311104898996`*^9}, {3.6220311977706175`*^9, 3.622031198943618*^9}, {
+  3.622032723335009*^9, 3.622032726401009*^9}, {3.622062752225862*^9, 
+  3.6220627667323127`*^9}, {3.62206282771741*^9, 3.6220628737730155`*^9}, {
+  3.6220646651321335`*^9, 3.6220646681704373`*^9}}],
+
+Cell["\<\
+Since AbsoluteTiming returns a pair (time, data) we need to grab the data to \
+analyze the walks.\
+\>", "Text",
+ CellChangeTimes->{{3.622134038708544*^9, 3.6221340611096416`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Walks", "=", 
+   RowBox[{"TimedWalksParallel", "[", 
+    RowBox[{"[", "2", "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.62206318104874*^9, 3.6220631915947943`*^9}}],
+
+Cell["\<\
+We can take a look at the cloud of endpoints (the aspect ratio is not \
+cooperating).\
+\>", "Text",
+ CellChangeTimes->{{3.6221341423172493`*^9, 3.622134168252833*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPointPlot3D", "[", 
+  RowBox[{"Walks", ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6220311278621626`*^9, 3.622031135359412*^9}, {
+   3.622031180205618*^9, 3.622031228193618*^9}, {3.622031266226618*^9, 
+   3.6220313267435083`*^9}, {3.6220314369445267`*^9, 
+   3.6220314689147234`*^9}, {3.6220315257604074`*^9, 
+   3.6220315709049215`*^9}, {3.622032889567009*^9, 3.622032892298009*^9}, {
+   3.6220532312026787`*^9, 3.6220532336106787`*^9}, {3.6220648621448326`*^9, 
+   3.622064864202039*^9}, {3.6220654983594513`*^9, 3.6220655272174516`*^9}, 
+   3.622133124356848*^9, {3.6221331549867773`*^9, 3.622133171451291*^9}, {
+   3.6221332126794047`*^9, 3.62213326141922*^9}, {3.6221333290075397`*^9, 
+   3.622133336270282*^9}, {3.6221333832560263`*^9, 3.622133467269568*^9}, {
+   3.622134281254445*^9, 3.62213428763817*^9}}],
+
+Cell["Where is the center of the cloud of endpoints for the walks?", "Text",
+ CellChangeTimes->{{3.6221335099214516`*^9, 3.6221335199580183`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Mean", "[", "Walks", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.622133483119322*^9, 3.6221334971777153`*^9}}],
+
+Cell["In theory, what should this be?", "Text",
+ CellChangeTimes->{{3.62213418294048*^9, 3.622134193050961*^9}}],
+
+Cell[TextData[{
+ "To compute the distances we can ParallelMap the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " function Norm over the list of Walks."
+}], "Text",
+ CellChangeTimes->{{3.6221342445259404`*^9, 3.6221342605029263`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Dists", "=", 
+   RowBox[{"ParallelMap", "[", 
+    RowBox[{"Norm", ",", "Walks"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.622031673184149*^9, 3.6220317612719564`*^9}, 
+   3.622032653276009*^9, 3.622033196841009*^9, {3.6221342243540277`*^9, 
+   3.6221342247915115`*^9}}],
+
+Cell["\<\
+We will now tally up the data to generate the histogram. The data will be \
+fairly noisy and one way to smooth things out it to take larger sizes for the \
+class intervals. Deciding how to choose the size of the class intervals can \
+be tricky business... but that is the topic for a course in sampling!\
+\>", "Text",
+ CellChangeTimes->{{3.6221349663346696`*^9, 3.6221350021453466`*^9}, {
+  3.6221490642096877`*^9, 3.6221490896532316`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"classSize", "=", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Data", "=", 
+    RowBox[{"Tally", "[", 
+     RowBox[{"Round", "[", 
+      RowBox[{"Dists", ",", "classSize"}], "]"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "To", " ", "create", " ", "our", " ", "distribution", " ", "we", " ", 
+    "need", " ", "to", " ", "count", " ", "how", " ", "many", " ", 
+    "distances", " ", "fall", " ", "into", " ", "our", " ", "class", " ", 
+    "intervals"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NormData", "=", 
+    RowBox[{"Sort", "[", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Length", "[", "Dists", "]"}], "*", "classSize"}], 
+           ")"}]}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "We", " ", "normalize", " ", "the", " ", "data", " ", "by", " ", 
+    "dividing", " ", "each", " ", "by", " ", "the", " ", "product", " ", "of",
+     " ", "numSamples", " ", "and", " ", "the", " ", "size", " ", "of", " ", 
+    "each", " ", "class", " ", "interval", " ", 
+    RowBox[{"(", 
+     RowBox[{
+     "so", " ", "that", " ", "the", " ", "total", " ", "area", " ", "under", 
+      " ", "the", " ", "curve", " ", "is", " ", "1"}], ")"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Sort", "[", "NormData", "]"}], "]"}], "}"}], "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0Wkow3EAxvG1F8YWEbnywuQKpeSI5j+3lTMhV8L8xcREeWFFrmwitnIr
+TORumVs5X7i1ZiVvkDIlyfnC7ff8Xzx93j1vvvwCaQrNZrFYfDJouVdN1Xzf
+h+uvyoRwYj5LDF1zb4thzIlXBeTvtNfCgxybRlh5lM84JJMq4UNHkQq2bkj7
+4ZaTyzCcLo/RQsf6hDVoXtdthKPrJRwZMW/3Y72BeHdxuQk1snG3ZuJN4pM7
+dF+eDIZOEvsQmMy+oaDxLU0IH4ZaWHJi9sAiD34bNFYwb1vPOCWcsIOHqxIH
++Bsn8YWpotIAqH7WCaBI3RwLz2hBBhyLoHKgYZavgC8cEyVMj+x6go6F0e8w
+eYfzBU99XH+gyWtmm4LYVnjMqONeJ7US2WI6BT6quEqocw7qgstUVf00sYl6
+ZPSTh6pgp1s444rpbw/UyNm9MND2cwSm8+LUcE7keQtptaUR/nm8DcwQLZYW
+BqHhRWemxT89yYV91hdCmOuvCINR8d5n++jdd874D+XtNVo=
+  "]],
+
+Cell["Out handy Spline module will happily compute the splines.", "Text",
+ CellChangeTimes->{{3.622135020635934*^9, 3.622135031486054*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"WalkP", "=", 
+   RowBox[{"Spline", "[", "NormData", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"Sort", "[", "NormData", "]"}], "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"WalkP", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"First", "[", "NormData", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "NormData", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.6220533923646784`*^9, 3.6220534288776784`*^9}, {
+   3.6220534671696787`*^9, 3.6220534707606783`*^9}, {3.6220535255086784`*^9, 
+   3.622053543467678*^9}, 3.6220535932406783`*^9, 3.6220541656112394`*^9, 
+   3.622054204529131*^9, {3.622060009073556*^9, 3.6220600248091288`*^9}, {
+   3.622135040774742*^9, 3.6221350410559874`*^9}}],
+
+Cell["\<\
+We can find the most likely distance by maximizing over the spline.\
+\>", "Text",
+ CellChangeTimes->{{3.622135054404869*^9, 3.6221350732865257`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Maximize", "[", 
+   RowBox[{"WalkP", ",", "x"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6220612015804696`*^9, 3.6220612266654696`*^9}, {
+  3.622133597419113*^9, 3.622133598544138*^9}}],
+
+Cell["It is interesting to compare this to the average distance.", "Text",
+ CellChangeTimes->{{3.6221350785779963`*^9, 3.6221350900226965`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Mean", "[", "Dists", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.62206123762947*^9, 3.6220612505204697`*^9}, {
+  3.6221481949736423`*^9, 3.6221481980456424`*^9}}],
+
+Cell["\<\
+This is evidence that the distances are not normally distributed!\
+\>", "Text",
+ CellChangeTimes->{{3.6221350939940557`*^9, 3.6221351027074137`*^9}}],
+
+Cell[" The total integral should be 1.", "Text",
+ CellChangeTimes->{{3.62213512006371*^9, 3.6221351727976494`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"WalkP", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{
+       RowBox[{"First", "[", "NormData", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"Last", "[", "NormData", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6220542243471127`*^9, 3.622054245913269*^9}, {
+  3.622054276915369*^9, 3.6220543028079576`*^9}, {3.6220600020048485`*^9, 
+  3.622060002509899*^9}, {3.6220604822828712`*^9, 3.62206048586523*^9}, {
+  3.6220605408867316`*^9, 3.622060541410784*^9}}],
+
+Cell["As we should expect, the integral isn\[CloseCurlyQuote]t exactly one.", \
+"Text",
+ CellChangeTimes->{{3.6221351569174604`*^9, 3.622135166924324*^9}}],
+
+Cell["\<\
+To compute probabilities that the distance will be in some interval we can \
+integrate the spline.\
+\>", "Text",
+ CellChangeTimes->{3.622135176336809*^9, 3.6221510441796646`*^9}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"WalkP", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "15", ",", "20"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.622135179509719*^9, 3.6221351971135497`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" A Larger Dataset", "Subsection",
+ CellChangeTimes->{{3.6221441770594826`*^9, 3.6221441818719873`*^9}}],
+
+Cell["\<\
+I ran this code at home taking 1,000,000 samples of walks with step size \
+1000. It took almost 4 hours running on 4 i7 cores. I saved the data to file \
+(the file is ~14 MB) so that we can import it and analyze it.\
+\>", "Text",
+ CellChangeTimes->{{3.622135208401785*^9, 3.6221352314252834`*^9}, {
+  3.622135261904922*^9, 3.622135299670205*^9}, {3.6221353590710278`*^9, 
+  3.6221353662407184`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LargeSample", "=", 
+   RowBox[{"Import", "[", "\"\<walks.dat\>\"", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.622135306170613*^9, 3.6221353429346333`*^9}}],
+
+Cell["\<\
+Again, we compute the distance from the origin from each of the walks (and \
+take a look at the timing).\
+\>", "Text",
+ CellChangeTimes->{{3.622148665996642*^9, 3.6221487351496425`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DistsTiming", "=", 
+   RowBox[{"AbsoluteTiming", "[", 
+    RowBox[{"ParallelMap", "[", 
+     RowBox[{"Norm", ",", "LargeSample"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.622135396162622*^9, 3.6221354050627203`*^9}, {
+  3.622144227371998*^9, 3.622144245153284*^9}, {3.6221442752157917`*^9, 
+  3.62214427576264*^9}}],
+
+Cell[BoxData[
+ RowBox[{"DistsTiming", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.622144290309517*^9, 3.6221442940126467`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Dists", "=", 
+   RowBox[{"DistsTiming", "[", 
+    RowBox[{"[", "2", "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.622144264122009*^9, 3.622144297872052*^9}}],
+
+Cell["\<\
+To avoid doing this computation again we can export this data to file. Import \
+and Export work well when importing and exporting lists. If you export a list \
+you can just import it and it will come back in as a list.\
+\>", "Text",
+ CellChangeTimes->{{3.6221478479608755`*^9, 3.622147856155695*^9}, {
+   3.6221487442446423`*^9, 3.6221488764286423`*^9}, 3.62215104773302*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<dists.dat\>\"", ",", "Dists"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6221467338002524`*^9, 3.6221467433682528`*^9}}],
+
+Cell["Now, we can look at the histogram for all this data!", "Text",
+ CellChangeTimes->{{3.6221488952686424`*^9, 3.622148896534642*^9}, {
+  3.6221489324386425`*^9, 3.6221489419646425`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"classSize", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Data", "=", 
+    RowBox[{"Tally", "[", 
+     RowBox[{"Round", "[", 
+      RowBox[{"Dists", ",", "classSize"}], "]"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "To", " ", "create", " ", "our", " ", "distribution", " ", "we", " ", 
+    "need", " ", "to", " ", "count", " ", "how", " ", "many", " ", 
+    "distances", " ", "fall", " ", "into", " ", "our", " ", "class", " ", 
+    "intervals"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NormData", "=", 
+    RowBox[{"Sort", "[", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Data", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"Data", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "2"}], "]"}], "]"}], "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Length", "[", "Dists", "]"}], "*", "classSize"}], 
+           ")"}]}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "We", " ", "normalize", " ", "the", " ", "data", " ", "by", " ", 
+    "dividing", " ", "each", " ", "by", " ", "the", " ", "product", " ", "of",
+     " ", "numSamples", " ", "and", " ", "the", " ", "size", " ", "of", " ", 
+    "each", " ", "class", " ", "interval", " ", 
+    RowBox[{"(", 
+     RowBox[{
+     "so", " ", "that", " ", "the", " ", "total", " ", "area", " ", "under", 
+      " ", "the", " ", "curve", " ", "is", " ", "1"}], ")"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Sort", "[", "NormData", "]"}], "]"}], "}"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.62213537890298*^9, 3.622135394059311*^9}, {
+  3.6221443692626667`*^9, 3.6221443693876657`*^9}, {3.6221444057939315`*^9, 
+  3.6221444303720613`*^9}, {3.622144568247137*^9, 3.6221445684815054`*^9}}],
+
+Cell["Computing the splines is the same as before.", "Text",
+ CellChangeTimes->{{3.622148955793642*^9, 3.6221489625526423`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"WalkP", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{"Spline", "[", "NormData", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"Sort", "[", "NormData", "]"}], "]"}], ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{"WalkP", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"First", "[", "NormData", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"Last", "[", "NormData", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.6221354244321966`*^9, 3.6221354435019383`*^9}, {
+   3.622144479309603*^9, 3.622144495012718*^9}, 3.6221445630127554`*^9}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Maximize", "[", 
+   RowBox[{"WalkP", ",", "x"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6221354445591407`*^9, 3.6221354455488157`*^9}, {
+  3.6221444585126963`*^9, 3.6221444591376953`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Mean", "[", "Dists", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.622135440592351*^9, 3.622135440982975*^9}, {
+  3.622144349622039*^9, 3.6221443525283155`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"WalkP", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{
+       RowBox[{"First", "[", "NormData", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"Last", "[", "NormData", "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.622135452255886*^9, 3.6221354526465135`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{"WalkP", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "150", ",", "200"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6221354608560133`*^9, 3.6221354612310123`*^9}, {
+  3.6221443586689296`*^9, 3.6221443592626925`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1600, 818},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+ShowSelection->True,
+Magnification:>1.4 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 161, 2, 141, "Title"],
+Cell[744, 26, 269, 6, 97, "Text"],
+Cell[1016, 34, 8433, 237, 421, "Input"],
+Cell[CellGroupData[{
+Cell[9474, 275, 200, 3, 96, "Section"],
+Cell[9677, 280, 332, 8, 43, "Text"],
+Cell[CellGroupData[{
+Cell[10034, 292, 112, 1, 67, "Subsection"],
+Cell[10149, 295, 479, 9, 125, "Text"],
+Cell[10631, 306, 3098, 71, 169, "Input"],
+Cell[13732, 379, 122, 2, 42, "Input"],
+Cell[13857, 383, 479, 10, 42, "Input"],
+Cell[14339, 395, 241, 5, 42, "Text"],
+Cell[14583, 402, 129, 2, 42, "Input"],
+Cell[14715, 406, 562, 14, 42, "Input"],
+Cell[15280, 422, 232, 4, 42, "Text"],
+Cell[15515, 428, 355, 9, 42, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15907, 442, 360, 6, 108, "Subsection"],
+Cell[16270, 450, 422, 8, 70, "Text"],
+Cell[16695, 460, 1332, 38, 70, "Input"],
+Cell[18030, 500, 144, 1, 42, "Text"],
+Cell[18177, 503, 190, 3, 42, "Input"],
+Cell[18370, 508, 180, 4, 42, "Text"],
+Cell[18553, 514, 268, 5, 42, "Input"],
+Cell[18824, 521, 226, 4, 42, "Text"],
+Cell[19053, 527, 133, 2, 42, "Input"],
+Cell[19189, 531, 158, 3, 42, "Input"],
+Cell[19350, 536, 158, 3, 42, "Text"],
+Cell[19511, 541, 362, 10, 42, "Input"],
+Cell[19876, 553, 216, 4, 42, "Text"],
+Cell[20095, 559, 655, 17, 70, "Input"],
+Cell[20753, 578, 263, 5, 42, "Text"],
+Cell[21019, 585, 474, 12, 42, "Input"],
+Cell[21496, 599, 133, 2, 42, "Input"],
+Cell[21632, 603, 129, 1, 42, "Text"],
+Cell[21764, 606, 582, 14, 42, "Input"],
+Cell[22349, 622, 166, 3, 42, "Text"],
+Cell[22518, 627, 183, 3, 42, "Input"],
+Cell[22704, 632, 371, 10, 42, "Input"],
+Cell[23078, 644, 139, 2, 42, "Input"],
+Cell[23220, 648, 207, 6, 97, "Text"],
+Cell[23430, 656, 662, 15, 42, "Input"],
+Cell[24095, 673, 132, 1, 42, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24276, 680, 149, 2, 96, "Section"],
+Cell[24428, 684, 276, 5, 42, "Text"],
+Cell[CellGroupData[{
+Cell[24729, 693, 347, 6, 108, "Subsection"],
+Cell[25079, 701, 4995, 118, 313, "Input"],
+Cell[30077, 821, 123, 1, 42, "Text"],
+Cell[30203, 824, 550, 16, 70, "Input"],
+Cell[30756, 842, 270, 7, 43, "Text"],
+Cell[31029, 851, 289, 6, 42, "Input"],
+Cell[31321, 859, 241, 5, 42, "Text"],
+Cell[31565, 866, 399, 8, 42, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32013, 880, 96, 1, 96, "Section"],
+Cell[32112, 883, 639, 14, 72, "Text"],
+Cell[32754, 899, 3709, 93, 259, "Input"],
+Cell[36466, 994, 141, 1, 42, "Text"],
+Cell[36610, 997, 804, 23, 70, "Input"],
+Cell[37417, 1022, 178, 4, 42, "Text"],
+Cell[CellGroupData[{
+Cell[37620, 1030, 401, 7, 108, "Subsection"],
+Cell[38024, 1039, 509, 8, 70, "Text"],
+Cell[38536, 1049, 4903, 108, 259, "Input"],
+Cell[43442, 1159, 124, 1, 42, "Text"],
+Cell[43569, 1162, 335, 6, 42, "Input"],
+Cell[43907, 1170, 192, 4, 42, "Text"],
+Cell[44102, 1176, 387, 11, 42, "Input"],
+Cell[44492, 1189, 243, 4, 42, "Text"],
+Cell[44738, 1195, 401, 10, 70, "Input"],
+Cell[45142, 1207, 278, 5, 42, "Text"],
+Cell[45423, 1214, 724, 14, 70, "Input"],
+Cell[46150, 1230, 189, 4, 42, "Text"],
+Cell[46342, 1236, 209, 5, 42, "Input"],
+Cell[46554, 1243, 177, 4, 42, "Text"],
+Cell[46734, 1249, 889, 14, 42, "Input"],
+Cell[47626, 1265, 146, 1, 42, "Text"],
+Cell[47775, 1268, 157, 3, 42, "Input"],
+Cell[47935, 1273, 112, 1, 42, "Text"],
+Cell[48050, 1276, 241, 6, 43, "Text"],
+Cell[48294, 1284, 312, 7, 42, "Input"],
+Cell[48609, 1293, 450, 7, 70, "Text"],
+Cell[49062, 1302, 2520, 63, 205, "Input"],
+Cell[51585, 1367, 139, 1, 42, "Text"],
+Cell[51727, 1370, 997, 24, 70, "Input"],
+Cell[52727, 1396, 159, 3, 42, "Text"],
+Cell[52889, 1401, 236, 5, 42, "Input"],
+Cell[53128, 1408, 144, 1, 42, "Text"],
+Cell[53275, 1411, 209, 4, 42, "Input"],
+Cell[53487, 1417, 159, 3, 42, "Text"],
+Cell[53649, 1422, 115, 1, 42, "Text"],
+Cell[53767, 1425, 654, 15, 42, "Input"],
+Cell[54424, 1442, 155, 2, 42, "Text"],
+Cell[54582, 1446, 188, 4, 42, "Text"],
+Cell[54773, 1452, 249, 6, 42, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55059, 1463, 109, 1, 67, "Subsection"],
+Cell[55171, 1466, 409, 7, 70, "Text"],
+Cell[55583, 1475, 324, 8, 70, "Input"],
+Cell[55910, 1485, 196, 4, 42, "Text"],
+Cell[56109, 1491, 365, 8, 42, "Input"],
+Cell[56477, 1501, 155, 3, 42, "Input"],
+Cell[56635, 1506, 201, 5, 42, "Input"],
+Cell[56839, 1513, 385, 6, 70, "Text"],
+Cell[57227, 1521, 191, 4, 42, "Input"],
+Cell[57421, 1527, 189, 2, 42, "Text"],
+Cell[57613, 1531, 2160, 55, 205, "Input"],
+Cell[59776, 1588, 128, 1, 42, "Text"],
+Cell[59907, 1591, 824, 23, 70, "Input"],
+Cell[60734, 1616, 240, 5, 42, "Input"],
+Cell[60977, 1623, 206, 4, 42, "Input"],
+Cell[61186, 1629, 454, 12, 42, "Input"],
+Cell[61643, 1643, 306, 7, 42, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

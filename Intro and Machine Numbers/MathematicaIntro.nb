@@ -1,0 +1,2998 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     97419,       2989]
+NotebookOptionsPosition[     77058,       2379]
+NotebookOutlinePosition[     81101,       2481]
+CellTagsIndexPosition[     81022,       2476]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ TogglerBox[2, {1->
+  OverlayBox[{
+   TagBox[GridBox[{
+      {
+       GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmNiYGAo5gASQYnljkVFiZXBLECOU2VJahIzkCEFxAJADBL8//8/
+Qfzo0SP2GzduCF29elXs/Pnz0sgYn747d+5wA9VoArE/EB8B4uPoGJu+Fy9e
+MF+4cEENKB8AxBeB+AMQ/wXif+gYi1tBdvoB8QUg/ghV9x8XRtb7/PlzFqje
+t1D7cOrDpv/ixYvqUHuJ0ousHxpWAVA3E6UXWT80nC8S8i82/Q8ePOAgx26Y
+/uvXrwsD2UdJ8Tey/kuXLolD0wNJbofpB6YVSUr0n4ek5QHTT6n7KQ0/SuOP
+0vRDafqlRv6BxgPZ+Ret/HhHrBl4yi9QWHwiFB7Yyk+QO6B+CTxPYvmJjG/f
+vs17nozyG1f9cR6t7gBhAPeiQ4A=
+         "], {{0, 26}, {16, 0}}, {0, 255},
+         ColorFunction->RGBColor],
+        BaseStyle->"ImageGraphics",
+        ImageSize->Magnification[1],
+        ImageSizeRaw->{16, 26},
+        PlotRange->{{0, 16}, {0, 26}}], 
+       GraphicsBox[RasterBox[CompressedData["
+1:eJzt2d9OVFcUB2DSNmkfQRFEiRQ1gCK1vW4fwT6BJu1tE9uk8fUUERE9aECC
+qLGYEmKkErWxtont2mGdcDLVOpNgZijfJB9hzp+99j6zb9b5Hb3ww7nvP+rr
+6/vxs/hz7vzPX1+8eP7St5/El28u/fTdhY/jn/6w8GlfXzlYVdWhDgyEwXT4
+HQYbBho6qQMAAOxt/Q0HWxxo0TzX3xij7juGwpFwNAyHY2EkfB6OhxPhZBgL
+42EinAqnw2SYSl+Es+HL9FWb6uvP5hj1eJNZ41TWHM85nMw5Hc85juSch3MN
+R3JNdf/UfGbtPqf6WdW6/XsDAADsV7vd/7b2vqPV2/veuuc9k6Za1Mfr3vVt
+feto9e+eVb9KL2tmz81M+n25dadZ9bU2zYXbYSmshNXwoOF+uJfn7obFcKfa
+/twMN8L1MNtBTQAAYO+ZSVfTdLqSLreoj0/n9eXe0jeUHmQ+3AoL1XZ/UfqR
+5Wq77yg9yMPwS3gcfg0b4Ul4Gn4LW+F5eBl+D6/CH+F1+DP99Q71+dd5z6sc
+42WOuZU1nmbNjZzD45zTw5zjSs55KdewkGuazzXONp5Xu8+pflb185rpgd8d
+AABgv/kQ/W/J4krGVvrIkruVDO5RWAvr1U7fuxmeVTt9b/Ei1d+38prNaqdv
+Xc+xHuXY97LWYtbWr9Jryj4sGXPJmkvmXD7l/UrZsyWTLu9dyj4u72Ca2fVq
+nivvY8renuug5ps2/b2L2q0JAADwX3azT/kQuv18AAAA2Pv0rOxn3djz3X6f
+BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAADsHW/a1I2aAAAAAAAAsJ91OyOEburGnr/W
+prlwOyyFlbAaHjTcD/fy3N2wGO5U25+b4Ua4HmY7qAkAAAAAAAC9aCZdTdPp
+Srrcoj4+ndeXe0tuVjK4+XCr2s7iSsa2XG3nbiWDexTWwnrYCE/CZngWtsLz
+9CLV37fyms28ZyPHWMsxH2SN5ax5O+cwn3Oabayv3XXVa6vXN9MDvxN7W9mH
+JWMuWXPJnMunZNBlz5ZMumTTZR+XrLqZXa/muZJtl70910HNQx0YCIPp8DsM
+Ngw0dFIHAAAAAAAAel1/w8EWB1o0z/U3xqhzt6FwNAyHY2EkjIYT4WQYC+Nh
+IpwOk+FMmmpRH5/Mayfy3rEc60SOPZK1hrP2ULWT9zXX2O666rXVuv378P/S
+zJ6bmfT7cuuOsup/AFmW9vs=
+         "], {{0, 26}, {2000, 0}}, {0, 255},
+         ColorFunction->RGBColor],
+        BaseStyle->"ImageGraphics",
+        ImageSize->Magnification[1],
+        ImageSizeRaw->{2000, 26},
+        PlotRange->{{0, 2000}, {0, 26}}], 
+       GraphicsBox[RasterBox[CompressedData["
+1:eJy9lstOwkAUhhthQUJcuUBl5cr4GPoABvEJINGtCZoYng4Il4Z7gXAJYUHY
+QAi3GlYQPZ5/4pCm0pYC2uSDaXvmn5lzzpzpVfQl/HyiKMqrj3/CkffbWCwS
+f/TyzV387Snq4cYlc87gYbVaDbpB07SLRqMR6Pf7PiJSnOA+6h7kmBBz0+12
+Tx30v/bgk9GZOvPAa7oejUYeC306AIz1wWjM/WAw8B9ZX4L1TDHGcDj02ulX
+KpUNbt79jKHBV1b66Fcul3fCYgzEJNTr9fxmfaldKpWoUChQPp8X/8ViUWB8
+BhuLMRCPGvJqmz76QWOxWFCtVqNsNku5XE6AdqfToclkImxga7cGuT/M+uw/
+ms/ntF6vqdlsUjKZFKCNC/pynTZxyLbb7bNt/sHcMpkMzWYzoVev1wW4xuOx
+WAdsbGIAH6ncJ7BNH/6FRjqdJl3XSV7T6VSsA76CDWxt9oSKOmLOH/RBLKEP
+LVVVN/qJRGKjDxsnfSZoN3/4CPNfrVa/5n+IvtH/iDHu9/G/2T/G/JT5A41U
+KiXm3Wq1xBhcx5zy0zK+Mj+Xy6XIf5n7EuQ/9sYh+Wneqy73r+3+2rX2OPh+
+a31wqpHG5xbatvXtCDjW5wO1Z9UdzheXyPMRPrc6H49yvpvn/Y/fJ3/6ffUN
+AyH/6w==
+         "], {{0, 26}, {24, 0}}, {0, 255},
+         ColorFunction->RGBColor],
+        BaseStyle->"ImageGraphics",
+        ImageSize->Magnification[1],
+        ImageSizeRaw->{24, 26},
+        PlotRange->{{0, 24}, {0, 26}}]}
+     },
+     AutoDelete->False,
+     GridBoxItemSize->{"Columns" -> {Automatic, 
+         Scaled[0.6], Automatic}},
+     GridBoxSpacings->{"Columns" -> {{0}}, "Rows" -> {{0}}}],
+    "Grid"], 
+   PaneBox[
+    StyleBox[
+     RowBox[{
+     "Background", " ", "images", " ", "and", " ", "text", " ", "colors", " ",
+       "have", " ", "been", " ", "adjusted", " ", "for", " ", "editing", " ", 
+      
+      RowBox[{"purposes", "."}]}],
+     LineBreakWithin->False,
+     FontFamily->"Helvetica",
+     FontSize->12,
+     FontColor->GrayLevel[0.4]],
+    Alignment->Center,
+    ImageSize->Scaled[0.5],
+    ScrollPosition->{0., 0.}]},
+   Alignment->{Center, Center}], 2->""}, "1"]], "SlideShowNavigationBar", \
+"FirstSlide",
+ CellMargins->{{0, 0}, {0, 0}},
+ CellFrameLabelMargins->2,
+ CellSize->{Inherited, 30},
+ CellChangeTimes->{3.5861718838718987`*^9},
+ TextAlignment->Center,
+ CellTags->"SlideShowHeader"],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " Programming:\nIntroduction for Numerical Analysis "
+}], "Title",
+ CellChangeTimes->{
+  3.559948400406288*^9, {3.586165186508545*^9, 3.58616520255085*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell["Colloquium Next Wednesday", "Title",
+ CellChangeTimes->{{3.618911262854061*^9, 3.618911293009061*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+\[OpenCurlyDoubleQuote]Numerical Differentiation and the Approximation of \
+Boundary Value Problems.\[CloseCurlyDoubleQuote]\
+\>", "Section",
+ CellChangeTimes->{{3.6189113023240614`*^9, 3.6189113038310614`*^9}, {
+  3.618911337356061*^9, 3.6189113560890613`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Wednesday, September 10, 2014
+Manchester Hall, Room 016 4:00pm-5:00pm
+The speaker will be Thomas Lewis from UNCG\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.6189114001480613`*^9, 3.6189114331540613`*^9}, {
+  3.6189115568760614`*^9, 3.6189115831133423`*^9}}],
+
+Cell["\<\
+I encourage you to attend the talk. One of the topics that I hope to get to \
+this semester is numerical solutions to differential equations. \
+\>", "Text",
+ CellChangeTimes->{{3.618911447077061*^9, 3.6189115458950615`*^9}, {
+  3.6189115933673677`*^9, 3.618911608552886*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " as a calculator."
+}], "Section",
+ CellChangeTimes->{{3.586165245639718*^9, 3.586165252574686*^9}}],
+
+Cell[TextData[{
+ "A good place to start with ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is with entering expressions and evaluating them. Here are some examples:"
+}], "Text",
+ CellChangeTimes->{{3.586165256639501*^9, 3.5861652993318367`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"22", "!"}]], "Input",
+ CellChangeTimes->{{3.5861653044423447`*^9, 3.5861653161238327`*^9}, {
+  3.6188285141273584`*^9, 3.6188285173976855`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Sin", "[", 
+  RowBox[{"\[Pi]", "/", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586165327200987*^9, 3.586165341018425*^9}}],
+
+Cell[BoxData[
+ RowBox[{"E", "^", "0.2"}]], "Input",
+ CellChangeTimes->{{3.5861653732661123`*^9, 3.586165376815217*^9}, 
+   3.586169258572599*^9}],
+
+Cell[BoxData["\[Pi]"], "Input",
+ CellChangeTimes->{{3.6189120284918756`*^9, 3.618912041451172*^9}, 
+   3.618912152038229*^9}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"\[Pi]", ",", "22"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586169266215542*^9, 3.5861692734744463`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"1", "/", "3"}]], "Input",
+ CellChangeTimes->{{3.6189118019872274`*^9, 3.6189118065946884`*^9}, {
+  3.618911851983227*^9, 3.618911906451673*^9}}],
+
+Cell[BoxData[
+ RowBox[{"1.0", "/", "3.0"}]], "Input",
+ CellChangeTimes->{{3.6189118937354016`*^9, 3.618911896669695*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetPrecision", "[", 
+  RowBox[{
+   RowBox[{"1.0", "/", "3.0"}], ",", "19"}], "]"}]], "Input",
+ CellChangeTimes->{{3.618912109134939*^9, 3.618912117573783*^9}, {
+  3.618921880710049*^9, 3.618921891845163*^9}, {3.618921964187396*^9, 
+  3.618921972605238*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Notice that:", "Item",
+ CellChangeTimes->{{3.586165365817116*^9, 3.586165384557214*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+You hit Shift-Return to evaluate the expression. Return just moves you down \
+in the text window.\
+\>", "Subitem",
+ CellChangeTimes->{{3.5861653906066303`*^9, 3.5861654133233423`*^9}}],
+
+Cell[TextData[{
+ "To type \[Pi], you enter Esc-pi-Esc (this works for other greek letters, \
+too). ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " knows what \[Pi] is automatically."
+}], "Subitem",
+ CellChangeTimes->{{3.586165419012155*^9, 3.586165469828298*^9}}],
+
+Cell[TextData[{
+ "e is written with a capital \[OpenCurlyQuote]E\[CloseCurlyQuote] (lowercase \
+\[OpenCurlyQuote]e\[CloseCurlyQuote]) is just another variable name to ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Subitem",
+ CellChangeTimes->{{3.586165419012155*^9, 3.586165492102253*^9}, {
+  3.586165522782879*^9, 3.586165522786789*^9}}],
+
+Cell["\<\
+Numbers with a decimal point are treated as machine floating point numbers \
+(actually, they are doubles). Numbers without are kept in fractional form, \
+which is very often NOT what you want in this class.\
+\>", "Subitem",
+ CellChangeTimes->{{3.586165419012155*^9, 3.586165492102253*^9}, {
+  3.586165522782879*^9, 3.586165569416872*^9}, {3.58616927786637*^9, 
+  3.586169277874991*^9}, {3.6189121234163675`*^9, 3.618912123430369*^9}}],
+
+Cell["\<\
+If you want to control the precision you can use SetPrecision.\
+\>", "Subitem",
+ CellChangeTimes->{{3.586165419012155*^9, 3.586165492102253*^9}, {
+  3.586165522782879*^9, 3.586165569416872*^9}, {3.58616927786637*^9, 
+  3.586169277874991*^9}, {3.6189121234163675`*^9, 3.618912142755301*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Literate ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " "
+}], "Section",
+ CellChangeTimes->{{3.5861662559517927`*^9, 3.5861662601462727`*^9}}],
+
+Cell[TextData[{
+ "Your ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " work is a document called a \[OpenCurlyDoubleQuote]Notebook\
+\[CloseCurlyDoubleQuote]. Your work will make a lot more sense (to both of \
+us) if you use the different types of styling available in notebooks. The \
+brackets on the right hand side of the notebook denote \
+\[OpenCurlyDoubleQuote]cells\[CloseCurlyDoubleQuote], each of which has a \
+type. For instance, this is a \[OpenCurlyDoubleQuote]Text\
+\[CloseCurlyDoubleQuote] cell. Here, return and shift-return do nothing but \
+move to the next line. The cell above is a \[OpenCurlyDoubleQuote]Section\
+\[CloseCurlyDoubleQuote] cell."
+}], "Text",
+ CellChangeTimes->{{3.586166265138513*^9, 3.5861663707393217`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+This is an (item) cell. You can select the cell type from the Format->Style \
+menu, or with the keys Alt-1 through Alt-9 (Command-1 through Command-9 on a \
+Mac). You\[CloseCurlyQuote]ll mostly use the following:\
+\>", "Item",
+ CellChangeTimes->{{3.5861664901246*^9, 3.58616657681339*^9}, {
+  3.6188434724530773`*^9, 3.618843479149747*^9}, {3.618843526641495*^9, 
+  3.618843545420583*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Alt-1 Title. This goes at the top of your notebook. Example title: \
+\[OpenCurlyDoubleQuote]Homework #2, Math/CS 355/655\[CloseCurlyDoubleQuote].\
+\>", "Subitem",
+ CellChangeTimes->{{3.5861664901246*^9, 3.586166611315155*^9}, {
+   3.6188276305890136`*^9, 3.618827636136568*^9}, 3.6188434827641077`*^9}],
+
+Cell["\<\
+Alt-2 Subtitle. This goes next. Example subtitle: \[OpenCurlyDoubleQuote]by \
+Matt Mastin\[CloseCurlyDoubleQuote].\
+\>", "Subitem",
+ CellChangeTimes->{{3.5861664901246*^9, 3.586166673127002*^9}, {
+   3.618827640966051*^9, 3.618827641974152*^9}, 3.6188434859304247`*^9}],
+
+Cell[TextData[{
+ "Alt",
+ "-7 Text. This is where you explain what you\[CloseCurlyQuote]re doing. Put \
+in LOTS of text cells. ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " doesn\[CloseCurlyQuote]t really have a good commenting mechanism for your \
+code, so the preferred method is to make your functions really short, and \
+intersperse a lot of text cells in the middle."
+}], "Subitem",
+ CellChangeTimes->{{3.5861664901246*^9, 3.5861667690934772`*^9}, 
+   3.6188434882016516`*^9}],
+
+Cell["\<\
+Alt-4 Section. When you switch problems, or parts of a computation, a good \
+idea is to use a \[OpenCurlyDoubleQuote]Section\[CloseCurlyDoubleQuote] \
+heading to keep the reader oriented.\
+\>", "Subitem",
+ CellChangeTimes->{{3.5861664901246*^9, 3.5861667987800627`*^9}, 
+   3.6188434905208836`*^9}],
+
+Cell[TextData[{
+ "Alt",
+ "-9 Input. This is where regular ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " input goes."
+}], "Subitem",
+ CellChangeTimes->{{3.5861664901246*^9, 3.5861668031420507`*^9}, {
+   3.5861669555415993`*^9, 3.586166976376206*^9}, {3.586167047469921*^9, 
+   3.58616704747751*^9}, 3.618843492808112*^9}]
+}, Open  ]],
+
+Cell["\<\
+You can change fonts (or the look of the entire document) with \
+Format->Stylesheet. You should explore; you might like some of them.\
+\>", "Item",
+ CellChangeTimes->{{3.5861664901246*^9, 3.5861668031420507`*^9}, {
+  3.5861669555415993`*^9, 3.586166976376206*^9}, {3.586167047469921*^9, 
+  3.586167106175597*^9}}],
+
+Cell[TextData[{
+ "The Palettes->Writing Assistant has an interface for \
+\[OpenCurlyDoubleQuote]Typesetting\[CloseCurlyDoubleQuote] mathematical \
+formulas, such as ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"n", "=", "1"}], "k"], 
+    RowBox[{
+     SuperscriptBox["n", "2"], "."}]}], TraditionalForm]]],
+ " You can also (kind of) use ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ " (more on this later)."
+}], "Item",
+ CellChangeTimes->{{3.5861664901246*^9, 3.5861668031420507`*^9}, {
+   3.5861669555415993`*^9, 3.586166976376206*^9}, {3.586167047469921*^9, 
+   3.5861671836318073`*^9}, 3.618843563173807*^9, {3.618922028040781*^9, 
+   3.6189220510290794`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Getting Help.", "Section",
+ CellChangeTimes->{{3.58616740923995*^9, 3.586167414165216*^9}}],
+
+Cell[TextData[{
+ "You will do a LOT of reading documentation and getting help with ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". Luckily, the built-in help functions are excellent."
+}], "Text",
+ CellChangeTimes->{{3.5861669905462008`*^9, 3.586167011951385*^9}, {
+  3.5861671970705833`*^9, 3.586167198699964*^9}}],
+
+Cell["Help->Wolfram Documentation .", "Item",
+ CellChangeTimes->{{3.586167226290319*^9, 3.586167235328896*^9}, {
+  3.586167317624565*^9, 3.586167325763172*^9}, {3.618827673535308*^9, 
+  3.61882767515847*^9}, {3.618827707949749*^9, 3.6188277106090145`*^9}}],
+
+Cell["You can also use a ? to bring up info about a command", "Text",
+ CellChangeTimes->{{3.586167417708947*^9, 3.586167426156732*^9}, {
+  3.618843637281396*^9, 3.6188436502231016`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "Sin"}]], "Input",
+ CellChangeTimes->{{3.586167428306355*^9, 3.586167429136383*^9}}],
+
+Cell["Or the double question mark:", "Text",
+ CellChangeTimes->{{3.586167444557366*^9, 3.586167448107238*^9}}],
+
+Cell[BoxData[
+ RowBox[{"??", "Sin"}]], "Input",
+ CellChangeTimes->{{3.586167449729198*^9, 3.5861674507509108`*^9}}],
+
+Cell["\<\
+Listable means that you can evaluate the expression on a list and it will \
+return a list of the results (we will get to lists shortly).\
+\>", "Text",
+ CellChangeTimes->{{3.6188289485888004`*^9, 3.6188289706690083`*^9}, {
+  3.618829017230664*^9, 3.6188290206500053`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Sin", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"\[Pi]", "/", "2"}], ",", " ", 
+    RowBox[{"2", 
+     RowBox[{"\[Pi]", "/", "3"}]}], ",", 
+    RowBox[{"3", 
+     RowBox[{"\[Pi]", "/", "2"}]}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6188289719521365`*^9, 3.6188290064815893`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Functions. The short form.", "Section",
+ CellChangeTimes->{{3.586166001282227*^9, 3.586166040178104*^9}, {
+  3.586166092142191*^9, 3.586166094613373*^9}}],
+
+Cell["\<\
+You can write down functions right away without worrying too much about what \
+the syntax actually means. (We\[CloseCurlyQuote]ll get to that shortly.)\
+\>", "Text",
+ CellChangeTimes->{{3.586166099876169*^9, 3.586166128139557*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"Tan", "[", "x", "]"}], " ", 
+    RowBox[{"Exp", "[", "x", "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.586166130358097*^9, 3.5861661462038517`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "7.0", "]"}]], "Input",
+ CellChangeTimes->{{3.58616615027048*^9, 3.586166152027727*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "\[Pi]", "]"}]], "Input",
+ CellChangeTimes->{{3.586166155283597*^9, 3.586166161444028*^9}}],
+
+Cell["\<\
+There are several things to notice about the function syntax. \
+\>", "Text",
+ CellChangeTimes->{{3.586167482058936*^9, 3.586167521093759*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+On the left hand side, the variable appears with an underscore, like x_. No \
+underscore, no live function. Also, no error message, so \
+you\[CloseCurlyQuote]ll make this mistake at least once.\
+\>", "Item",
+ CellChangeTimes->{{3.58616753699755*^9, 3.5861675843054256`*^9}}],
+
+Cell["\<\
+The assignment is \[OpenCurlyDoubleQuote]:=\[CloseCurlyDoubleQuote] and not \
+\[OpenCurlyDoubleQuote]=\[CloseCurlyDoubleQuote]. Again, no colon, no live \
+function (but again, no error message).\
+\>", "Item",
+ CellChangeTimes->{{3.58616753699755*^9, 3.586167602581151*^9}}],
+
+Cell["Note the color coding on the right hand side:", "Item",
+ CellChangeTimes->{{3.58616753699755*^9, 3.58616762239608*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Black. This is already defined.", "Subitem",
+ CellChangeTimes->{{3.58616753699755*^9, 3.586167628675905*^9}}],
+
+Cell["Blue. This is not defined yet. ", "Subitem",
+ CellChangeTimes->{{3.58616753699755*^9, 3.58616763512361*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Functions take anything.", "Section",
+ CellChangeTimes->{{3.586192797009885*^9, 3.586192803103335*^9}}],
+
+Cell["Absolutely anything.", "Text",
+ CellChangeTimes->{{3.5861928049031982`*^9, 3.58619280773488*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "\"\<My name is Ishmael\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.5861676666758842`*^9, 3.5861676741249027`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"Graphics", "[", 
+   RowBox[{"Circle", "[", "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586166053630074*^9, 3.5861660895898247`*^9}, {
+  3.586167680653569*^9, 3.586167693651346*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"Sound", "[", 
+   RowBox[{
+    RowBox[{"SoundNote", "[", "\"\<C\>\"", "]"}], ",", "2"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.5861928110139313`*^9, 3.586192825215776*^9}, {
+  3.586192885502193*^9, 3.586192917131151*^9}, {3.6189221327442503`*^9, 
+  3.6189221435063267`*^9}}],
+
+Cell[TextData[{
+ "As we will see later, this kind of strangeness is really a consequence of \
+the fact that the heart of ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is replacements in lists. ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " doesn\[CloseCurlyQuote]t know what to do with these nonsensical \
+statements, so it is just spitting them back out."
+}], "Text",
+ CellChangeTimes->{{3.618916231876644*^9, 3.6189163191709337`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plots. The short form.", "Section",
+ CellChangeTimes->{{3.586167759331298*^9, 3.586167766333674*^9}}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " graphics and plotting is probably something that we could have a semester \
+course on. However, most of what you\[CloseCurlyQuote]ll actually want to do \
+is easy."
+}], "Text",
+ CellChangeTimes->{{3.5861677691581373`*^9, 3.586167805219297*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586167810167337*^9, 3.586167819049774*^9}, {
+  3.618912179484974*^9, 3.618912180258051*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plots. Some options.", "Section",
+ CellChangeTimes->{{3.586192937592437*^9, 3.586192941397984*^9}}],
+
+Cell["\<\
+The most important generic options for Plot are probably \
+AspectRatio->Automatic, Filling->Axis.\
+\>", "Text",
+ CellChangeTimes->{{3.58616783050281*^9, 3.5861678584870977`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861678623412113`*^9, 3.586167877832789*^9}, {
+  3.618912268873912*^9, 3.618912287237456*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plots. PlotRange.", "Section",
+ CellChangeTimes->{{3.586192948454809*^9, 3.586192951060587*^9}}],
+
+Cell["You can set the range of the plot with PlotRange.", "Text",
+ CellChangeTimes->{{3.586167917469721*^9, 3.586167925634989*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586167938325933*^9, 3.5861679536763973`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plots. Plotting data.", "Section",
+ CellChangeTimes->{{3.586167986368733*^9, 3.586167991246023*^9}}],
+
+Cell["\<\
+If you have a list of data to plot, you can do that with \
+\[OpenCurlyDoubleQuote]ListPlot\[CloseCurlyDoubleQuote] or (usually better) \
+\[OpenCurlyDoubleQuote]ListLinePlot\[CloseCurlyDoubleQuote], which connects \
+the data points.\
+\>", "Text",
+ CellChangeTimes->{{3.586167994078705*^9, 3.586168022340632*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Data", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"f", "[", "x", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.586168026905953*^9, 3.586168074011149*^9}}],
+
+Cell["We will talk about what Table is in a bit.", "Text",
+ CellChangeTimes->{{3.6189123256954556`*^9, 3.618912333230456*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"Data", ",", 
+   RowBox[{"PlotMarkers", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Automatic", ",", "Medium"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586168050520814*^9, 3.586168055434511*^9}, {
+  3.586168090419635*^9, 3.586168127708495*^9}, {3.5861681611592503`*^9, 
+  3.5861681678568087`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plots. ListLinePlot.", "Section",
+ CellChangeTimes->{{3.586192965214334*^9, 3.58619296991584*^9}}],
+
+Cell["\<\
+You can get these connected by line segments with \
+\[OpenCurlyDoubleQuote]ListLinePlot\[CloseCurlyDoubleQuote].\
+\>", "Text",
+ CellChangeTimes->{{3.586192971804392*^9, 3.586192982563381*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Data", ",", 
+   RowBox[{"PlotMarkers", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Automatic", ",", "Medium"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586168060709964*^9, 3.586168063618638*^9}, {
+  3.586168177053693*^9, 3.5861681828389874`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Plotting Multiple Things Together.", "Section",
+ CellChangeTimes->{{3.586168205674099*^9, 3.586168214871278*^9}}],
+
+Cell["To plot several functions on the same axes, use \
+\[OpenCurlyDoubleQuote]Show\[CloseCurlyDoubleQuote].", "Text",
+ CellChangeTimes->{{3.58616821761788*^9, 3.586168224119212*^9}, {
+  3.586168291980701*^9, 3.586168297698234*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Data", ",", 
+     RowBox[{"PlotMarkers", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Automatic", ",", "Medium"}], "}"}]}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.5861682256020107`*^9, 3.586168271005291*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Multiple plots in Plot.", "Section",
+ CellChangeTimes->{{3.586192994270843*^9, 3.586193000745928*^9}}],
+
+Cell["\<\
+If you\[CloseCurlyQuote]re interested in plotting multiple functions, you can \
+do this directly in Plot:\
+\>", "Text",
+ CellChangeTimes->{{3.5861683040680313`*^9, 3.5861683178969803`*^9}, {
+  3.586168353846463*^9, 3.586168354966209*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Sin", "[", "x", "]"}], ",", 
+     RowBox[{"f", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586168319210256*^9, 3.586168337371414*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Algebra and Calculus. ", "Section",
+ CellChangeTimes->{{3.586168497728197*^9, 3.58616849930814*^9}, {
+  3.586168966405409*^9, 3.586168968229051*^9}}],
+
+Cell[TextData[{
+ "We will do a lot of calculus and algebra with ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". So let\[CloseCurlyQuote]s see some examples.\nFirst, you can take \
+derivatives with D."
+}], "Text",
+ CellChangeTimes->{{3.58616850259689*^9, 3.5861685042839527`*^9}, {
+  3.586168959529162*^9, 3.586168991891994*^9}}],
+
+Cell[BoxData[
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", "x"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586168993707515*^9, 3.58616899600495*^9}}],
+
+Cell[BoxData[
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", "x", ",", "x"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586169000447864*^9, 3.5861690043805532`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "5"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.58616900662287*^9, 3.586169015969733*^9}}],
+
+Cell[TextData[{
+ "This is a mess, and ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " may be able to help. You can always try to improve an expression with \
+\[OpenCurlyDoubleQuote]Simplify\[CloseCurlyDoubleQuote]."
+}], "Text",
+ CellChangeTimes->{{3.58616902889939*^9, 3.5861690495440474`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "5"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586169050778418*^9, 3.586169064640806*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Calculus continued.", "Section",
+ CellChangeTimes->{{3.586169140403953*^9, 3.586169144281105*^9}}],
+
+Cell["\<\
+You can do surprisingly complicated integrals with Integrate.\
+\>", "Text",
+ CellChangeTimes->{{3.586169147241787*^9, 3.586169184966673*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Integrate", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", "x"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861691557579536`*^9, 3.5861691608044577`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"value", " ", "=", " ", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586169208728827*^9, 3.586169217245502*^9}, {
+  3.586169382804035*^9, 3.586169383628981*^9}}],
+
+Cell["\<\
+Since this answer doesn\[CloseCurlyQuote]t really mean anything to us, let\
+\[CloseCurlyQuote]s evaluate it numerically.\
+\>", "Text",
+ CellChangeTimes->{{3.586169420425014*^9, 3.586169433798134*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"value", ",", "15"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586169374910891*^9, 3.586169392692325*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Taylor\[CloseCurlyQuote]s theorem and Series.", "Section",
+ CellChangeTimes->{{3.5861694584781322`*^9, 3.586169464171739*^9}}],
+
+Cell[TextData[{
+ "We\[CloseCurlyQuote]ll do a lot of Taylor series in this class, so let\
+\[CloseCurlyQuote]s learn how to do that in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.586169466484321*^9, 3.586169486241991*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Series", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586169488358876*^9, 3.5861695049068193`*^9}}],
+
+Cell["\<\
+Notice the syntax: Series[function,{variable,point to expand around,highest \
+order term}]. You can convert this to a polynomial with Normal\
+\>", "Text",
+ CellChangeTimes->{{3.5861695170824966`*^9, 3.586169560933358*^9}, 
+   3.5861696095001593`*^9}],
+
+Cell[BoxData[
+ RowBox[{"poly", " ", "=", " ", 
+  RowBox[{"Normal", "[", 
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5861695622127*^9, 3.586169580831897*^9}, {
+  3.586169612620371*^9, 3.586169613358714*^9}}],
+
+Cell["\<\
+Now poly isn\[CloseCurlyQuote]t a function yet. Why not? Because x isn\
+\[CloseCurlyQuote]t a variable. To convert poly into a function \
+automatically, we\[CloseCurlyQuote]ll need some trickery. In the meantime, we \
+can always put it into InputForm and copy and paste to use it to define a \
+function.\
+\>", "Text",
+ CellChangeTimes->{{3.5861696173476152`*^9, 3.586169689629127*^9}, {
+  3.586169828669857*^9, 3.5861698309518547`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"poly", " ", "//", " ", "InputForm"}]], "Input",
+ CellChangeTimes->{{3.58616969147758*^9, 3.586169694713955*^9}, {
+  3.6189223151564894`*^9, 3.618922328052779*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Taylor\[CloseCurlyQuote]s theorem and series (continued).", "Section",
+ CellChangeTimes->{{3.5861930423932037`*^9, 3.586193047694771*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"p", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{"x", "+", 
+    RowBox[{"x", "^", "2"}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"5", "*", 
+       RowBox[{"x", "^", "3"}]}], ")"}], "/", "6"}], "+", 
+    RowBox[{
+     RowBox[{"x", "^", "4"}], "/", "2"}], "+", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"41", "*", 
+       RowBox[{"x", "^", "5"}]}], ")"}], "/", "120"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.586169704808345*^9, 3.5861697093192787`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], ",", 
+     RowBox[{"p", "[", "x", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861697131745663`*^9, 3.586169725847432*^9}}],
+
+Cell["\<\
+The other thing we probably want to do is think about the coefficients as \
+list of numbers. \
+\>", "Text",
+ CellChangeTimes->{{3.586169856563884*^9, 3.5861698687171183`*^9}, {
+  3.586169899616262*^9, 3.586169904224813*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CoefficientList", "[", 
+  RowBox[{"poly", ",", "x"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861698719045143`*^9, 3.5861698790493402`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " and TeX"
+}], "Section",
+ CellChangeTimes->{{3.5861930423932037`*^9, 3.586193047694771*^9}, {
+  3.6189160277976437`*^9, 3.6189160356586437`*^9}}],
+
+Cell[TextData[{
+ "This seems as good a time as any to mention that ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " can generate ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ " statements (since Taylor Polynomials can be a pain to ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ ")."
+}], "Text",
+ CellChangeTimes->{{3.6189160435776443`*^9, 3.618916061590644*^9}, {
+  3.6189161842756443`*^9, 3.618916196706644*^9}}],
+
+Cell[BoxData[
+ RowBox[{"TeXForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.618916068002644*^9, 3.618916091911644*^9}}],
+
+Cell["Or alternately,", "Text",
+ CellChangeTimes->{{3.6189161463306437`*^9, 3.6189161491106443`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}], "//", 
+  "TeXForm"}]], "Input",
+ CellChangeTimes->{{3.618916150383644*^9, 3.618916159281644*^9}}],
+
+Cell[TextData[{
+ "You can also import ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox[
+    RowBox[{"T", 
+     AdjustmentBox["E",
+      BoxBaselineShift->0.5,
+      BoxMargins->{{-0.3, 0}, {0, 0}}], "X"}],
+    SingleLetterItalics->False], TraditionalForm]]],
+ " into ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", but I am just learning about this myself and it seems to not really work \
+all that well. More on this as I continue to play with it."
+}], "Text",
+ CellChangeTimes->{{3.6189223632592993`*^9, 3.618922392960269*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Two kinds of equals. \[OpenCurlyDoubleQuote]=\[CloseCurlyDoubleQuote]", \
+"Section",
+ CellChangeTimes->{{3.586165602396508*^9, 3.586165616039414*^9}, {
+  3.586169959654109*^9, 3.586169981545198*^9}, {3.586170319195347*^9, 
+  3.586170322618487*^9}, {3.5861930640798283`*^9, 3.586193066581922*^9}}],
+
+Cell[TextData[{
+ "It\[CloseCurlyQuote]s not obvious from the surface, but ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is really just the world\[CloseCurlyQuote]s most complicated \
+search-and-replace function. That\[CloseCurlyQuote]s really what\
+\[CloseCurlyQuote]s happening behind the scenes in essentially every ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " operation. So let\[CloseCurlyQuote]s start with the very basics. There are \
+two kinds of \[OpenCurlyDoubleQuote]equals\[CloseCurlyDoubleQuote] signs in \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.586169986408886*^9, 3.586170078898604*^9}}],
+
+Cell[BoxData[
+ RowBox[{"bob", " ", "=", " ", 
+  RowBox[{"\[Pi]", " ", "+", " ", "7"}]}]], "Input",
+ CellChangeTimes->{{3.586170089100593*^9, 3.586170097091021*^9}}],
+
+Cell[BoxData["bob"], "Input",
+ CellChangeTimes->{{3.586170100172785*^9, 3.58617010142514*^9}}],
+
+Cell["\<\
+The \[OpenCurlyDoubleQuote]=\[CloseCurlyDoubleQuote] means \
+\[OpenCurlyDoubleQuote]the left-hand side is forever after whatever the right \
+hand side evaluates to right now\[CloseCurlyDoubleQuote]. This is a \
+\[OpenCurlyDoubleQuote]dead assignment\[CloseCurlyDoubleQuote], because the \
+result is always the same.\
+\>", "Text",
+ CellChangeTimes->{{3.586170113882841*^9, 3.5861701538776627`*^9}, {
+  3.586170202082955*^9, 3.5861702026023073`*^9}, {3.58617027774361*^9, 
+  3.586170290316476*^9}}],
+
+Cell[BoxData[
+ RowBox[{"fred", " ", "=", " ", 
+  RowBox[{"bob", " ", "+", " ", "2"}]}]], "Input",
+ CellChangeTimes->{{3.586170160664063*^9, 3.5861701675662603`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"bob", " ", "=", " ", "3"}]], "Input",
+ CellChangeTimes->{{3.58617017082279*^9, 3.586170172717966*^9}}],
+
+Cell[BoxData["fred"], "Input",
+ CellChangeTimes->{{3.586170175204689*^9, 3.5861701768389473`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Two kinds of equals. \
+\[OpenCurlyDoubleQuote]:=\[CloseCurlyDoubleQuote]", "Section",
+ CellChangeTimes->{{3.5861930731912537`*^9, 3.586193078197115*^9}}],
+
+Cell["\<\
+On the other hand, the \[OpenCurlyDoubleQuote]:=\[CloseCurlyDoubleQuote] \
+means \[OpenCurlyDoubleQuote]whenever you\[CloseCurlyQuote]re asked to \
+evaluate the left hand side, replace it with the right hand side and evaluate \
+that instead\[CloseCurlyDoubleQuote]. This is a \[OpenCurlyDoubleQuote]live \
+assignment\[CloseCurlyDoubleQuote] because it changes as the stuff on the \
+right-hand side gets updated. This is why it\[CloseCurlyQuote]s so important \
+to use the \[OpenCurlyDoubleQuote]:=\[CloseCurlyDoubleQuote] when defining a \
+function.\
+\>", "Text",
+ CellChangeTimes->{{3.58617019358949*^9, 3.586170242360054*^9}, {
+  3.5861702925887413`*^9, 3.586170343129346*^9}}],
+
+Cell[BoxData[
+ RowBox[{"steve", " ", ":=", " ", 
+  RowBox[{"bob", " ", "+", " ", "2"}]}]], "Input",
+ CellChangeTimes->{{3.586170248245475*^9, 3.5861702529930477`*^9}}],
+
+Cell[BoxData["steve"], "Input",
+ CellChangeTimes->{{3.586170255167679*^9, 3.5861702561157017`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"bob", " ", "=", " ", "9"}]], "Input",
+ CellChangeTimes->{{3.586170260646089*^9, 3.586170263408359*^9}}],
+
+Cell[BoxData["steve"], "Input",
+ CellChangeTimes->{{3.5861702654932833`*^9, 3.586170266482939*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Patterns. ", "Section",
+ CellChangeTimes->{{3.5861704463324223`*^9, 3.5861704478976803`*^9}}],
+
+Cell["\<\
+Search and replace gets a lot more interesting if you\[CloseCurlyQuote]re \
+allowed to use variables to match and replace stuff with a certain structure. \
+The most basic pattern (you\[CloseCurlyQuote]ve already seen this) is the \
+function definition:\
+\>", "Text",
+ CellChangeTimes->{{3.5861704536263*^9, 3.586170502998651*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"newf", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{"x", "^", "2"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.586170504486251*^9, 3.5861705156555567`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", "steve", "]"}]], "Input",
+ CellChangeTimes->{{3.58617051819731*^9, 3.586170526080454*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", "\[Pi]", "]"}]], "Input",
+ CellChangeTimes->{{3.586170533668622*^9, 3.586170535599619*^9}}],
+
+Cell["\<\
+Here, the x_ means \[OpenCurlyDoubleQuote]a pattern (blank) matching any \
+single object, which I will refer to as x\[CloseCurlyDoubleQuote]. Since a \
+list is a \[OpenCurlyDoubleQuote]single object\[CloseCurlyDoubleQuote], you \
+can pass a list of numbers\
+\>", "Text",
+ CellChangeTimes->{{3.586170542526059*^9, 3.586170602351779*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.58617057326033*^9, 3.58617060768944*^9}}],
+
+Cell["\<\
+But you can\[CloseCurlyQuote]t pass a pair of objects, since that doesn\
+\[CloseCurlyQuote]t match the pattern.\
+\>", "Text",
+ CellChangeTimes->{{3.5861706363674603`*^9, 3.5861706615559397`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", 
+  RowBox[{"1", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861706434780283`*^9, 3.586170647902088*^9}}],
+
+Cell["\<\
+When the output is just the input regurgitated it usually means that the \
+input is not defined.\
+\>", "Text",
+ CellChangeTimes->{{3.6188291908720264`*^9, 3.618829231797099*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Patterns, continued. ", "Section",
+ CellChangeTimes->{{3.58619309377386*^9, 3.586193096486658*^9}}],
+
+Cell["\<\
+You can define a new function with the SAME NAME, but a different pattern \
+(this is like overloading a function).\
+\>", "Text",
+ CellChangeTimes->{{3.586170686626318*^9, 3.586170690673943*^9}, {
+  3.5861709262181673`*^9, 3.586170934145671*^9}, {3.618829246099238*^9, 
+  3.618829251132231*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"newf", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"x", "*", "y"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.586170691917737*^9, 3.586170700699444*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", 
+  RowBox[{"7", ",", "8"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586170702856731*^9, 3.5861707126520557`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"newf", "[", 
+  RowBox[{"{", 
+   RowBox[{"7", ",", "8"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861707071569567`*^9, 3.586170718418107*^9}}],
+
+Cell[TextData[{
+ "You can see from this that this is a) very convenient, and b) can get you \
+into a lot of trouble. ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " will give you no warning when you redefine a variable name you\
+\[CloseCurlyQuote]ve already used, reassign something you needed elsewhere, \
+or otherwise mess yourself up. So I recommend:"
+}], "Text",
+ CellChangeTimes->{{3.5861707224739943`*^9, 3.586170819289394*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "If you\[CloseCurlyQuote]re just confused, restart ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " (or just shut the kernel down) and re-evaluate your notebook from the top. \
+If you\[CloseCurlyQuote]ve tried a lot of different things (and erased them), \
+some previous definition is probably messing you up."
+}], "Item",
+ CellChangeTimes->{{3.586170826177318*^9, 3.586170865772119*^9}, {
+  3.618922568030015*^9, 3.618922578259015*^9}}],
+
+Cell["\<\
+Don\[CloseCurlyQuote]t do too much in one notebook. It\[CloseCurlyQuote]s not \
+unreasonable to answer different homework questions in different notebooks, \
+for example.\
+\>", "Item",
+ CellChangeTimes->{{3.586170826177318*^9, 3.586170891762204*^9}}],
+
+Cell["\<\
+Don\[CloseCurlyQuote]t do a lot of editing and erasing, or evaluating your \
+notebook out of sequence. The results can be very weird.\
+\>", "Item",
+ CellChangeTimes->{{3.586170826177318*^9, 3.586170917378729*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Transformation Rules and Advanced Patterns.  ", "Section",
+ CellChangeTimes->{{3.5861709493307467`*^9, 3.586170970334302*^9}}],
+
+Cell["\<\
+Sometimes, Simplify won\[CloseCurlyQuote]t do what you want it to and you \
+want to transform an expression in a more controlled way. You do this with a \
+transformation rule, written x->y and \[OpenCurlyDoubleQuote]applied\
+\[CloseCurlyDoubleQuote] with /.\
+\>", "Text",
+ CellChangeTimes->{{3.586170973847418*^9, 3.586171019243878*^9}, {
+  3.58617106521887*^9, 3.58617106546489*^9}}],
+
+Cell[BoxData["poly"], "Input",
+ CellChangeTimes->{{3.58617100501215*^9, 3.586171005494399*^9}}],
+
+Cell[BoxData[
+ RowBox[{"poly", " ", "/.", " ", 
+  RowBox[{"x", "\[Rule]", 
+   RowBox[{"Cos", "[", "y", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.58617102264225*^9, 3.586171061034668*^9}}],
+
+Cell[BoxData[
+ RowBox[{"poly", "/.", 
+  RowBox[{"x", "\[Rule]", "5"}]}]], "Input",
+ CellChangeTimes->{{3.6188439708899794`*^9, 3.6188439829319797`*^9}}],
+
+Cell["\<\
+Notice that we got the exact rational number back. We can force a numerical \
+computation by sending along a float.\
+\>", "Text",
+ CellChangeTimes->{{3.6188440006369796`*^9, 3.6188440377429795`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"poly", " ", "/.", " ", 
+  RowBox[{"x", "\[Rule]", " ", "5.0"}]}]], "Input",
+ CellChangeTimes->{{3.5861711125981073`*^9, 3.5861711169032927`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Transformation Rules, Continued.", "Section",
+ CellChangeTimes->{{3.586185337476429*^9, 3.586185342937798*^9}}],
+
+Cell["\<\
+Sometimes, one application of a transformation rule doesn\[CloseCurlyQuote]t \
+get the job done...\t\
+\>", "Text",
+ CellChangeTimes->{{3.586185345042162*^9, 3.586185376143807*^9}, {
+  3.58618542950204*^9, 3.5861854302918167`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Sin", "[", 
+   RowBox[{"Sin", "[", "x", "]"}], "]"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{"Sin", "[", "x_", "]"}], " ", "->", " ", 
+   RowBox[{"Cos", "[", "x", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.586185388179611*^9, 3.586185416312026*^9}, {
+  3.61882927513043*^9, 3.618829276769103*^9}, {3.6188440539579797`*^9, 
+  3.6188440550769796`*^9}}],
+
+Cell["\<\
+In this case, you can use the //. operation to apply the transformation rules \
+until the expression stops changing.\
+\>", "Text",
+ CellChangeTimes->{{3.586185435555642*^9, 3.586185444050927*^9}, {
+  3.586185476249011*^9, 3.586185484544558*^9}, {3.586185522879964*^9, 
+  3.586185526173623*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Sin", "[", 
+   RowBox[{"Sin", "[", "x", "]"}], "]"}], " ", "//.", " ", 
+  RowBox[{
+   RowBox[{"Sin", "[", "x_", "]"}], " ", "->", " ", 
+   RowBox[{"Cos", "[", "x", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.586185527870036*^9, 3.586185537863904*^9}, {
+  3.618829283091838*^9, 3.6188292859722614`*^9}, {3.6188293286927156`*^9, 
+  3.618829334617531*^9}}],
+
+Cell[TextData[{
+ "If you give ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " a list of transformation rules, it will try them in order. You can do some \
+pretty sophisticated things this way."
+}], "Text",
+ CellChangeTimes->{{3.586185546974265*^9, 3.58618557754628*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DerivativeRules", " ", "=", " ", 
+   RowBox[{"{", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"MyD", "[", 
+       RowBox[{"x_", " ", "+", " ", "y_"}], "]"}], " ", "->", " ", 
+      RowBox[{
+       RowBox[{"MyD", "[", "x", "]"}], " ", "+", " ", 
+       RowBox[{"MyD", "[", "y", "]"}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"MyD", "[", 
+       RowBox[{"x_", " ", "y_"}], "]"}], " ", "->", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"MyD", "[", "x", "]"}], " ", "y"}], " ", "+", " ", 
+       RowBox[{"x", " ", 
+        RowBox[{"MyD", "[", "y", "]"}]}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"MyD", "[", 
+       RowBox[{"Sin", "[", "x_", "]"}], "]"}], " ", "->", " ", 
+      RowBox[{
+       RowBox[{"Cos", "[", "x", "]"}], " ", 
+       RowBox[{"MyD", "[", "x", "]"}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"MyD", "[", 
+       RowBox[{"x_", "^", "n_"}], "]"}], " ", "->", " ", 
+      RowBox[{"n", " ", 
+       RowBox[{"x", "^", 
+        RowBox[{"(", 
+         RowBox[{"n", "-", "1"}], ")"}]}]}]}], ",", " ", 
+     RowBox[{
+      RowBox[{"MyD", "[", "x", "]"}], " ", "\[Rule]", " ", "1"}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5861855814059687`*^9, 3.586185733132224*^9}, {
+  3.6188440637269793`*^9, 3.6188440703859797`*^9}, {3.6188444176249795`*^9, 
+  3.61884441864098*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MyD", "[", 
+   RowBox[{
+    RowBox[{"x", "^", "3"}], " ", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"x", "^", " ", "2"}], " ", "+", " ", "4"}], ")"}]}], "]"}], " ",
+   "//.", " ", "DerivativeRules"}]], "Input",
+ CellChangeTimes->{{3.586185805973806*^9, 3.586185820165433*^9}, {
+  3.6188441064939795`*^9, 3.6188441142529793`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "When ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " gives you transformation rules."
+}], "Section",
+ CellChangeTimes->{{3.586193128710553*^9, 3.586193135425046*^9}}],
+
+Cell[TextData[{
+ "You can get transformation rules as output from ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " as well. For instance, when you use Solve to solve an equation, you get \
+list of transformation rules which substitute in the various solutions."
+}], "Text",
+ CellChangeTimes->{{3.586185867936954*^9, 3.586185890501073*^9}, {
+  3.586185940034006*^9, 3.586185967064144*^9}}],
+
+Cell[BoxData[
+ RowBox[{"sols", " ", "=", " ", 
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"x", "^", "2"}], " ", "-", " ", 
+      RowBox[{"4", " ", "x"}], " ", "+", " ", "7"}], " ", "\[Equal]", " ", 
+     "0"}], ",", "x"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586185891945188*^9, 3.586185918612899*^9}}],
+
+Cell[BoxData[
+ RowBox[{"x", " ", "/.", " ", 
+  RowBox[{"sols", "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586185921792315*^9, 3.5861859251958523`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"x", " ", "/.", " ", 
+  RowBox[{"sols", "[", 
+   RowBox[{"[", "2", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5861859283500032`*^9, 3.586185931999859*^9}}],
+
+Cell["\<\
+Note that we are using the [[.]] operator to select an element from a list. \
+We will talk more about lists soon.\
+\>", "Text",
+ CellChangeTimes->{{3.6188441720509796`*^9, 3.6188441914909797`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Heads.", "Section",
+ CellChangeTimes->{{3.586186003463767*^9, 3.5861860136528482`*^9}, {
+  3.586186070745462*^9, 3.5861860724890957`*^9}, {3.586186344752125*^9, 
+  3.5861863453828583`*^9}}],
+
+Cell[TextData[{
+ "One of the really kind of weird things about ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is that it doesn\[CloseCurlyQuote]t really have \
+\[OpenCurlyDoubleQuote]structure\[CloseCurlyDoubleQuote] data types. What we \
+have is elementary data types and lists. Lots of lists. The data type of an \
+object is called its \[OpenCurlyDoubleQuote]Head\[CloseCurlyDoubleQuote] in \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.586186017789414*^9, 3.5861861298085403`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Head", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.586186132896637*^9, 3.586186135167315*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Head", "[", "1.0", "]"}]], "Input",
+ CellChangeTimes->{{3.5861861389719*^9, 3.586186140462016*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Head", "[", "\[Pi]", "]"}]], "Input",
+ CellChangeTimes->{{3.586186142426025*^9, 3.586186149423232*^9}}],
+
+Cell[TextData[{
+ "When we pass stuff to a function in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", we are just wrapping it in a new Head to something new (and checking to \
+see if there\[CloseCurlyQuote]s a transformation which applies to stuff with \
+that Head)."
+}], "Text",
+ CellChangeTimes->{{3.5861861976110697`*^9, 3.5861862719475317`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Head", "[", 
+  RowBox[{"f", "[", 
+   RowBox[{"2", ",", "3", ",", "5"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.58618615793011*^9, 3.58618617894144*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"2", ",", "3", ",", "5"}], "]"}], "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586186274612718*^9, 3.5861862796266737`*^9}}],
+
+Cell["\<\
+Again notice that you can address parts of an expression with [[1]], [[2]], \
+etc. Something to watch out for is [[0]], which stands for the head.\
+\>", "Text",
+ CellChangeTimes->{{3.586186296587792*^9, 3.5861863267756443`*^9}, {
+  3.6188442570099792`*^9, 3.6188442594439793`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"2", ",", "3", ",", "5"}], "]"}], "[", 
+  RowBox[{"[", "0", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586186329940172*^9, 3.586186333958136*^9}}],
+
+Cell[TextData[{
+ "To see this idea in action we can use the FullForm command to see how ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " really views an expression."
+}], "Text",
+ CellChangeTimes->{{3.6189126382128468`*^9, 3.6189126642414494`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FullForm", "[", 
+  RowBox[{
+   RowBox[{"x", "^", "2"}], "+", 
+   RowBox[{"2", "x"}], "+", "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6189126650605307`*^9, 3.6189126732873535`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FullForm", "[", 
+  RowBox[{"f", "[", 
+   RowBox[{
+    RowBox[{"x", "^", "2"}], "+", 
+    RowBox[{"2", "x"}], "+", "1"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.618912741608185*^9, 3.618912752474272*^9}}],
+
+Cell["\<\
+You can change the head directly with the Apply function, which is \
+abbreviated @@. As in\
+\>", "Text",
+ CellChangeTimes->{{3.58618634992833*^9, 3.586186394115591*^9}, {
+  3.586186556330844*^9, 3.5861865653761587`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Times", " ", "@@", " ", 
+  RowBox[{"f", "[", 
+   RowBox[{"2", ",", "3", ",", "5"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5861864028153877`*^9, 3.586186441693515*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Lists.", "Section",
+ CellChangeTimes->{{3.58618662549422*^9, 3.5861866261567383`*^9}}],
+
+Cell["\<\
+The default expression type has the head \[OpenCurlyDoubleQuote]List\
+\[CloseCurlyDoubleQuote]. This is what you\[CloseCurlyQuote]ll usually \
+operate with (and lists of lists, and lists of lists of lists, and so forth). \
+\>", "Text",
+ CellChangeTimes->{{3.586186627933524*^9, 3.586186662097077*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Head", "[", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2", ",", "3"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861866641183023`*^9, 3.586186687899645*^9}}],
+
+Cell["\<\
+Lists have \[OpenCurlyDoubleQuote]levels\[CloseCurlyDoubleQuote], which \
+correspond to the \[OpenCurlyDoubleQuote]level\[CloseCurlyDoubleQuote] of \
+nesting in the list. So \
+\>", "Text",
+ CellChangeTimes->{{3.586186692567787*^9, 3.586186710998233*^9}}],
+
+Cell[BoxData[
+ RowBox[{"nestedlist", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "4"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "6", ",", "7"}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.586186713254591*^9, 3.58618677657973*^9}}],
+
+Cell["has two levels. We can address these as ", "Text",
+ CellChangeTimes->{{3.586186728294273*^9, 3.586186743836097*^9}}],
+
+Cell[BoxData[
+ RowBox[{"nestedlist", "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "2"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586186750837162*^9, 3.586186756398601*^9}}],
+
+Cell["Or get heads", "Text",
+ CellChangeTimes->{{3.5861867620451803`*^9, 3.586186763498934*^9}}],
+
+Cell[BoxData[
+ RowBox[{"nestedlist", "[", 
+  RowBox[{"[", 
+   RowBox[{"1", ",", "0"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.58618676428376*^9, 3.586186769313349*^9}}],
+
+Cell["\<\
+Most functions will \[OpenCurlyDoubleQuote]thread\[CloseCurlyDoubleQuote] \
+over a list, meaning that they will replace a list with a new list contained \
+the function evaluated on each member of the list (as we saw before).\
+\>", "Text",
+ CellChangeTimes->{{3.586186811977825*^9, 3.586186838661467*^9}, {
+  3.618922825514015*^9, 3.6189228300830154`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Sin", "[", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "2", ",", "3"}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861868407937593`*^9, 3.5861868453832417`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Table.", "Section",
+ CellChangeTimes->{{3.586186926626199*^9, 3.586186930015785*^9}}],
+
+Cell["\<\
+A standard way to generate lists is to use the Table function.\
+\>", "Text",
+ CellChangeTimes->{{3.586186932696027*^9, 3.586186943134853*^9}}],
+
+Cell[BoxData[
+ RowBox[{"sinTable", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"Sin", "[", "x", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", 
+      RowBox[{"2", "\[Pi]"}], ",", 
+      RowBox[{"\[Pi]", "/", "20.0"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586186944062397*^9, 3.586186986839879*^9}, {
+  3.58618702616369*^9, 3.586187027314272*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Tables, continued.", "Section",
+ CellChangeTimes->{{3.586193171047558*^9, 3.58619317346989*^9}}],
+
+Cell["You can display a table in a nice format. ", "Text",
+ CellChangeTimes->{{3.586186995675837*^9, 3.586187019705894*^9}, {
+  3.618919543505227*^9, 3.6189195724822273`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"sinTable", " ", "//", " ", "TableView"}]], "Input",
+ CellChangeTimes->{{3.586187021585993*^9, 3.586187043119975*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Operations on Lists. ", "Section",
+ CellChangeTimes->{{3.586187070810957*^9, 3.58618707346111*^9}}],
+
+Cell["\<\
+There are a lot of really useful operations on lists. You should read the \
+List Manipulation guide in the docs. 
+
+Given sinTable, a common question would be \[OpenCurlyDoubleQuote]Can I get \
+separate lists of the x and y coordinates?\[CloseCurlyDoubleQuote] Sure! Use \
+Transpose:\
+\>", "Text",
+ CellChangeTimes->{{3.5861870761023808`*^9, 3.5861871746232977`*^9}, {
+  3.61884461808698*^9, 3.61884467159898*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Transpose", "[", "sinTable", "]"}], " ", "//", " ", 
+  "TableView"}]], "Input",
+ CellChangeTimes->{{3.586187176016384*^9, 3.586187182299994*^9}, {
+  3.586187384565394*^9, 3.5861873873274307`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"yCoords", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"Transpose", "[", "sinTable", "]"}], "[", 
+   RowBox[{"[", "2", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586187199737858*^9, 3.586187206262294*^9}}],
+
+Cell["\<\
+Now I want to see the positive entries in this list. To do this, you use \
+Select. This requires a function (to be called on each list member). You get \
+the list entries for which this function returns \[OpenCurlyDoubleQuote]True\
+\[CloseCurlyDoubleQuote].\
+\>", "Text",
+ CellChangeTimes->{{3.586187225774171*^9, 3.58618724333851*^9}, {
+  3.586187286386005*^9, 3.586187312574422*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"IsPositive", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{"TrueQ", "[", 
+    RowBox[{"x", " ", ">", " ", "0"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5861873167524853`*^9, 3.586187328207219*^9}}],
+
+Cell[BoxData[
+ RowBox[{"IsPositive", "[", "3", "]"}]], "Input",
+ CellChangeTimes->{{3.586187329915773*^9, 3.586187332781584*^9}}],
+
+Cell[BoxData[
+ RowBox[{"IsPositive", "[", 
+  RowBox[{"-", "5"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586187334396606*^9, 3.5861873381180162`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Select", "[", 
+  RowBox[{"yCoords", ",", "IsPositive"}], "]"}]], "Input",
+ CellChangeTimes->{{3.58618724439282*^9, 3.586187265530847*^9}, {
+  3.586187343359645*^9, 3.586187344683351*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Iteration. ", "Section",
+ CellChangeTimes->{{3.586188092908289*^9, 3.586188094787772*^9}}],
+
+Cell[TextData[{
+ "This is a really important topic, especially because the pseudocode used in \
+the book and the lectures doesn\[CloseCurlyQuote]t always translate into the \
+Very High Level syntax of a programming language like ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". If you\[CloseCurlyQuote]ve taken programming, you\[CloseCurlyQuote]ve \
+seen \[OpenCurlyDoubleQuote]the loop\[CloseCurlyDoubleQuote]:\n\n\
+for(i=0;i<10;i++) {\n\n   x += Sin[i];\n   \n }\[LineSeparator]\nDon\
+\[CloseCurlyQuote]t ever do this in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". I\[CloseCurlyQuote]m so serious about this that even though it\
+\[CloseCurlyQuote]s perfectly possible to code this in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["I am not going to tell you how",
+  FontSlant->"Italic"],
+ ".   \n\nThe point is that we need to make a distinction between two kinds \
+of iteration. In the first, the same operation is being done on large number \
+of different inputs and the results are listed. Like\n\nfor(i=0;i<10;i++) { \n\
+\n    y[i] = sin[i];\n    \n };\n \n This is called a \
+\[OpenCurlyDoubleQuote]Map\[CloseCurlyDoubleQuote] in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", and the point is that this computation can be parallelized."
+}], "Text",
+ CellChangeTimes->{{3.586188097529868*^9, 3.586188341196827*^9}, {
+   3.5861888798697567`*^9, 3.586188910002879*^9}, 3.618922963791015*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Map. ", "Section",
+ CellChangeTimes->{{3.586189301115556*^9, 3.586189301979257*^9}}],
+
+Cell["\<\
+We use Map when the results of the iteration don\[CloseCurlyQuote]t depend on \
+each other, and we are applying the same function to a list of inputs, \
+producing a list of outputs. I have to invent something nontrivial to do or \
+we wouldn\[CloseCurlyQuote]t see any benefit from it, so \
+let\[CloseCurlyQuote]s take an image and apply a lot of meaningless filters \
+to it.\
+\>", "Text",
+ CellChangeTimes->{{3.586189316248551*^9, 3.5861893445825253`*^9}, {
+  3.5861894793814707`*^9, 3.586189507235832*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"Sin", ",", 
+   RowBox[{"Range", "[", 
+    RowBox[{"0", ",", "9", ",", "1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.618829713363449*^9, 3.618829765681449*^9}}],
+
+Cell["Recall that if we want the numerical approximation we use N.", "Text",
+ CellChangeTimes->{{3.6188297787324495`*^9, 3.6188297927954493`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"Map", "[", 
+   RowBox[{"Sin", ",", 
+    RowBox[{"Range", "[", 
+     RowBox[{"0", ",", "9", ",", "1"}], "]"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.618829771728449*^9, 3.6188298041094494`*^9}}],
+
+Cell["\<\
+Since the results of the iteration don\[CloseCurlyQuote]t depend on each \
+other Map can be parallelized.\
+\>", "Text",
+ CellChangeTimes->{{3.6188447584709797`*^9, 3.6188447792359796`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"ParallelMap", "[", 
+   RowBox[{"Sin", ",", 
+    RowBox[{"Range", "[", 
+     RowBox[{"0", ",", "9", ",", "1"}], "]"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6188447810229797`*^9, 3.6188447967019796`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " actually has a lot of built in parallelization. In fact, it even has built \
+in CUDA support! "
+}], "Text",
+ CellChangeTimes->{{3.6188448174559793`*^9, 3.6188448408259797`*^9}, {
+   3.618912944118434*^9, 3.618912979771999*^9}, 3.6189230103090153`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Abbreviating Map. ", "Section",
+ CellChangeTimes->{{3.586193255882904*^9, 3.586193259417514*^9}}],
+
+Cell["Map can be abbreviated /@ and usually is:", "Text",
+ CellChangeTimes->{{3.586190641000038*^9, 3.5861906491189747`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Sin", " ", "/@", " ", 
+  RowBox[{"Range", "[", 
+   RowBox[{"0", ",", "3", ",", "0.1"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5861906505574017`*^9, 3.586190658775909*^9}}],
+
+Cell["\<\
+You say this as \[OpenCurlyDoubleQuote]Sin mapped onto (stuff)\
+\[CloseCurlyDoubleQuote]. It\[CloseCurlyQuote]s equivalent to \
+\>", "Text",
+ CellChangeTimes->{{3.586193287815277*^9, 3.5861933151266203`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Map", "[", 
+  RowBox[{"Sin", ",", 
+   RowBox[{"Range", "[", 
+    RowBox[{"0", ",", "3", ",", "0.1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586193265076974*^9, 3.5861932741537123`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Nest.", "Section",
+ CellChangeTimes->{{3.586189528311612*^9, 3.586189530185665*^9}}],
+
+Cell["\<\
+The alternative to a \[OpenCurlyDoubleQuote]Map\[CloseCurlyDoubleQuote] is \
+the kind of iteration where each iteration applies a transformation to some \
+output. This is really common in numerical algorithms, which tend to iterate \
+on a solution in the hopes of improving it. 
+
+Let\[CloseCurlyQuote]s define a function f.\
+\>", "Text",
+ CellChangeTimes->{{3.5861895321620092`*^9, 3.586189645851615*^9}, {
+   3.586189730788693*^9, 3.586189743772435*^9}, {3.586189784983931*^9, 
+   3.586189800767899*^9}, {3.586190293083571*^9, 3.586190360075755*^9}, 
+   3.586193331699286*^9, {3.618829819136449*^9, 3.618829857028449*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"x", "/", "2"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6188298287354493`*^9, 3.618829869976449*^9}}],
+
+Cell["If we want to evaluate f[f[f[f[fx]]]] we can use Nest.", "Text",
+ CellChangeTimes->{{3.618829888695449*^9, 3.6188299043924494`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Nest", "[", 
+  RowBox[{"f", ",", "32", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861898958302803`*^9, 3.586189903993333*^9}, {
+  3.586189992660159*^9, 3.586190058391472*^9}, {3.586190119925827*^9, 
+  3.586190135578525*^9}, {3.586190399304923*^9, 3.5861904005692263`*^9}, {
+  3.6188299156614494`*^9, 3.618829937577449*^9}}],
+
+Cell["We can see the intermediate evaluations with NestList:", "Text",
+ CellChangeTimes->{{3.586190409432785*^9, 3.58619042059844*^9}}],
+
+Cell[BoxData[
+ RowBox[{"NestList", "[", 
+  RowBox[{"f", ",", "32", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190422552294*^9, 3.586190428783337*^9}, {
+  3.618829943101449*^9, 3.6188299489264493`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Iterations that you shouldn\[CloseCurlyQuote]t code yourself.", \
+"Section",
+ CellChangeTimes->{{3.586190501883358*^9, 3.5861905114642963`*^9}}],
+
+Cell[TextData[{
+ "Very often, you\[CloseCurlyQuote]ll want to do something that seems to \
+require a loop, but it is already a builtin function if you do a little \
+digging. It\[CloseCurlyQuote]s definitely worth it to use the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " function instead of writing your own code. Not only does it make for more \
+readable code, it\[CloseCurlyQuote]s essentially always a lot quicker than \
+your own code. This includes code that searches for or counts stuff in a \
+list.\n\nFor example:"
+}], "Text",
+ CellChangeTimes->{{3.586190515960162*^9, 3.586190589059404*^9}, {
+  3.586190782664339*^9, 3.586190793949039*^9}, {3.5861927261113787`*^9, 
+  3.5861927268520947`*^9}, {3.618923057709015*^9, 3.6189230580000153`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Range", "[", 
+  RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190591211903*^9, 3.58619061894882*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Mean", "[", 
+  RowBox[{"Sin", " ", "/@", " ", 
+   RowBox[{"Range", "[", 
+    RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190626519642*^9, 3.586190632017461*^9}, {
+  3.586190681888102*^9, 3.586190688909452*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Total", "[", 
+  RowBox[{"Sin", " ", "/@", " ", 
+   RowBox[{"Range", "[", 
+    RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190692339501*^9, 3.586190698897097*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Iterations that you shouldn\[CloseCurlyQuote]t code yourself. II.", \
+"Section",
+ CellChangeTimes->{{3.586193357186941*^9, 3.586193366009186*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Max", "[", 
+  RowBox[{"Sin", " ", "/@", " ", 
+   RowBox[{"Range", "[", 
+    RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190709321203*^9, 3.586190716692952*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Min", "[", 
+  RowBox[{"Sin", " ", "/@", " ", 
+   RowBox[{"Range", "[", 
+    RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190717852458*^9, 3.5861907260885487`*^9}}],
+
+Cell["\<\
+To count stuff in a list you want to use a \[OpenCurlyDoubleQuote]conditional \
+pattern\[CloseCurlyDoubleQuote]. This is written x_ /; (something), where /; \
+means \[OpenCurlyDoubleQuote]such that\[CloseCurlyDoubleQuote]. So to count \
+the positive values of Sin in this list, we\[CloseCurlyQuote]d use \
+\>", "Text",
+ CellChangeTimes->{{3.586191062845633*^9, 3.586191123094952*^9}, {
+  3.618923131412116*^9, 3.618923145702545*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Count", "[", 
+  RowBox[{
+   RowBox[{"Sin", " ", "/@", " ", 
+    RowBox[{"Range", "[", 
+     RowBox[{"1", ",", "5", ",", "0.1"}], "]"}]}], ",", 
+   RowBox[{"x_", " ", "/;", " ", 
+    RowBox[{"x", " ", ">", " ", "0"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586190775589313*^9, 3.586190776320134*^9}, {
+  3.586190907488617*^9, 3.586190941166153*^9}, {3.58619099358803*^9, 
+  3.586191030870994*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Interactivity. Manipulate.", "Section",
+ CellChangeTimes->{{3.5861917907488003`*^9, 3.586191798489635*^9}}],
+
+Cell[TextData[{
+ "This is an immense topic. But the basics are well worth understanding. The \
+idea is that you often don\[CloseCurlyQuote]t just want to display math or \
+calculate something, you want to interact with the process by changing some \
+parameter and seeing how the results change in real time. This is very easy \
+to do in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.586191801618046*^9, 3.586191862133655*^9}, 
+   3.61892317195317*^9}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Sin", "[", 
+      RowBox[{"k", " ", "x"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "0", ",", "20"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586191864690538*^9, 3.586191908215412*^9}}],
+
+Cell["\<\
+Manipulate can display anything you like, including numbers, formulae, \
+images, and expressions. \
+\>", "Text",
+ CellChangeTimes->{{3.58619194475299*^9, 3.586191972790162*^9}, {
+   3.586192020629271*^9, 3.586192032810018*^9}, 3.6188452452219796`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Expand", "[", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "+", "x"}], ")"}], "^", "n"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "1", ",", "100", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.58619197483219*^9, 3.5861919930872173`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate basics.", "Section",
+ CellChangeTimes->{{3.5861921802028522`*^9, 3.58619218356033*^9}}],
+
+Cell["And expand Sin[x] in a Taylor series with", "Text",
+ CellChangeTimes->{{3.586192036800498*^9, 3.586192044625162*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"Sin", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "0", ",", "35", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586192046063205*^9, 3.5861920616892557`*^9}}],
+
+Cell["\<\
+Note the extra \[OpenCurlyDoubleQuote]by 1\[CloseCurlyDoubleQuote] step in \
+the iterator above \[OpenCurlyDoubleQuote]{n,0,35,1}\[CloseCurlyDoubleQuote]. \
+If we didn\[CloseCurlyQuote]t have it, the iterator would try to iterate over \
+real values... which is bad.\
+\>", "Text",
+ CellChangeTimes->{{3.586192080385454*^9, 3.5861921342756367`*^9}, {
+  3.6188453030779796`*^9, 3.6188453076499796`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"Sin", "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "0", ",", "35"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.586192119735894*^9, 3.586192121501883*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate advanced topics.", "Section",
+ CellChangeTimes->{{3.586192190154097*^9, 3.5861921948074713`*^9}}],
+
+Cell["\<\
+Actually, you can do a LOT with Manipulate, including having input which isn\
+\[CloseCurlyQuote]t sliders. This is just an example:\
+\>", "Text",
+ CellChangeTimes->{{3.5861921973921337`*^9, 3.586192225293765*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"InterpolatingPolynomial", "[", 
+      RowBox[{"points", ",", "x"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "2"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"points", ",", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "2"}], "}"}]}], "]"}]}], "}"}], ",", "Locator"}], 
+    "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5861923408500547`*^9, 3.586192344162668*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+
+Cell[CellGroupData[{
+
+Cell["Manipulate advanced topics.", "Section",
+ CellChangeTimes->{{3.5861933951217318`*^9, 3.586193399310486*^9}}],
+
+Cell["\<\
+What makes this work is a special kind of control called a \
+\[OpenCurlyDoubleQuote]Locator\[CloseCurlyDoubleQuote] which evaluates to its \
+position on the screen. \
+\>", "Text",
+ CellChangeTimes->{{3.586192440401968*^9, 3.586192463998219*^9}, {
+  3.586192566881122*^9, 3.586192570814437*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Graphics", "[", 
+    RowBox[{
+     RowBox[{"Polygon", "[", "pts", "]"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "1"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pts", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", "Locator"}], 
+    "}"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "You can carry this as far as you want to generate little web applets in the \
+\[OpenCurlyDoubleQuote]Computable Document Format\[CloseCurlyDoubleQuote] \
+which run in \
+\[OpenCurlyDoubleQuote]MathematicaPlayer\[CloseCurlyDoubleQuote]. In general, \
+these ONLY get Manipulate inputs because otherwise they would BE ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.5861925871834307`*^9, 3.5861926360984087`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{784, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+TaggingRules->{"SlideShow" -> True},
+Magnification->1.25,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "SlideShowHeader"->{
+  Cell[579, 22, 4301, 96, 76, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[5142, 131, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[6256, 168, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[9889, 283, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[14351, 412, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[16309, 471, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[18528, 541, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[20059, 590, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[20905, 620, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[21734, 649, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[22663, 681, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[24067, 726, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[24829, 753, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[25851, 787, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[26718, 818, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[28501, 879, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[29780, 923, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[31828, 985, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[33408, 1039, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[35704, 1123, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[37989, 1187, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[39482, 1228, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[41630, 1295, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[44166, 1372, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[45661, 1418, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[49252, 1527, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[50905, 1583, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[56940, 1767, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[57779, 1798, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[58341, 1818, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[60626, 1887, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[62310, 1930, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[64461, 1994, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[65474, 2028, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[67384, 2080, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[69110, 2128, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[70737, 2176, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[72564, 2234, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[74097, 2282, 64, 1, 1, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"],
+  Cell[75426, 2327, 64, 1, 75, "SlideShowNavigationBar",
+   CellTags->"SlideShowHeader"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"SlideShowHeader", 77433, 2392}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 4301, 96, 76, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[4883, 120, 222, 6, 291, "Title"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5142, 131, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[5209, 134, 108, 1, 127, "Title"],
+Cell[CellGroupData[{
+Cell[5342, 139, 272, 5, 137, "Section"],
+Cell[CellGroupData[{
+Cell[5639, 148, 268, 6, 120, "Subsubsection"],
+Cell[5910, 156, 285, 5, 63, "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6256, 168, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[6345, 173, 166, 5, 86, "Section"],
+Cell[6514, 180, 254, 6, 64, "Text"],
+Cell[6771, 188, 168, 3, 36, "Input"],
+Cell[6942, 193, 149, 3, 36, "Input"],
+Cell[7094, 198, 145, 3, 36, "Input"],
+Cell[7242, 203, 125, 2, 36, "Input"],
+Cell[7370, 207, 150, 3, 36, "Input"],
+Cell[7523, 212, 168, 3, 36, "Input"],
+Cell[7694, 217, 121, 2, 36, "Input"],
+Cell[7818, 221, 281, 6, 36, "Input"],
+Cell[CellGroupData[{
+Cell[8124, 231, 94, 1, 37, "Item"],
+Cell[CellGroupData[{
+Cell[8243, 236, 194, 4, 50, "Subitem"],
+Cell[8440, 242, 270, 7, 51, "Subitem"],
+Cell[8713, 251, 353, 8, 51, "Subitem"],
+Cell[9069, 261, 444, 7, 70, "Subitem"],
+Cell[9516, 270, 300, 5, 30, "Subitem"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9889, 283, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[9978, 288, 168, 6, 164, "Section"],
+Cell[10149, 296, 748, 14, 210, "Text"],
+Cell[CellGroupData[{
+Cell[10922, 314, 399, 7, 91, "Item"],
+Cell[CellGroupData[{
+Cell[11346, 325, 312, 5, 50, "Subitem"],
+Cell[11661, 332, 279, 5, 30, "Subitem"],
+Cell[11943, 339, 489, 11, 91, "Subitem"],
+Cell[12435, 352, 308, 6, 50, "Subitem"],
+Cell[12746, 360, 329, 9, 31, "Subitem"]
+}, Open  ]],
+Cell[13090, 372, 323, 6, 59, "Item"],
+Cell[13416, 380, 874, 25, 84, "Item"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14351, 412, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[14440, 417, 97, 1, 86, "Section"],
+Cell[14540, 420, 322, 7, 64, "Text"],
+Cell[14865, 429, 256, 3, 37, "Item"],
+Cell[15124, 434, 186, 2, 38, "Text"],
+Cell[15313, 438, 112, 2, 36, "Input"],
+Cell[15428, 442, 110, 1, 38, "Text"],
+Cell[15541, 445, 115, 2, 36, "Input"],
+Cell[15659, 449, 281, 5, 63, "Text"],
+Cell[15943, 456, 317, 9, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16309, 471, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[16398, 476, 160, 2, 164, "Section"],
+Cell[16561, 480, 241, 4, 96, "Text"],
+Cell[16805, 486, 264, 7, 57, "Input"],
+Cell[17072, 495, 121, 2, 57, "Input"],
+Cell[17196, 499, 124, 2, 57, "Input"],
+Cell[17323, 503, 152, 3, 57, "Text"],
+Cell[CellGroupData[{
+Cell[17500, 510, 284, 5, 91, "Item"],
+Cell[17787, 517, 283, 5, 59, "Item"],
+Cell[18073, 524, 125, 1, 59, "Item"],
+Cell[CellGroupData[{
+Cell[18223, 529, 115, 1, 59, "Subitem"],
+Cell[18341, 532, 114, 1, 59, "Subitem"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18528, 541, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[18617, 546, 109, 1, 164, "Section"],
+Cell[18729, 549, 103, 1, 57, "Text"],
+Cell[18835, 552, 149, 2, 57, "Input"],
+Cell[18987, 556, 235, 5, 57, "Input"],
+Cell[19225, 563, 329, 8, 57, "Input"],
+Cell[19557, 573, 453, 11, 134, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20059, 590, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[20148, 595, 107, 1, 164, "Section"],
+Cell[20258, 598, 312, 7, 96, "Text"],
+Cell[20573, 607, 283, 7, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20905, 620, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[20994, 625, 105, 1, 164, "Section"],
+Cell[21102, 628, 188, 4, 57, "Text"],
+Cell[21293, 634, 392, 9, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21734, 649, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[21823, 654, 102, 1, 164, "Section"],
+Cell[21928, 657, 131, 1, 57, "Text"],
+Cell[22062, 660, 552, 15, 95, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22663, 681, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[22752, 686, 106, 1, 164, "Section"],
+Cell[22861, 689, 321, 6, 96, "Text"],
+Cell[23185, 697, 342, 10, 57, "Input"],
+Cell[23530, 709, 126, 1, 57, "Text"],
+Cell[23659, 712, 359, 8, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24067, 726, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[24156, 731, 104, 1, 86, "Section"],
+Cell[24263, 734, 202, 4, 38, "Text"],
+Cell[24468, 740, 312, 7, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24829, 753, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[24918, 758, 119, 1, 86, "Section"],
+Cell[25040, 761, 232, 3, 38, "Text"],
+Cell[25275, 766, 527, 15, 60, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25851, 787, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[25940, 792, 108, 1, 86, "Section"],
+Cell[26051, 795, 248, 5, 38, "Text"],
+Cell[26302, 802, 367, 10, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26718, 818, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[26807, 823, 155, 2, 86, "Section"],
+Cell[26965, 827, 336, 8, 89, "Text"],
+Cell[27304, 837, 171, 4, 57, "Input"],
+Cell[27478, 843, 184, 4, 57, "Input"],
+Cell[27665, 849, 220, 6, 57, "Input"],
+Cell[27888, 857, 301, 7, 96, "Text"],
+Cell[28192, 866, 260, 7, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28501, 879, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[28590, 884, 104, 1, 164, "Section"],
+Cell[28697, 887, 151, 3, 57, "Text"],
+Cell[28851, 892, 184, 4, 57, "Input"],
+Cell[29038, 898, 329, 8, 57, "Input"],
+Cell[29370, 908, 210, 4, 38, "Text"],
+Cell[29583, 914, 148, 3, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29780, 923, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[29869, 928, 132, 1, 86, "Section"],
+Cell[30004, 931, 268, 7, 64, "Text"],
+Cell[30275, 940, 238, 6, 36, "Input"],
+Cell[30516, 948, 260, 5, 63, "Text"],
+Cell[30779, 955, 361, 9, 36, "Input"],
+Cell[31143, 966, 446, 8, 88, "Text"],
+Cell[31592, 976, 187, 3, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31828, 985, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[31917, 990, 144, 1, 86, "Section"],
+Cell[32064, 993, 521, 16, 36, "Input"],
+Cell[32588, 1011, 367, 10, 36, "Input"],
+Cell[32958, 1023, 234, 5, 63, "Text"],
+Cell[33195, 1030, 164, 3, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33408, 1039, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[33497, 1044, 212, 6, 86, "Section"],
+Cell[33712, 1052, 754, 25, 67, "Text"],
+Cell[34469, 1079, 274, 7, 36, "Input"],
+Cell[34746, 1088, 101, 1, 38, "Text"],
+Cell[34850, 1091, 273, 8, 36, "Input"],
+Cell[35126, 1101, 529, 16, 91, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35704, 1123, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[35793, 1128, 302, 4, 86, "Section"],
+Cell[36098, 1134, 671, 16, 116, "Text"],
+Cell[36772, 1152, 164, 3, 36, "Input"],
+Cell[36939, 1157, 94, 1, 36, "Input"],
+Cell[37036, 1160, 506, 9, 88, "Text"],
+Cell[37545, 1171, 165, 3, 36, "Input"],
+Cell[37713, 1176, 126, 2, 36, "Input"],
+Cell[37842, 1180, 98, 1, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37989, 1187, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[38078, 1192, 159, 2, 164, "Section"],
+Cell[38240, 1196, 689, 11, 172, "Text"],
+Cell[38932, 1209, 167, 3, 57, "Input"],
+Cell[39102, 1214, 99, 1, 57, "Input"],
+Cell[39204, 1217, 127, 2, 57, "Input"],
+Cell[39334, 1221, 99, 1, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39482, 1228, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[39571, 1233, 99, 1, 164, "Section"],
+Cell[39673, 1236, 340, 6, 134, "Text"],
+Cell[40016, 1244, 203, 5, 57, "Input"],
+Cell[40222, 1251, 126, 2, 57, "Input"],
+Cell[40351, 1255, 127, 2, 57, "Input"],
+Cell[40481, 1259, 346, 6, 96, "Text"],
+Cell[40830, 1267, 201, 5, 57, "Input"],
+Cell[41034, 1274, 205, 4, 57, "Text"],
+Cell[41242, 1280, 148, 3, 57, "Input"],
+Cell[41393, 1285, 188, 4, 57, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41630, 1295, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[41719, 1300, 105, 1, 86, "Section"],
+Cell[41827, 1303, 304, 6, 63, "Text"],
+Cell[42134, 1311, 227, 6, 36, "Input"],
+Cell[42364, 1319, 148, 3, 36, "Input"],
+Cell[42515, 1324, 172, 4, 36, "Input"],
+Cell[42690, 1330, 441, 9, 114, "Text"],
+Cell[CellGroupData[{
+Cell[43156, 1343, 460, 9, 82, "Item"],
+Cell[43619, 1354, 260, 5, 59, "Item"],
+Cell[43882, 1361, 223, 4, 59, "Item"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44166, 1372, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[44255, 1377, 132, 1, 86, "Section"],
+Cell[44390, 1380, 394, 7, 88, "Text"],
+Cell[44787, 1389, 95, 1, 36, "Input"],
+Cell[44885, 1392, 188, 4, 36, "Input"],
+Cell[45076, 1398, 152, 3, 36, "Input"],
+Cell[45231, 1403, 209, 4, 96, "Text"],
+Cell[45443, 1409, 169, 3, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45661, 1418, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[45750, 1423, 117, 1, 164, "Section"],
+Cell[45870, 1426, 240, 5, 57, "Text"],
+Cell[46113, 1433, 385, 9, 57, "Input"],
+Cell[46501, 1444, 304, 6, 96, "Text"],
+Cell[46808, 1452, 387, 9, 57, "Input"],
+Cell[47198, 1463, 277, 7, 64, "Text"],
+Cell[47478, 1472, 1348, 37, 106, "Input"],
+Cell[48829, 1511, 374, 10, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49252, 1527, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[49341, 1532, 191, 6, 137, "Section"],
+Cell[49535, 1540, 394, 8, 89, "Text"],
+Cell[49932, 1550, 342, 9, 36, "Input"],
+Cell[50277, 1561, 183, 4, 36, "Input"],
+Cell[50463, 1567, 183, 4, 36, "Input"],
+Cell[50649, 1573, 207, 4, 63, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50905, 1583, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[50994, 1588, 195, 3, 86, "Section"],
+Cell[51192, 1593, 540, 13, 90, "Text"],
+Cell[51735, 1608, 123, 2, 36, "Input"],
+Cell[51861, 1612, 123, 2, 36, "Input"],
+Cell[51987, 1616, 127, 2, 36, "Input"],
+Cell[52117, 1620, 357, 8, 89, "Text"],
+Cell[52477, 1630, 183, 4, 36, "Input"],
+Cell[52663, 1636, 207, 5, 36, "Input"],
+Cell[52873, 1643, 291, 5, 63, "Text"],
+Cell[53167, 1650, 205, 5, 36, "Input"],
+Cell[53375, 1657, 253, 6, 64, "Text"],
+Cell[53631, 1665, 207, 5, 36, "Input"],
+Cell[53841, 1672, 234, 6, 36, "Input"],
+Cell[54078, 1680, 230, 5, 63, "Text"],
+Cell[54311, 1687, 194, 4, 36, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54542, 1696, 92, 1, 86, "Section"],
+Cell[54637, 1699, 311, 5, 63, "Text"],
+Cell[54951, 1706, 182, 4, 36, "Input"],
+Cell[55136, 1712, 264, 5, 38, "Text"],
+Cell[55403, 1719, 353, 10, 36, "Input"],
+Cell[55759, 1731, 122, 1, 38, "Text"],
+Cell[55884, 1734, 176, 4, 36, "Input"],
+Cell[56063, 1740, 96, 1, 38, "Text"],
+Cell[56162, 1743, 175, 4, 36, "Input"],
+Cell[56340, 1749, 365, 6, 88, "Text"],
+Cell[56708, 1757, 183, 4, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56940, 1767, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[57029, 1772, 91, 1, 86, "Section"],
+Cell[57123, 1775, 152, 3, 38, "Text"],
+Cell[57278, 1780, 452, 12, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57779, 1798, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[57868, 1803, 102, 1, 86, "Section"],
+Cell[57973, 1806, 175, 2, 38, "Text"],
+Cell[58151, 1810, 141, 2, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58341, 1818, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[58430, 1823, 105, 1, 86, "Section"],
+Cell[58538, 1826, 423, 9, 137, "Text"],
+Cell[58964, 1837, 231, 5, 36, "Input"],
+Cell[59198, 1844, 227, 5, 36, "Input"],
+Cell[59428, 1851, 395, 7, 88, "Text"],
+Cell[59826, 1860, 253, 6, 36, "Input"],
+Cell[60082, 1868, 129, 2, 36, "Input"],
+Cell[60214, 1872, 149, 3, 36, "Input"],
+Cell[60366, 1877, 211, 4, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60626, 1887, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[60715, 1892, 96, 1, 86, "Section"],
+Cell[60814, 1895, 1447, 29, 661, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62310, 1930, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[62399, 1935, 90, 1, 86, "Section"],
+Cell[62492, 1938, 517, 9, 113, "Text"],
+Cell[63012, 1949, 215, 5, 36, "Input"],
+Cell[63230, 1956, 146, 1, 38, "Text"],
+Cell[63379, 1959, 248, 6, 36, "Input"],
+Cell[63630, 1967, 199, 4, 63, "Text"],
+Cell[63832, 1973, 258, 6, 36, "Input"],
+Cell[64093, 1981, 319, 7, 64, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[64461, 1994, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[64550, 1999, 103, 1, 86, "Section"],
+Cell[64656, 2002, 125, 1, 38, "Text"],
+Cell[64784, 2005, 198, 4, 36, "Input"],
+Cell[64985, 2011, 218, 4, 57, "Text"],
+Cell[65206, 2017, 219, 5, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[65474, 2028, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[65563, 2033, 90, 1, 164, "Section"],
+Cell[65656, 2036, 633, 11, 210, "Text"],
+Cell[66292, 2049, 190, 5, 57, "Input"],
+Cell[66485, 2056, 138, 1, 57, "Text"],
+Cell[66626, 2059, 356, 6, 57, "Input"],
+Cell[66985, 2067, 135, 1, 57, "Text"],
+Cell[67123, 2070, 212, 4, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67384, 2080, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[67473, 2085, 150, 2, 164, "Section"],
+Cell[67626, 2089, 760, 13, 249, "Text"],
+Cell[68389, 2104, 158, 3, 57, "Input"],
+Cell[68550, 2109, 278, 6, 57, "Input"],
+Cell[68831, 2117, 230, 5, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69110, 2128, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[69199, 2133, 152, 2, 164, "Section"],
+Cell[69354, 2137, 228, 5, 36, "Input"],
+Cell[69585, 2144, 230, 5, 36, "Input"],
+Cell[69818, 2151, 443, 7, 88, "Text"],
+Cell[70264, 2160, 424, 10, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70737, 2176, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[70826, 2181, 113, 1, 86, "Section"],
+Cell[70942, 2184, 497, 11, 114, "Text"],
+Cell[71442, 2197, 470, 13, 60, "Input"],
+Cell[71915, 2212, 261, 5, 63, "Text"],
+Cell[72179, 2219, 336, 9, 36, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[72564, 2234, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[72653, 2239, 104, 1, 86, "Section"],
+Cell[72760, 2242, 123, 1, 38, "Text"],
+Cell[72886, 2245, 379, 10, 36, "Input"],
+Cell[73268, 2257, 410, 7, 96, "Text"],
+Cell[73681, 2266, 367, 10, 57, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74097, 2282, 64, 1, 1, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[74186, 2287, 114, 1, 86, "Section"],
+Cell[74303, 2290, 223, 4, 63, "Text"],
+Cell[74529, 2296, 848, 25, 83, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75426, 2327, 64, 1, 75, "SlideShowNavigationBar",
+ CellTags->"SlideShowHeader"],
+Cell[CellGroupData[{
+Cell[75515, 2332, 114, 1, 86, "Section"],
+Cell[75632, 2335, 304, 6, 63, "Text"],
+Cell[75939, 2343, 618, 20, 60, "Input"],
+Cell[76560, 2365, 470, 10, 114, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

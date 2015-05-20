@@ -1,0 +1,187 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6825,        178]
+NotebookOptionsPosition[      6510,        163]
+NotebookOutlinePosition[      6851,        178]
+CellTagsIndexPosition[      6808,        175]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.620392841845148*^9, 3.6203928436463284`*^9}, {
+   3.6203928819301567`*^9, 3.6203928853645*^9}, 3.6203930986658278`*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"1", "/", "x"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"InterpolatingPolynomial", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"2", ",", 
+               RowBox[{"1", "/", "2"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"11", "/", "4"}], ",", 
+               RowBox[{"4", "/", "11"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", 
+               RowBox[{"1", "/", "4"}]}], "}"}]}], "}"}], ",", "y"}], "]"}], "/.", 
+         RowBox[{"y", "\[Rule]", "x"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Series", "[", 
+            RowBox[{
+             RowBox[{"1", "/", "y"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"y", ",", "center", ",", "degree"}], "}"}]}], "]"}], "//",
+            "Normal"}], ")"}], "/.", 
+         RowBox[{"y", "\[Rule]", "x"}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "5"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "2"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"center", ",", "1", ",", "5", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"degree", ",", "1", ",", "8", ",", "1"}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6203369194914427`*^9, 3.620336990793521*^9}, {
+  3.6203374187095194`*^9, 3.6203374726365385`*^9}, {3.6203375604706163`*^9, 
+  3.620337677917559*^9}, {3.6203378990681944`*^9, 3.62033791774259*^9}, {
+  3.620380715582885*^9, 3.6203807266989965`*^9}, {3.620380761812507*^9, 
+  3.620380812476573*^9}, {3.620380846526978*^9, 3.620380855541879*^9}, {
+  3.620380894504775*^9, 3.620380935904915*^9}, {3.620381041879511*^9, 
+  3.6203810494802713`*^9}, {3.620381089282251*^9, 3.620381097846985*^9}, {
+  3.620392849701934*^9, 3.6203928518471484`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "[", 
+      RowBox[{"InterpolatingPolynomial", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"SortBy", "[", 
+          RowBox[{"pts", ",", 
+           RowBox[{
+            RowBox[{
+            "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+            "&"}]}], "]"}], "//.", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"left___", ",", 
+            RowBox[{"{", 
+             RowBox[{"x1_", ",", "y1_"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x1_", ",", "y2_"}], "}"}], ",", "right___"}], "}"}], 
+          "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"left", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"x1", "-", 
+               SuperscriptBox["10", 
+                RowBox[{"-", "4"}]]}], ",", "y1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"x1", ",", "y2"}], "}"}], ",", "right"}], "}"}]}]}], ",",
+         "x"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "}"}]}], ",", 
+     RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+     RowBox[{"FrameTicks", "\[Rule]", "None"}], ",", 
+     RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+     RowBox[{"FillingStyle", "\[Rule]", "LightBlue"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "450"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pts", ",", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x", ",", " ", 
+           RowBox[{"x", " ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"9", "x"}], "]"}]}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "1", ",", "0.2"}], "}"}]}], "]"}]}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", "Locator", ",", 
+     RowBox[{"LocatorAutoCreate", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "\[Infinity]"}], "}"}]}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6203811749079847`*^9, 3.620381175214985*^9}}]
+},
+WindowSize->{1584, 818},
+WindowMargins->{{-2, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 168, 2, 31, "Input"],
+Cell[729, 24, 3418, 69, 1152, "Input"],
+Cell[4150, 95, 2356, 66, 77, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

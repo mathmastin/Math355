@@ -1,0 +1,298 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     10692,        289]
+NotebookOptionsPosition[     10031,        264]
+NotebookOutlinePosition[     10372,        279]
+CellTagsIndexPosition[     10329,        276]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Choice of Nodes and Interpolation.", "Title",
+ CellChangeTimes->{{3.45935692137237*^9, 3.4593569317653513`*^9}, {
+  3.4607117550848846`*^9, 3.460711757462351*^9}, {3.4628103729791317`*^9, 
+  3.4628103799851313`*^9}}],
+
+Cell["\<\
+This demonstration shows the interpolating polynomial and the function for \
+some explicit examples.\
+\>", "Text",
+ CellChangeTimes->{{3.4593569408336782`*^9, 3.45935695814388*^9}, {
+   3.4593590985378*^9, 3.459359115229948*^9}, {3.4594349808851347`*^9, 
+   3.459434996514577*^9}, {3.459605724870706*^9, 3.4596058280034733`*^9}, {
+   3.460711763709217*^9, 3.460711819888723*^9}, 3.460723860603013*^9, {
+   3.462810383441132*^9, 3.462810431198669*^9}, {3.462811221415543*^9, 
+   3.462811222380672*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{"1", "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", "x", ")"}], "^", "2"}], "+", "1"}], ")"}]}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.620558578990196*^9, 3.620558579647999*^9}, {
+  3.620942328472372*^9, 3.6209423348300085`*^9}}],
+
+Cell["\<\
+Functions of this form are called Runge Functions as the mathematician Runge \
+was the first to study this issue with interpolating polynomials.
+
+Let\[CloseCurlyQuote]s set our interval and number of nodes to take.\
+\>", "Text",
+ CellChangeTimes->{{3.620558593349887*^9, 3.6205586940641184`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", " ", "=", " ", 
+   RowBox[{"-", "10"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", " ", "=", "    ", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"n", "  ", "=", "   ", "40"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"EqualNodes", " ", ":=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", " ", "+", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"b", "-", "a"}], ")"}], 
+        RowBox[{"i", "/", "n"}]}]}], ",", 
+      RowBox[{"f", "[", 
+       RowBox[{"a", "+", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"b", "-", "a"}], ")"}], 
+         RowBox[{"i", "/", "n"}]}]}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", "n"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ChebyNodes", " ", ":=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "/", "2"}], ")"}], "*", 
+         RowBox[{"(", 
+          RowBox[{"a", " ", "+", " ", "b"}], ")"}]}], " ", "+", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "/", "2"}], ")"}], 
+         RowBox[{"(", 
+          RowBox[{"b", "-", "a"}], ")"}], 
+         RowBox[{"Cos", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", "i"}], "+", "1"}], ")"}], 
+           RowBox[{"Pi", "/", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", "n"}], "+", "2"}], ")"}]}]}], "]"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"f", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1", "/", "2"}], ")"}], "*", 
+          RowBox[{"(", 
+           RowBox[{"a", " ", "+", " ", "b"}], ")"}]}], " ", "+", " ", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"1", "/", "2"}], ")"}], 
+          RowBox[{"(", 
+           RowBox[{"b", "-", "a"}], ")"}], 
+          RowBox[{"Cos", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"2", "i"}], "+", "1"}], ")"}], 
+            RowBox[{"Pi", "/", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"2", "n"}], "+", "2"}], ")"}]}]}], "]"}]}]}], " ", 
+        "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "0", ",", "n"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EqP", " ", ":=", " ", 
+   RowBox[{"InterpolatingPolynomial", "[", 
+    RowBox[{"EqualNodes", ",", "x"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ChebyP", " ", ":=", " ", 
+   RowBox[{"InterpolatingPolynomial", "[", 
+    RowBox[{"ChebyNodes", ",", "x"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.4593569823699703`*^9, 3.459357060924468*^9}, {
+   3.459357125913353*^9, 3.459357242135627*^9}, {3.459357282638081*^9, 
+   3.459357287498719*^9}, {3.459357327354567*^9, 3.459357418675777*^9}, {
+   3.4593574512799788`*^9, 3.459357533754788*^9}, {3.4593575910701027`*^9, 
+   3.4593578296705017`*^9}, {3.4593578661205397`*^9, 3.459358004695141*^9}, {
+   3.459358095085375*^9, 3.459358097142673*^9}, {3.4593581351365757`*^9, 
+   3.4593582071607447`*^9}, {3.459358240852594*^9, 3.459358326449738*^9}, {
+   3.4593584120244627`*^9, 3.459358436914117*^9}, {3.4593586611555157`*^9, 
+   3.459358714250257*^9}, 3.4594348852639112`*^9, {3.4594349462914133`*^9, 
+   3.459434950679678*^9}, {3.459435003099393*^9, 3.4594350039682817`*^9}, 
+   3.459435086775653*^9, 3.459605884824007*^9, 3.459605920241057*^9, {
+   3.459606896996472*^9, 3.459606923242097*^9}, {3.459606976945345*^9, 
+   3.4596069805766363`*^9}, {3.460711823893104*^9, 3.4607119174122267`*^9}, {
+   3.460712041643588*^9, 3.460712067016101*^9}, {3.4607121074082747`*^9, 
+   3.460712205911663*^9}, {3.460712237522114*^9, 3.460712399948258*^9}, {
+   3.460712448574892*^9, 3.460712503761948*^9}, {3.460723642260371*^9, 
+   3.460723846467607*^9}, {3.460723928394636*^9, 3.460723931884945*^9}, {
+   3.4607239645831623`*^9, 3.460723964661027*^9}, {3.460724010427746*^9, 
+   3.4607240153132277`*^9}, {3.460724049319186*^9, 3.460724075660923*^9}, {
+   3.460724156210074*^9, 3.46072440087633*^9}, {3.4607246148168793`*^9, 
+   3.460724637251401*^9}, {3.460724722342664*^9, 3.460724749594469*^9}, {
+   3.460725252497422*^9, 3.460725257104268*^9}, {3.460725462883502*^9, 
+   3.460725462957391*^9}, {3.4607255067444983`*^9, 3.460725544954211*^9}, {
+   3.460726398679769*^9, 3.460726402398378*^9}, {3.4607264900948553`*^9, 
+   3.4607264901745653`*^9}, {3.4607265294878273`*^9, 
+   3.4607266215497017`*^9}, {3.4607266525953207`*^9, 3.460726681753384*^9}, {
+   3.460726752152919*^9, 3.4607267894035387`*^9}, {3.460726855113059*^9, 
+   3.460726869029655*^9}, {3.46072691208464*^9, 3.4607269130429163`*^9}, {
+   3.462810496255804*^9, 3.4628106689504423`*^9}, {3.4628107717913227`*^9, 
+   3.4628109235808897`*^9}, {3.462810983700308*^9, 3.4628110766815243`*^9}, {
+   3.462811127076709*^9, 3.4628111528220673`*^9}, {3.462811229670088*^9, 
+   3.462811293001821*^9}, {3.46283378934337*^9, 3.4628337951398773`*^9}, {
+   3.6205586656589594`*^9, 3.620558666573868*^9}, {3.620942355020027*^9, 
+   3.620942356811206*^9}, 3.6209456528628583`*^9}],
+
+Cell["\<\
+We now show plots of the interpolating polynomials constructed on each set of \
+nodes, together with the original function. Here's the equally-spaced nodes \
+interpolating polynomial:\
+\>", "Text",
+ CellChangeTimes->{{3.462811298861794*^9, 3.4628113895448303`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], ",", "EqP"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"EqualNodes", ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.462811393598528*^9, 3.462811489515983*^9}, {
+  3.462834098867559*^9, 3.4628341147422647`*^9}}],
+
+Cell["\<\
+Now we're going to see the interpolating polynomial constructed on the \
+Chebyshev nodes:\
+\>", "Text",
+ CellChangeTimes->{{3.462811659982565*^9, 3.4628116864599648`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], ",", "ChebyP"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "a", ",", "b"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "1.5"}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"ChebyNodes", ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.4628115214764423`*^9, 3.4628115404406223`*^9}, {
+  3.46281157887862*^9, 3.462811596302724*^9}, {3.4628118458999367`*^9, 
+  3.462811846450343*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s zoom in a bit so we can see that there is some \
+error.", "Text",
+ CellChangeTimes->{{3.462811707410322*^9, 3.462811726081262*^9}, {
+  3.462811882510796*^9, 3.4628118847874393`*^9}, {3.6209455341319866`*^9, 
+  3.620945579055478*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f", "[", "x", "]"}], ",", "ChebyP"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "a", ",", "b"}], "}"}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"ChebyNodes", ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"PointSize", "[", "Large", "]"}], "}"}]}]}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.4628117007339163`*^9, 3.4628117028926907`*^9}, {
+  3.462811737739978*^9, 3.46281174102674*^9}, {3.462811832805417*^9, 
+  3.462811833459064*^9}}]
+}, Open  ]]
+},
+WindowSize->{1600, 818},
+WindowMargins->{{-2, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 222, 3, 101, "Title"],
+Cell[792, 27, 511, 9, 30, "Text"],
+Cell[1306, 38, 358, 11, 31, "Input"],
+Cell[1667, 51, 306, 6, 68, "Text"],
+Cell[1976, 59, 5373, 123, 232, "Input"],
+Cell[7352, 184, 275, 5, 30, "Text"],
+Cell[7630, 191, 590, 17, 31, "Input"],
+Cell[8223, 210, 181, 4, 30, "Text"],
+Cell[8407, 216, 697, 19, 31, "Input"],
+Cell[9107, 237, 262, 4, 30, "Text"],
+Cell[9372, 243, 643, 18, 31, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

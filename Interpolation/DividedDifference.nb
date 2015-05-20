@@ -1,0 +1,390 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     13629,        381]
+NotebookOptionsPosition[     12799,        348]
+NotebookOutlinePosition[     13159,        364]
+CellTagsIndexPosition[     13116,        361]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DivDiff", "[", 
+    RowBox[{"f_", ",", "points_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "1"}], ",", 
+       RowBox[{"f", "[", 
+        RowBox[{"points", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"DivDiff", "[", 
+           RowBox[{"f", ",", 
+            RowBox[{"Drop", "[", 
+             RowBox[{"points", ",", "1"}], "]"}]}], "]"}], "-", 
+          RowBox[{"DivDiff", "[", 
+           RowBox[{"f", ",", 
+            RowBox[{"Drop", "[", 
+             RowBox[{"points", ",", 
+              RowBox[{"-", "1"}]}], "]"}]}], "]"}]}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Last", "[", "points", "]"}], "-", 
+          RowBox[{"First", "[", "points", "]"}]}], ")"}]}]}], "]"}]}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.62116823445417*^9, 3.621168259751849*^9}, {
+   3.621168554841633*^9, 3.621168610343012*^9}, {3.6211686949208183`*^9, 
+   3.621168712456017*^9}, {3.621168748326847*^9, 3.621168820053089*^9}, 
+   3.62116890062033*^9, {3.6211691444408784`*^9, 3.621169167378172*^9}, {
+   3.62116936798123*^9, 3.6211694156229935`*^9}, 3.6216031323687906`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"DivDiffData", "[", "points_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "1"}], ",", 
+       RowBox[{"points", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"DivDiffData", "[", 
+           RowBox[{"Drop", "[", 
+            RowBox[{"points", ",", "1"}], "]"}], "]"}], "-", 
+          RowBox[{"DivDiffData", "[", 
+           RowBox[{"Drop", "[", 
+            RowBox[{"points", ",", 
+             RowBox[{"-", "1"}]}], "]"}], "]"}]}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Last", "[", "points", "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "-", 
+          RowBox[{
+           RowBox[{"First", "[", "points", "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.621348174592555*^9, 3.621348207459163*^9}, {
+   3.6213482749541636`*^9, 3.621348281374163*^9}, {3.6213483661421633`*^9, 
+   3.621348367901163*^9}, {3.6213484364051633`*^9, 3.621348438926163*^9}, {
+   3.621348490106163*^9, 3.621348529441163*^9}, {3.6213490936202564`*^9, 
+   3.621349130552949*^9}, {3.621349247200613*^9, 3.621349266664559*^9}, {
+   3.6213495221631064`*^9, 3.621349564437333*^9}, {3.62134962120601*^9, 
+   3.621349810962558*^9}, {3.6213498738915577`*^9, 3.621349899946558*^9}, 
+   3.621349940743965*^9, {3.62160313375793*^9, 3.6216031346550193`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Data", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "2"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "2"}], ",", 
+      RowBox[{"-", "56"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "2"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "4"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "16"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"7", ",", "376"}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.6213499424121313`*^9, 3.6213499572396145`*^9}, {
+  3.621350220377926*^9, 3.6213502522631135`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{"-", "2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "56"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "16"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "376"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.6213499574016304`*^9, 3.621350252787166*^9, 
+  3.6213509016909523`*^9, 3.6213509494109526`*^9, 3.621507109296034*^9, 
+  3.6215093131552467`*^9, 3.621542654228323*^9, 3.621603135829137*^9, 
+  3.6216031829748507`*^9, 3.6216100851295166`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"DivDiffData", "[", 
+    RowBox[{"Data", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ";;", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", "i"}], ")"}]}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "0", ",", "5"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6213502676616535`*^9, 3.621350346367523*^9}, {
+  3.621350376445531*^9, 3.6213505191958046`*^9}, {3.621350609950879*^9, 
+  3.621350618571741*^9}, {3.621350836744952*^9, 3.6213508917289524`*^9}, {
+  3.6213509316719522`*^9, 3.621350935612952*^9}, {3.621350972179103*^9, 
+  3.6213509871526003`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "2"}], ",", "18", ",", 
+   RowBox[{"-", "9"}], ",", "2", ",", "0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6213504039892845`*^9, 3.621350421000986*^9}, 
+   3.621350521183003*^9, {3.621350885107952*^9, 3.6213509512079525`*^9}, 
+   3.6213509878686714`*^9, 3.6215071128041086`*^9, 3.621542656529323*^9, 
+   3.621603136533207*^9, 3.6216031841889725`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DivDiffData", "[", "points_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "1"}], ",", 
+        RowBox[{"points", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "2"}], "&&", 
+           RowBox[{
+            RowBox[{"points", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", 
+            RowBox[{"points", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}]}], ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "3"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"DivDiffData", "[", 
+              RowBox[{"Drop", "[", 
+               RowBox[{"points", ",", "1"}], "]"}], "]"}], "-", 
+             RowBox[{"DivDiffData", "[", 
+              RowBox[{"Drop", "[", 
+               RowBox[{"points", ",", 
+                RowBox[{"-", "1"}]}], "]"}], "]"}]}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Last", "[", "points", "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "-", 
+             RowBox[{
+              RowBox[{"First", "[", "points", "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}]}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.6216031512516785`*^9, 3.62160315526908*^9}, 
+   3.6216098308520913`*^9, {3.6216099498419895`*^9, 3.6216100266056647`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"DivDiffDataDup", "[", "points_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "1"}], ",", 
+        RowBox[{"points", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "2"}], " ", "&&",
+            " ", 
+           RowBox[{
+            RowBox[{"points", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", 
+            RowBox[{"points", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}]}], ",", 
+          RowBox[{
+           RowBox[{"points", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "[", 
+           RowBox[{"[", "3", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"DivDiffDataDup", "[", 
+              RowBox[{"Drop", "[", 
+               RowBox[{"points", ",", "1"}], "]"}], "]"}], "-", 
+             RowBox[{"DivDiffDataDup", "[", 
+              RowBox[{"Drop", "[", 
+               RowBox[{"points", ",", 
+                RowBox[{"-", "1"}]}], "]"}], "]"}]}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Last", "[", "points", "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "-", 
+             RowBox[{
+              RowBox[{"First", "[", "points", "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}]}], "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.62135011571646*^9, 3.6213501172346125`*^9}, {
+  3.6215064797939425`*^9, 3.6215065025929813`*^9}, {3.6215069470562296`*^9, 
+  3.6215069514247284`*^9}, {3.6215070057838235`*^9, 3.6215070292862678`*^9}, {
+  3.621509127951305*^9, 3.621509228727952*^9}, {3.621509271552449*^9, 
+  3.6215092771186323`*^9}, {3.62160314396395*^9, 3.6216031460151553`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DivDiffDataDup", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "2"}], ",", "\[Pi]"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "2"}], ",", "\[Pi]"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6215069628032365`*^9, 3.62150699659857*^9}, {
+  3.6215070351566257`*^9, 3.62150705074054*^9}, {3.6215091431550007`*^9, 
+  3.6215091446748705`*^9}, {3.6215092365864477`*^9, 3.6215092390738697`*^9}, {
+  3.621509284481846*^9, 3.621509289195541*^9}, {3.6216100630193057`*^9, 
+  3.6216100666616697`*^9}}],
+
+Cell[BoxData["\[Pi]"], "Output",
+ CellChangeTimes->{{3.621509280879787*^9, 3.621509289689825*^9}, 
+   3.621542659114323*^9, {3.6216100571157155`*^9, 3.6216100673277364`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"DivDiffDataDup", "[", 
+    RowBox[{"Data", "[", 
+     RowBox[{"[", 
+      RowBox[{"1", ";;", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", "i"}], ")"}]}], "]"}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "0", ",", "5"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6215093191246614`*^9, 3.6215093238383584`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "2"}], ",", "18", ",", 
+   RowBox[{"-", "9"}], ",", "2", ",", "0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.6215093243316402`*^9, 3.6215426607443233`*^9, 
+  3.62161009226723*^9}]
+}, Open  ]]
+},
+WindowSize->{1584, 802},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 1496, 36, 162, "Input"],
+Cell[2056, 58, 1727, 40, 133, "Input"],
+Cell[CellGroupData[{
+Cell[3808, 102, 702, 23, 45, "Input"],
+Cell[4513, 127, 798, 24, 44, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5348, 156, 641, 15, 45, "Input"],
+Cell[5992, 173, 418, 8, 44, "Output"]
+}, Open  ]],
+Cell[6425, 184, 1975, 49, 249, "Input"],
+Cell[8403, 235, 2795, 61, 887, "Input"],
+Cell[CellGroupData[{
+Cell[11223, 300, 703, 17, 45, "Input"],
+Cell[11929, 319, 174, 2, 44, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12140, 326, 396, 11, 45, "Input"],
+Cell[12539, 339, 244, 6, 44, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

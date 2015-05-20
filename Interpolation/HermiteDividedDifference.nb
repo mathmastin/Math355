@@ -1,0 +1,298 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9954,        289]
+NotebookOptionsPosition[      9058,        257]
+NotebookOutlinePosition[      9419,        273]
+CellTagsIndexPosition[      9376,        270]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Divided Difference for Hermite Interpolation", "Title",
+ CellChangeTimes->{{3.6216021939069443`*^9, 3.6216022015187054`*^9}}],
+
+Cell["\<\
+We need to modify our previous divided differences code to watch out for \
+repeated data and use the derivative instead of the divided difference \
+formula.\
+\>", "Text",
+ CellChangeTimes->{{3.621602209921546*^9, 3.6216022456531186`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"HermiteDivDiff", "[", "points_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "1"}], ",", 
+       RowBox[{"points", "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "points", "]"}], "\[Equal]", "2"}], " ", "&&",
+           " ", 
+          RowBox[{
+           RowBox[{"points", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", 
+           RowBox[{"points", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}]}], ",", 
+         RowBox[{
+          RowBox[{"points", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "3", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"HermiteDivDiff", "[", 
+             RowBox[{"Drop", "[", 
+              RowBox[{"points", ",", "1"}], "]"}], "]"}], "-", 
+            RowBox[{"HermiteDivDiff", "[", 
+             RowBox[{"Drop", "[", 
+              RowBox[{"points", ",", 
+               RowBox[{"-", "1"}]}], "]"}], "]"}]}], ")"}], "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Last", "[", "points", "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "-", 
+            RowBox[{
+             RowBox[{"First", "[", "points", "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ")"}]}]}], "]"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.62135011571646*^9, 3.6213501172346125`*^9}, {
+  3.6215064797939425`*^9, 3.6215065025929813`*^9}, {3.6215069470562296`*^9, 
+  3.6215069514247284`*^9}, {3.6215070057838235`*^9, 3.6215070292862678`*^9}, {
+  3.621509127951305*^9, 3.621509228727952*^9}, {3.621509271552449*^9, 
+  3.6215092771186323`*^9}, {3.6215974984824066`*^9, 3.6215975010364065`*^9}, {
+  3.621604540026896*^9, 3.621604542663896*^9}}],
+
+Cell["Let\[CloseCurlyQuote]s just make sure it works.", "Text",
+ CellChangeTimes->{{3.6216022520817614`*^9, 3.6216022553560886`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"HermiteDivDiff", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "2"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "2"}], ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "2"}], ",", "2"}], "}"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6215069628032365`*^9, 3.62150699659857*^9}, {
+  3.6215070351566257`*^9, 3.62150705074054*^9}, {3.6215091431550007`*^9, 
+  3.6215091446748705`*^9}, {3.6215092365864477`*^9, 3.6215092390738697`*^9}, {
+  3.621509284481846*^9, 3.621509289195541*^9}, {3.621597645620407*^9, 
+  3.6215976573784065`*^9}, {3.621604511662896*^9, 3.621604524202896*^9}}],
+
+Cell["Now we can do the example from page 140 in our book.", "Text",
+ CellChangeTimes->{{3.621602259799533*^9, 3.621602274242977*^9}, {
+  3.621602621578107*^9, 3.6216026225131073`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Data", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1.3", ",", "0.6200860", ",", 
+       RowBox[{"-", "0.5220232"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1.6", ",", "0.4554022", ",", 
+       RowBox[{"-", "0.5698959"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1.9", ",", "0.2818186", ",", 
+       RowBox[{"-", "0.5811571"}]}], "}"}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6215975125014067`*^9, 3.621597512709407*^9}, {
+  3.621597561405407*^9, 3.6215976362314067`*^9}}],
+
+Cell["We need to double up the data.", "Text",
+ CellChangeTimes->{{3.6216022798315363`*^9, 3.6216022942849813`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"HermiteData", "=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Data", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{"Data", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "Data", "]"}]}], "}"}]}], "]"}], ",", "1"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6215976684874067`*^9, 3.6215977000434065`*^9}, {
+  3.621597761630407*^9, 3.6215978732324066`*^9}, {3.6216023072992826`*^9, 
+  3.6216023329578485`*^9}, {3.6216024379551067`*^9, 3.621602441724107*^9}}],
+
+Cell["\<\
+The same code we wrote on Friday will find the coefficients. \
+\>", "Text",
+ CellChangeTimes->{{3.621602637593107*^9, 3.621602676991107*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Coef", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"HermiteDivDiff", "[", 
+     RowBox[{"HermiteData", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ";;", 
+        RowBox[{"(", 
+         RowBox[{"1", "+", "i"}], ")"}]}], "]"}], "]"}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", 
+      RowBox[{
+       RowBox[{"Length", "[", "HermiteData", "]"}], "-", "1"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6215093191246614`*^9, 3.6215093238383584`*^9}, {
+   3.621602466654107*^9, 3.621602483925107*^9}, {3.621602763537107*^9, 
+   3.621602764959107*^9}, 3.621604560769896*^9}],
+
+Cell["Let\[CloseCurlyQuote]s now define the Hermite polynomial and take a \
+look!", "Text",
+ CellChangeTimes->{{3.621604293019844*^9, 3.62160430797934*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"H", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Coef", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "+", 
+   RowBox[{"Sum", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Coef", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "*", 
+      RowBox[{"Product", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", 
+          RowBox[{
+           RowBox[{"HermiteData", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ")"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "1", ",", 
+          RowBox[{"i", "-", "1"}]}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "2", ",", 
+       RowBox[{"Length", "[", "HermiteData", "]"}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.621597751367407*^9, 3.6215977523314066`*^9}, {
+  3.6215978773294067`*^9, 3.621597879940407*^9}, {3.621602737445107*^9, 
+  3.621602839781107*^9}, {3.621602895779107*^9, 3.621602900459107*^9}, {
+  3.621602988517407*^9, 3.6216029885444098`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"H", "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.621602842501107*^9, 3.6216028450141068`*^9}, {
+  3.621603014199975*^9, 3.6216030431638713`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"HermiteData", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"HermiteData", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "HermiteData", "]"}]}], "}"}]}], "]"}], "]"}],
+     ",", 
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"H", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}]}], "}"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6216043118417263`*^9, 3.6216043919207335`*^9}, {
+  3.6216044265098963`*^9, 3.621604446189896*^9}}],
+
+Cell["\<\
+The problem asked us to approximate $f(1.5)$ which we can easily do now.\
+\>", "Text",
+ CellChangeTimes->{{3.621604457086896*^9, 3.6216044833708963`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"H", "[", "1.5", "]"}]], "Input",
+ CellChangeTimes->{{3.621602861616107*^9, 3.6216028666061068`*^9}}]
+}, Open  ]]
+},
+WindowSize->{1584, 818},
+WindowMargins->{{-2, Automatic}, {Automatic, 0}},
+Magnification->1.5,
+FrontEndVersion->"10.0 for Microsoft Windows (32-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 131, 1, 150, "Title"],
+Cell[713, 25, 248, 5, 45, "Text"],
+Cell[964, 32, 2189, 53, 162, "Input"],
+Cell[3156, 87, 133, 1, 45, "Text"],
+Cell[3292, 90, 739, 17, 45, "Input"],
+Cell[4034, 109, 185, 2, 45, "Text"],
+Cell[4222, 113, 560, 15, 45, "Input"],
+Cell[4785, 130, 116, 1, 45, "Text"],
+Cell[4904, 133, 699, 18, 45, "Input"],
+Cell[5606, 153, 151, 3, 45, "Text"],
+Cell[5760, 158, 639, 17, 45, "Input"],
+Cell[6402, 177, 156, 2, 45, "Text"],
+Cell[6561, 181, 1058, 29, 45, "Input"],
+Cell[7622, 212, 173, 3, 45, "Input"],
+Cell[7798, 217, 950, 28, 75, "Input"],
+Cell[8751, 247, 164, 3, 45, "Text"],
+Cell[8918, 252, 124, 2, 45, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
